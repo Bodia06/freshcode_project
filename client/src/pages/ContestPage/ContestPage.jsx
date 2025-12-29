@@ -227,4 +227,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeShowImage: (data) => dispatch(changeShowImage(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContestPage));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ContestPage));
