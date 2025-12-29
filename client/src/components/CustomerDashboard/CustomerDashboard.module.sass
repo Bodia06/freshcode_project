@@ -51,6 +51,8 @@
       height: 80px
 
     .filter
+      border: none
+      background-color: #fff
       margin-top: 15px
       align-self: stretch
       text-align: center
@@ -58,6 +60,7 @@
       font-size: 18px
       border-radius: 10px
       padding: 10px
+      cursor: pointer
       @media(max-width: 1000px)
         height: 20px
         margin: 0 5px
@@ -66,6 +69,7 @@
         background-color: #eefaea
 
     .activeFilter
+      border: none
       transition: 0.5s background-color
       margin-top: 15px
       align-self: stretch
@@ -75,6 +79,7 @@
       padding: 10px
       background-color: #4e618d
       color: white
+      pointer-events: none
       @media(max-width: 1000px)
         height: 20px
         margin: 0 5px
