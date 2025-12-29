@@ -64,12 +64,12 @@ const UserInfo = (props) => {
           </div>
         </div>
       )}
-      <div
+      <button
         onClick={() => changeEditMode(!isEdit)}
         className={styles.buttonEdit}
       >
         {isEdit ? 'Cancel' : 'Edit'}
-      </div>
+      </button>
     </div>
   );
 };
