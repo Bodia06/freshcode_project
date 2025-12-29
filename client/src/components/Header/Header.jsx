@@ -24,6 +24,10 @@ class Header extends React.Component {
     this.props.navigate('/startContest');
   };
 
+  goToHomePage = () => {
+    this.props.navigate('/');
+  };
+
   renderLoginButtons = () => {
     if (this.props.data) {
       return (
@@ -110,7 +114,7 @@ class Header extends React.Component {
         <div className={styles.loginSignnUpHeaders}>
           <div className={styles.numberContainer}>
             <img src={`${CONSTANTS.STATIC_IMAGES_PATH}phone.png`} alt="phone" />
-            <span>(877)&nbsp;355-3585</span>
+            <a href="tel:(877)355-3585">(877)&nbsp;355-3585</a>
           </div>
           <div className={styles.userButtonsContainer}>
             {this.renderLoginButtons()}
@@ -121,6 +125,7 @@ class Header extends React.Component {
             src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
             className={styles.logo}
             alt="blue_logo"
+            onClick={this.goToHomePage}
           />
           <div className={styles.leftNav}>
             <div className={styles.nav}>
