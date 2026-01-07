@@ -1,4 +1,3 @@
-import React from 'react';
 import { toast } from 'react-toastify';
 import WebSocket from './WebSocket';
 import Notification from '../../../components/Notification/Notification';

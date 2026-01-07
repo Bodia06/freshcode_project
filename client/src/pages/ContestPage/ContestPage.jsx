@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import LightBox from 'react-18-image-lightbox';
+import 'react-18-image-lightbox/style.css';
 import withRouter from '../../hocs/withRouter';
 import { goToExpandedDialog } from '../../store/slices/chatSlice';
 import {
@@ -13,17 +14,15 @@ import {
   changeContestViewMode,
   changeShowImage,
 } from '../../store/slices/contestByIdSlice';
-import Header from '../../components/Header/Header';
+import Error from '../../components/Error/Error';
+import TryAgain from '../../components/TryAgain/TryAgain';
 import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
-import styles from './ContestPage.module.sass';
 import OfferBox from '../../components/OfferBox/OfferBox';
 import OfferForm from '../../components/OfferForm/OfferForm';
-import CONSTANTS from '../../constants';
 import Brief from '../../components/Brief/Brief';
 import Spinner from '../../components/Spinner/Spinner';
-import TryAgain from '../../components/TryAgain/TryAgain';
-import 'react-18-image-lightbox/style.css';
-import Error from '../../components/Error/Error';
+import CONSTANTS from '../../constants';
+import styles from './ContestPage.module.sass';
 
 class ContestPage extends React.Component {
   componentWillUnmount() {

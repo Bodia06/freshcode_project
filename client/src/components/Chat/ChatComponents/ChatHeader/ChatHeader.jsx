@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import {
@@ -6,8 +5,8 @@ import {
   changeChatFavorite,
   changeChatBlock,
 } from '../../../../store/slices/chatSlice';
-import styles from './ChatHeader.module.sass';
 import CONSTANTS from '../../../../constants';
+import styles from './ChatHeader.module.sass';
 
 const ChatHeader = (props) => {
   const changeFavorite = (data, event) => {

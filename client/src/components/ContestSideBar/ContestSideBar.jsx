@@ -1,10 +1,9 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import styles from './ContestSideBar.module.sass';
 import CONSTANTS from '../../constants';
+import styles from './ContestSideBar.module.sass';
 
-const ContestSideBar = props => {
+const ContestSideBar = (props) => {
   const getTimeStr = () => {
     const diff = moment.duration(
       moment().diff(moment(props.contestData.createdAt))
@@ -26,7 +25,7 @@ const ContestSideBar = props => {
             <div className={styles.prizeContainer}>
               <img
                 src={`${CONSTANTS.STATIC_IMAGES_PATH}big-diamond.png`}
-                alt='diamond'
+                alt="diamond"
               />
               <span>{`$ ${prize}`}</span>
             </div>
@@ -34,7 +33,7 @@ const ContestSideBar = props => {
               <div className={styles.timeDesc}>
                 <img
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}clock.png`}
-                  alt='clock'
+                  alt="clock"
                 />
                 <span>Going</span>
               </div>
@@ -44,7 +43,7 @@ const ContestSideBar = props => {
               <div>
                 <img
                   src={`${CONSTANTS.STATIC_IMAGES_PATH}smallCheck.png`}
-                  alt='check'
+                  alt="check"
                 />
               </div>
               <span>Guaranteed prize</span>
@@ -70,7 +69,7 @@ const ContestSideBar = props => {
                     ? CONSTANTS.ANONYM_IMAGE_PATH
                     : `${CONSTANTS.publicURL}${User.avatar}`
                 }
-                alt='user'
+                alt="user"
               />
               <div className={styles.customerNameContainer}>
                 <span>{`${User.firstName} ${User.lastName}`}</span>
@@ -86,6 +85,6 @@ const ContestSideBar = props => {
   return renderContestInfo();
 };
 
-const mapStateToProps = state => state.userStore;
+const mapStateToProps = (state) => state.userStore;
 
 export default connect(mapStateToProps, null)(ContestSideBar);

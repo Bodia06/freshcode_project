@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import UpdateUserInfoForm from '../UpdateUserInfoForm/UpdateUserInfoForm';
 import { updateUser } from '../../store/slices/userSlice';

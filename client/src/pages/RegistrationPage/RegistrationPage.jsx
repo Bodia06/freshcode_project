@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { clearAuthError } from '../../store/slices/authSlice';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import styles from './RegistrationPage.module.sass';
-import { clearAuthError } from '../../store/slices/authSlice';
 
 const RegistrationPage = (props) => {
   const dispatch = useDispatch();

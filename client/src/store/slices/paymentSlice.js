@@ -3,12 +3,12 @@ import * as restController from '../../api/rest/restController';
 import { clearContestStore } from './contestCreationSlice';
 import { changeProfileViewMode } from './userProfileSlice';
 import { updateUser } from './userSlice';
-import CONSTANTS from '../../constants';
 import {
   decorateAsyncThunk,
   pendingReducer,
   rejectedReducer,
 } from '../../utils/store';
+import CONSTANTS from '../../constants';
 
 const PAYMENT_SLICE_NAME = 'payment';
 

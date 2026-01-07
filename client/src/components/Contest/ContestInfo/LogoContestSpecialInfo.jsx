@@ -1,7 +1,6 @@
-import React from 'react';
 import styles from './ContestInfo.module.sass';
 
-const LogoContestSpecialInfo = props => {
+const LogoContestSpecialInfo = (props) => {
   const { nameVenture, brandStyle } = props;
   return (
     <>

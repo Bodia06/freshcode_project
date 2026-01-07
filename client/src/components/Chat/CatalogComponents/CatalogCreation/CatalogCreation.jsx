@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import CONSTANTS from '../../../../constants';
 import {
   changeTypeOfChatAdding,
   changeShowAddChatToCatalogMenu,
   getCatalogList,
 } from '../../../../store/slices/chatSlice';
-import styles from './CatalogCreation.module.sass';
 import AddToCatalog from '../AddToCatalog/AddToCatalog';
 import CreateCatalog from '../CreateCatalog/CreateCatalog';
+import CONSTANTS from '../../../../constants';
+import styles from './CatalogCreation.module.sass';
 
 class CatalogCreation extends React.Component {
   componentDidMount() {

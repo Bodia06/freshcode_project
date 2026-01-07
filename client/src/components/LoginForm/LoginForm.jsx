@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { checkAuth, clearAuth } from '../../store/slices/authSlice';
-import styles from './LoginForm.module.sass';
 import FormInput from '../FormInput/FormInput';
 import Schems from '../../utils/validators/validationSchems';
 import Error from '../Error/Error';
 import CONSTANTS from '../../constants';
+import styles from './LoginForm.module.sass';
 
 class LoginForm extends React.Component {
   componentWillUnmount() {
@@ -83,7 +83,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loginRequest: ({ data, navigate }) =>
-    dispatch(checkAuth({ data, navigate, authMode: CONSTANTS.AUTH_MODE.LOGIN })),
+    dispatch(
+      checkAuth({ data, navigate, authMode: CONSTANTS.AUTH_MODE.LOGIN })
+    ),
   authClear: () => dispatch(clearAuth()),
 });
 

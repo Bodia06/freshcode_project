@@ -1,6 +1,6 @@
 import axios from 'axios';
-import CONTANTS from '../constants';
 import history from '../browserHistory';
+import CONTANTS from '../constants';
 
 const instance = axios.create({
   baseURL: CONTANTS.BASE_URL,

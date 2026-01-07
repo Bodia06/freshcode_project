@@ -7,8 +7,8 @@ import {
   clearMessageList,
 } from '../../../../store/slices/chatSlice';
 import ChatHeader from '../../ChatComponents/ChatHeader/ChatHeader';
-import styles from './Dialog.module.sass';
 import ChatInput from '../../ChatComponents/ChatInut/ChatInput';
+import styles from './Dialog.module.sass';
 
 class Dialog extends React.Component {
   componentDidMount() {

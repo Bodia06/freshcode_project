@@ -1,11 +1,10 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import Catalog from '../Catalog/Catalog';
-import styles from '../CatalogListContainer/CatalogListContainer.module.sass';
 import {
   changeShowModeCatalog,
   deleteCatalog,
 } from '../../../../store/slices/chatSlice';
+import styles from '../CatalogListContainer/CatalogListContainer.module.sass';
 
 const CatalogList = (props) => {
   const goToCatalog = (event, catalog) => {

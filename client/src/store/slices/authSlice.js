@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import CONSTANTS from '../../constants';
 import * as restController from '../../api/rest/restController';
 import {
   decorateAsyncThunk,
@@ -7,6 +6,7 @@ import {
   fulfilledReducer,
   rejectedReducer,
 } from '../../utils/store';
+import CONSTANTS from '../../constants';
 
 const AUTH_SLICE_NAME = 'auth';
 

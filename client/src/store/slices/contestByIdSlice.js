@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import CONSTANTS from '../../constants';
 import * as restController from '../../api/rest/restController';
 import {
   decorateAsyncThunk,
   rejectedReducer,
   createExtraReducers,
 } from '../../utils/store';
+import CONSTANTS from '../../constants';
 
 const CONTEST_BY_ID_SLICE_NAME = 'getContestById';
 

@@ -1,6 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import Rating from 'react-rating';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import './confirmStyle.css';
 import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { confirmAlert } from 'react-confirm-alert';
@@ -13,8 +14,6 @@ import {
 } from '../../store/slices/contestByIdSlice';
 import CONSTANTS from '../../constants';
 import styles from './OfferBox.module.sass';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import './confirmStyle.css';
 
 const OfferBox = (props) => {
   const findConversationInfo = () => {

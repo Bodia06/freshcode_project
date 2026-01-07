@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import SelectInput from '../../../SelectInput/SelectInput';

@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './ContestContainer.module.sass';
 import Spinner from '../Spinner/Spinner';
+import styles from './ContestContainer.module.sass';
 
 class ContestsContainer extends React.Component {
   componentDidMount () {

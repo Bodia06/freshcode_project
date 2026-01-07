@@ -1,9 +1,7 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 import { connect } from 'react-redux';
-import CONSTANTS from '../../constants';
 import { getDataForContest } from '../../store/slices/dataForContestSlice';
-import styles from './ContestForm.module.sass';
 import withRouter from '../../hocs/withRouter';
 import Spinner from '../Spinner/Spinner';
 import FormInput from '../FormInput/FormInput';
@@ -13,6 +11,8 @@ import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import TryAgain from '../TryAgain/TryAgain';
 import Schems from '../../utils/validators/validationSchems';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
+import CONSTANTS from '../../constants';
+import styles from './ContestForm.module.sass';
 
 const variableOptions = {
   [CONSTANTS.NAME_CONTEST]: {

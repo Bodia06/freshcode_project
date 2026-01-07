@@ -1,9 +1,8 @@
-import React from 'react';
 import withRouter from '../../hocs/withRouter';
 import styles from './BackButton.module.sass';
 
-const BackButton = props => {
-  function clickHandler () {
+const BackButton = (props) => {
+  function clickHandler() {
     props.navigate(-1);
   }
 

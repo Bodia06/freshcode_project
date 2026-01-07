@@ -1,8 +1,7 @@
-import React from 'react';
-import styles from './BundleBox.module.sass';
 import CONSTANTS from '../../constants';
+import styles from './BundleBox.module.sass';
 
-const BundleBox = props => {
+const BundleBox = (props) => {
   const defaultPathToImages = `${CONSTANTS.STATIC_IMAGES_PATH}contestLabels/`;
 
   const renderImage = () => {
