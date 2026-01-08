@@ -1,0 +1,56 @@
+@import '../../../common/AtomPageVar.sass'
+
+.faqItem
+  background: #fff
+  border: 1px solid #e7eaf3
+  border-radius: 8px
+  margin-bottom: 16px
+  overflow: hidden
+  cursor: pointer
+  transition: all 0.3s ease
+
+  &.open
+    background-color: $blue-primary
+    border-color: $blue-primary
+    box-shadow: 0 10px 20px rgba(55, 125, 255, 0.15)
+
+    .questionTitle
+      color: $text-white
+
+    .icon
+      color: $text-white
+    
+    .faqBody
+      p
+        color: $text-white
+
+.faqHeader
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 20px 24px
+
+.questionTitle
+  font-size: 18px
+  font-weight: 600
+  color: $dark-text
+  margin: 0
+  padding-right: 20px
+
+.icon
+  display: flex
+  align-items: center
+  justify-content: center
+  min-width: 20px
+  height: 20px
+  color: $blue-primary
+  transition: color 0.3s ease
+
+.faqBody
+  padding: 0 24px 24px 24px
+  
+  p
+    margin: 0
+    font-size: 16px
+    line-height: 1.6
+    color: #1e2022

@@ -1,0 +1,52 @@
+@import '../../../common/AtomPageVar.sass'
+
+.stepCard
+  background: #fff
+  flex: 1
+  min-width: 220px
+  max-width: 280px
+  padding: 30px 20px
+  border-radius: 16px
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04)
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  text-align: left
+  position: relative
+  border: 1px solid #f0f0f0
+  @media (max-width: 1200px)
+    align-items: center
+    width: 100%
+    max-width: 650px
+
+.stepBadge
+  background-color: $purple-badge
+  color: #fff
+  padding: 6px 16px
+  border-radius: 20px
+  font-size: 14px
+  font-weight: 700
+  margin-bottom: 20px
+  display: inline-block
+
+.stepDescription
+  font-size: 15px
+  line-height: 1.6
+  color: $grey-text
+  margin: 0
+  @media (max-width: 1200px)
+    text-align: center
+
+.arrowContainer
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 0 10px
+  color: #dbe2ea
+  
+  svg
+    stroke: $purple-badge
+    width: 30px
+    height: 30px
+    @media (max-width: 1200px)
+      transform: rotate(90deg)

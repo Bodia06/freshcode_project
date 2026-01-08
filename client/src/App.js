@@ -15,6 +15,7 @@ import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import Layout from './pages/Layout/Layout';
 import NotFound from './components/NotFound/NotFound';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
+import AtomPage from './pages/AtomPage/AtomPage';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
 import browserHistory from './browserHistory';
@@ -39,6 +40,7 @@ class App extends Component {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path='/atom' element={<AtomPage />} />
 
             <Route element={<OnlyNotAuthorizedUserRoute />}>
               <Route path='/login' element={<LoginPage />} />

@@ -158,6 +158,11 @@ class Header extends React.Component {
                   </ul>
                 </li>
                 <li>
+                  <Link to="/atom" className={styles.navLink}>
+                    <span>Atom</span>
+                  </Link>
+                </li>
+                <li>
                   <span>CONTESTS</span>
                   <img
                     src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
