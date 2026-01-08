@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { CUSTOMER, CREATOR, SALT_ROUNDS } = require('../constants');
+const { CUSTOMER, CREATOR, SALT_ROUNDS } = require('../../constants');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

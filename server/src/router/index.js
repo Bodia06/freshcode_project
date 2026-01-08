@@ -1,9 +1,9 @@
-const express = require('express');
+const { Router } = require('express');
 const contestRouters = require('./contestRouters');
 const userRouters = require('./userRouters');
 const chatRouters = require('./chatRouters');
 
-const router = express.Router();
+const router = Router();
 
 router.use('/contest', contestRouters);
 
