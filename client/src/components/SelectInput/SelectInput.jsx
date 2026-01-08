@@ -15,32 +15,29 @@ const SelectInput = ({
   } = props;
 
   const getOptionsArray = () => {
-    const array = [];
-    for (let i = 0; optionsArray && i < optionsArray.length; i++) {
-      let option;
-      if (valueArray) {
-        option = (
-          <option key={i} value={valueArray[i]}>
-            {optionsArray[i]}
-          </option>
-        );
-      } else {
-        option = <option key={i}>{optionsArray[i]}</option>;
-      }
-      array.push(option);
-    }
-    return array;
+    if (!optionsArray) return null;
+
+    return optionsArray.map((label, index) => {
+      const value = valueArray ? valueArray[index] : label;
+      const key = `option-${value}-${index}`;
+
+      return (
+        <option key={key} value={value}>
+          {label}
+        </option>
+      );
+    });
   };
 
   useLayoutEffect(() => {
-    if (!initialValue && optionsArray) {
+    if (optionsArray && initialValue === undefined) {
       setFieldValue(field.name, valueArray ? valueArray[0] : optionsArray[0]);
     }
-  }, []);
+  }, [optionsArray, initialValue, setFieldValue, field.name, valueArray]);
 
   return (
     <div className={classes.inputContainer}>
-      <span className={classes.inputHeader}>{header}</span>
+      {header && <span className={classes.inputHeader}>{header}</span>}
       <select {...field} className={classes.selectInput}>
         {getOptionsArray()}
       </select>

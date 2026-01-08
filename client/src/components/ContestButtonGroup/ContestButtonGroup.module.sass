@@ -1,0 +1,76 @@
+.container
+  display: flex
+  flex-direction: column
+  margin-bottom: 20px
+  width: 100%
+
+.header
+  font-size: 16px
+  font-weight: 700
+  color: #333
+  margin-bottom: 15px
+  margin-top: 20px
+
+.row
+  display: flex
+  gap: 15px
+  width: 100%
+
+  @media (max-width: 768px)
+    flex-direction: column
+
+.card
+  position: relative
+  flex: 1
+  background: #fff
+  border: 1px solid #e0e0e0
+  border-radius: 8px
+  padding: 20px
+  cursor: pointer
+  transition: all 0.2s ease
+  display: flex
+  flex-direction: column
+
+  &:hover
+    border-color: #28d2d0
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05)
+
+  &.active
+    border: 2px solid #2874f0
+    background-color: #fff
+
+.cardLabel
+  font-size: 18px
+  font-weight: 700
+  color: #333
+  margin-bottom: 8px
+  display: block
+
+.cardDescription
+  font-size: 14px
+  color: #777
+  line-height: 1.4
+
+.recommended
+  position: absolute
+  top: -10px
+  right: 15px
+  background-color: #dbeafe
+  color: #2563eb
+  font-size: 12px
+  font-weight: 600
+  padding: 4px 10px
+  border-radius: 12px
+  border: 1px solid #bfdbfe
+
+.checkMark
+  position: absolute
+  top: 10px
+  right: 10px
+  color: #2874f0
+  font-size: 16px
+
+.infoText
+  margin-top: 15px
+  font-size: 14px
+  color: #666

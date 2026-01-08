@@ -262,4 +262,45 @@ export default {
     time: '',
     notifyBefore: 1,
   },
+  CONTEST_BUTTON_GROUP_INFO: [
+    {
+      label: 'Yes',
+      description: 'But minor variations are allowed',
+      value: 'yes_variations',
+      options: [
+        {
+          label: 'Yes',
+          description: 'I’m open to other URL extensions.',
+          value: 'yes_other_ext',
+        },
+        {
+          label: 'No',
+          description: 'I am only looking for a (.com) Domain',
+          value: 'no_other_ext',
+        },
+      ],
+    },
+    {
+      label: 'Yes',
+      description: 'The Domain should exactly match the name',
+      value: 'yes_exact',
+      options: [
+        {
+          label: 'Yes',
+          description: 'I’m open to other URL extensions.',
+          value: 'yes_other_ext',
+        },
+        {
+          label: 'No',
+          description: 'I am only looking for a (.com) Domain',
+          value: 'no_other_ext',
+        },
+      ],
+    },
+    {
+      label: 'No',
+      description: 'I am only looking for a name, not a Domain',
+      value: 'no_domain',
+    },
+  ],
 };
