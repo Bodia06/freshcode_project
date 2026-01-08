@@ -256,4 +256,10 @@ export default {
     'Short',
     'One Word',
   ],
+  INITIAL_VALUES_EVENT_FROM: {
+    name: '',
+    date: '',
+    time: '',
+    notifyBefore: 1,
+  },
 };

@@ -13,11 +13,13 @@ import ContestPage from './pages/ContestPage/ContestPage';
 import UserProfile from './pages/UserProfile/UserProfile';
 import ContestCreationPage from './pages/ContestCreation/ContestCreationPage';
 import Layout from './pages/Layout/Layout';
+import EventPage from './pages/EventPage/EventPage';
 import NotFound from './components/NotFound/NotFound';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import AtomPage from './pages/AtomPage/AtomPage';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
+import { EventProvider } from './contexts/eventContest';
 import browserHistory from './browserHistory';
 import CONSTANTS from './constants';
 import './App.css';
@@ -37,53 +39,56 @@ class App extends Component {
           draggable
           pauseOnHover
         />
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path='/atom' element={<AtomPage />} />
+        <EventProvider>
+          <Routes>
+            <Route path='/' element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path='/atom' element={<AtomPage />} />
 
-            <Route element={<OnlyNotAuthorizedUserRoute />}>
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='/registration' element={<RegistrationPage />} />
-            </Route>
+              <Route element={<OnlyNotAuthorizedUserRoute />}>
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/registration' element={<RegistrationPage />} />
+              </Route>
 
-            <Route element={<PrivateRoute />}>
-              <Route path='/payment' element={<Payment />} />
-              <Route path='/startContest' element={<StartContestPage />} />
-              <Route
-                path='/startContest/nameContest'
-                element={
-                  <ContestCreationPage
-                    contestType={CONSTANTS.NAME_CONTEST}
-                    title='Company Name'
-                  />
-                }
-              />
-              <Route
-                path='/startContest/taglineContest'
-                element={
-                  <ContestCreationPage
-                    contestType={CONSTANTS.TAGLINE_CONTEST}
-                    title='TAGLINE'
-                  />
-                }
-              />
-              <Route
-                path='/startContest/logoContest'
-                element={
-                  <ContestCreationPage
-                    contestType={CONSTANTS.LOGO_CONTEST}
-                    title='LOGO'
-                  />
-                }
-              />
-              <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/contest/:id' element={<ContestPage />} />
-              <Route path='/account' element={<UserProfile />} />
+              <Route element={<PrivateRoute />}>
+                <Route path='/events' element={<EventPage />} />
+                <Route path='/payment' element={<Payment />} />
+                <Route path='/startContest' element={<StartContestPage />} />
+                <Route
+                  path='/startContest/nameContest'
+                  element={
+                    <ContestCreationPage
+                      contestType={CONSTANTS.NAME_CONTEST}
+                      title='Company Name'
+                    />
+                  }
+                />
+                <Route
+                  path='/startContest/taglineContest'
+                  element={
+                    <ContestCreationPage
+                      contestType={CONSTANTS.TAGLINE_CONTEST}
+                      title='TAGLINE'
+                    />
+                  }
+                />
+                <Route
+                  path='/startContest/logoContest'
+                  element={
+                    <ContestCreationPage
+                      contestType={CONSTANTS.LOGO_CONTEST}
+                      title='LOGO'
+                    />
+                  }
+                />
+                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/contest/:id' element={<ContestPage />} />
+                <Route path='/account' element={<UserProfile />} />
+              </Route>
+              <Route path='*' element={<NotFound />} />
             </Route>
-            <Route path='*' element={<NotFound />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </EventProvider>
         <ChatContainer />
       </Router>
     );

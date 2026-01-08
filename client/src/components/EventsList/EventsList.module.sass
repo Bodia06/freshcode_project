@@ -1,0 +1,75 @@
+.eventItem
+  position: relative
+  background-color: #e9ecef 
+  border-radius: 8px
+  list-style: none
+  overflow: hidden
+  height: 50px
+  flex-shrink: 0
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1)
+
+  &.expired
+    background-color: #ffecec
+    .progressBar
+       width: 0
+
+.progressBar
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  background-color: #d1e7dd
+  transition: width 1s linear
+  z-index: 1
+
+.content
+  position: relative
+  z-index: 2
+  display: flex
+  justify-content: space-between
+  align-items: center
+  height: 100%
+  padding: 0 45px 0 15px
+
+  @media (max-width: 480px)
+    padding: 0 35px 0 10px
+.name
+  margin: 0
+  font-size: 16px
+  font-weight: 500
+  color: #333
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  max-width: 60%
+
+  @media (max-width: 480px)
+    font-size: 14px
+    max-width: 55%
+
+.timer
+  font-size: 14px
+  color: #495057
+  font-weight: 600
+  font-variant-numeric: tabular-nums
+  
+  @media (max-width: 480px)
+    font-size: 12px
+
+.deleteBtn
+  position: absolute
+  z-index: 3
+  right: 0
+  top: 0
+  height: 100%
+  width: 40px
+  border: none
+  background: transparent
+  color: #999
+  font-size: 20px
+  cursor: pointer
+  transition: all 0.2s
+
+  &:hover
+    background-color: rgba(255,255,255,0.5)
+    color: #dc3545
