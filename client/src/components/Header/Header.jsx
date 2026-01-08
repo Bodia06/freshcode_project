@@ -58,18 +58,12 @@ class Header extends React.Component {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="http:/www.google.com"
-                  style={{ textDecoration: 'none' }}
-                >
+                <Link to="#" style={{ textDecoration: 'none' }}>
                   <span>Messages</span>
                 </Link>
               </li>
               <li>
-                <Link
-                  to="http:/www.google.com"
-                  style={{ textDecoration: 'none' }}
-                >
+                <Link to="#" style={{ textDecoration: 'none' }}>
                   <span>Affiliate Dashboard</span>
                 </Link>
               </li>
