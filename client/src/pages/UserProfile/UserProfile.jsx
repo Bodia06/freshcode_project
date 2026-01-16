@@ -5,28 +5,28 @@ import { cashOut, clearPaymentStore } from '../../store/slices/paymentSlice';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import PayForm from '../../components/PayForm/PayForm';
 import Error from '../../components/Error/Error';
+import Spinner from '../../components/Spinner/Spinner';
 import CONSTANTS from '../../constants';
 import styles from './UserProfile.module.sass';
 
 const UserProfile = (props) => {
+  if (props.isFetching) {
+    return <Spinner />;
+  }
+
+  if (!props.data) {
+    return <div className={styles.error}>User data not found</div>;
+  }
+
+  const { balance, role } = props.data;
+  const { profileViewMode, changeProfileViewMode, error, clearPaymentStore } =
+    props;
+
   const pay = (values) => {
     const { number, expiry, cvc, sum } = values;
-    props.cashOut({
-      number,
-      expiry,
-      cvc,
-      sum,
-    });
+    props.cashOut({ number, expiry, cvc, sum });
   };
 
-  const {
-    balance,
-    role,
-    profileViewMode,
-    changeProfileViewMode,
-    error,
-    clearPaymentStore,
-  } = props;
   return (
     <div>
       <div className={styles.mainContainer}>
@@ -42,6 +42,7 @@ const UserProfile = (props) => {
             >
               UserInfo
             </div>
+
             {role === CONSTANTS.CREATOR && (
               <div
                 className={classNames(styles.optionContainer, {
@@ -55,11 +56,12 @@ const UserProfile = (props) => {
             )}
           </div>
         </div>
+
         {profileViewMode === CONSTANTS.USER_INFO_MODE ? (
           <UserInfo />
         ) : (
           <div className={styles.container}>
-            {parseInt(balance) === 0 ? (
+            {parseFloat(balance) === 0 ? (
               <span className={styles.notMoney}>
                 There is no money on your balance
               </span>
@@ -83,12 +85,12 @@ const UserProfile = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { balance, role } = state.userStore.data;
+  const { data, isFetching } = state.userStore;
   const { profileViewMode } = state.userProfile;
   const { error } = state.payment;
   return {
-    balance,
-    role,
+    data,
+    isFetching,
     profileViewMode,
     error,
   };
