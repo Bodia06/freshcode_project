@@ -12,6 +12,10 @@ export const cashOut = data => http.post('user/cashout', data);
 export const updateContest = data => http.post('contest/updateContest', data);
 export const setNewOffer = data => http.post('contest/setNewOffer', data);
 export const setOfferStatus = data => http.post('contest/setOfferStatus', data);
+export const getOffersForModeration = data =>
+  http.post('contest/getOffersForModeration', data);
+export const approveOfferByModerator = data =>
+  http.post('contest/approveOfferByModerator', data);
 export const downloadContestFile = data =>
   http.get(`contest/downloadFile/${data.fileName}`);
 export const payMent = data => http.post('contest/pay', data.formData);

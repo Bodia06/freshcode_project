@@ -60,6 +60,13 @@ class Header extends React.Component {
                   <span>My Account</span>
                 </Link>
               </li>
+              {this.props.data.role === 'moderator' && (
+                <li>
+                  <Link to="/moderation" style={{ textDecoration: 'none' }}>
+                    <span>Moderation Panel</span>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link to="/events" className={styles.navLink}>
                   <span>Events</span>

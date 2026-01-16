@@ -17,6 +17,7 @@ import EventPage from './pages/EventPage/EventPage';
 import NotFound from './components/NotFound/NotFound';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import AtomPage from './pages/AtomPage/AtomPage';
+import ModeratorPage from './pages/ModeratorPage/ModeratorPage';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
 import { EventProvider } from './contexts/eventContest';
@@ -51,6 +52,7 @@ class App extends Component {
               </Route>
 
               <Route element={<PrivateRoute />}>
+                <Route path='/moderation' element={<ModeratorPage />} />
                 <Route path='/events' element={<EventPage />} />
                 <Route path='/payment' element={<Payment />} />
                 <Route path='/startContest' element={<StartContestPage />} />

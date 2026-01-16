@@ -164,14 +164,16 @@ class ContestPage extends React.Component {
                 >
                   Brief
                 </span>
-                <span
-                  onClick={() => changeContestViewMode(false)}
-                  className={classNames(styles.btn, {
-                    [styles.activeBtn]: !isBrief,
-                  })}
-                >
-                  Offer
-                </span>
+                {role !== CONSTANTS.MODERATOR && (
+                  <span
+                    onClick={() => changeContestViewMode(false)}
+                    className={classNames(styles.btn, {
+                      [styles.activeBtn]: !isBrief,
+                    })}
+                  >
+                    Offer
+                  </span>
+                )}
               </div>
               {isBrief ? (
                 <Brief
@@ -187,6 +189,7 @@ class ContestPage extends React.Component {
                         contestType={contestData.contestType}
                         contestId={contestData.id}
                         customerId={contestData.User.id}
+                        valid={true}
                       />
                     )}
                   {setOfferStatusError && (
