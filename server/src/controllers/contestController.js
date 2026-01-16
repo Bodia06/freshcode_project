@@ -56,7 +56,9 @@ module.exports.getContestById = async (req, res, next) => {
           model: db.Offers,
           required: false,
           where:
-            tokenData.role === CONSTANTS.CREATOR
+            tokenData.role === CONSTANTS.CUSTOMER
+              ? { status: CONSTANTS.OFFER_STATUS_PENDING }
+              : tokenData.role === CONSTANTS.CREATOR
               ? { userId: tokenData.userId }
               : {},
           attributes: { exclude: ['userId', 'contestId'] },
@@ -78,6 +80,8 @@ module.exports.getContestById = async (req, res, next) => {
         },
       ],
     });
+
+    if (!contestInfo) return next(new ServerError('Contest not found'));
 
     contestInfo = contestInfo.get({ plain: true });
     contestInfo.Offers.forEach(offer => {
@@ -119,6 +123,46 @@ module.exports.updateContest = async (req, res, next) => {
     res.send(updatedContest);
   } catch (e) {
     next(e);
+  }
+};
+
+module.exports.getOffersForModeration = async (req, res, next) => {
+  const { limit, offset } = req.pagination;
+  try {
+    const offers = await db.Offers.findAndCountAll({
+      where: { status: CONSTANTS.OFFER_STATUS_PREPENDING },
+      limit,
+      offset,
+      order: [['id', 'ASC']],
+      attributes: ['id', 'text', 'fileName', 'contestId', 'status'],
+    });
+    res.send({ offers: offers.rows, count: offers.count });
+  } catch (err) {
+    next(new ServerError());
+  }
+};
+
+module.exports.approveOfferByModerator = async (req, res, next) => {
+  const { offerId, command } = req.body;
+  try {
+    const newStatus =
+      command === 'approve'
+        ? CONSTANTS.OFFER_STATUS_PENDING
+        : CONSTANTS.OFFER_STATUS_REJECTED;
+
+    const [updatedCount, [updatedOffer]] = await db.Offers.update(
+      { status: newStatus },
+      {
+        where: { id: offerId },
+        returning: true,
+      }
+    );
+
+    if (updatedCount === 0) return res.status(404).send('Offer not found');
+
+    res.send(updatedOffer);
+  } catch (err) {
+    next(new ServerError());
   }
 };
 
@@ -240,30 +284,41 @@ module.exports.setOfferStatus = async (req, res, next) => {
     body: { command, offerId, creatorId, contestId, orderId, priority },
   } = req;
 
-  let transaction;
-  if (command === 'reject') {
-    try {
-      const offer = await rejectOffer(offerId, creatorId, contestId);
-      res.send(offer);
-    } catch (err) {
-      next(err);
+  try {
+    const offer = await db.Offers.findOne({
+      where: {
+        id: offerId,
+        status: CONSTANTS.OFFER_STATUS_PENDING,
+      },
+    });
+
+    if (!offer) {
+      return next(new ServerError('Offer not found or not moderated yet'));
     }
-  } else if (command === 'resolve') {
-    try {
-      transaction = await db.sequelize.transaction();
-      const winningOffer = await resolveOffer(
-        contestId,
-        creatorId,
-        orderId,
-        offerId,
-        priority,
-        transaction
-      );
-      res.send(winningOffer);
-    } catch (err) {
-      transaction.rollback();
-      next(err);
+
+    let transaction;
+    if (command === 'reject') {
+      const result = await rejectOffer(offerId, creatorId, contestId);
+      res.send(result);
+    } else if (command === 'resolve') {
+      try {
+        transaction = await db.sequelize.transaction();
+        const winningOffer = await resolveOffer(
+          contestId,
+          creatorId,
+          orderId,
+          offerId,
+          priority,
+          transaction
+        );
+        res.send(winningOffer);
+      } catch (err) {
+        if (transaction) await transaction.rollback();
+        next(err);
+      }
     }
+  } catch (err) {
+    next(err);
   }
 };
 

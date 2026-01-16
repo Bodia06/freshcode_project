@@ -17,15 +17,24 @@ module.exports.parseBody = (req, res, next) => {
 
 module.exports.canGetContest = async (req, res, next) => {
   let result = null;
+  const {
+    tokenData: { role, userId },
+  } = req;
+  const contestId = req.headers.contestid;
+
   try {
-    if (req.tokenData.role === CONSTANTS.CUSTOMER) {
+    if (role === CONSTANTS.MODERATOR) {
       result = await bd.Contests.findOne({
-        where: { id: req.headers.contestid, userId: req.tokenData.userId },
+        where: { id: contestId },
       });
-    } else if (req.tokenData.role === CONSTANTS.CREATOR) {
+    } else if (role === CONSTANTS.CUSTOMER) {
+      result = await bd.Contests.findOne({
+        where: { id: contestId, userId: userId },
+      });
+    } else if (role === CONSTANTS.CREATOR) {
       result = await bd.Contests.findOne({
         where: {
-          id: req.headers.contestid,
+          id: contestId,
           status: {
             [bd.Sequelize.Op.or]: [
               CONSTANTS.CONTEST_STATUS_ACTIVE,
@@ -35,10 +44,20 @@ module.exports.canGetContest = async (req, res, next) => {
         },
       });
     }
-    result ? next() : next(new RightsError());
+
+    result
+      ? next()
+      : next(new RightsError('Contest not found or access denied'));
   } catch (e) {
     next(new ServerError(e));
   }
+};
+
+module.exports.onlyForModerator = (req, res, next) => {
+  if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+    return next(new RightsError('This action is only for moderators'));
+  }
+  next();
 };
 
 module.exports.onlyForCreative = (req, res, next) => {
@@ -86,11 +105,17 @@ module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
       where: {
         userId: req.tokenData.userId,
         id: req.body.contestId,
-        status: CONSTANTS.CONTEST_STATUS_ACTIVE,
+        status: {
+          [bd.Sequelize.Op.or]: [
+            CONSTANTS.CONTEST_STATUS_ACTIVE,
+            CONSTANTS.CONTEST_STATUS_PENDING,
+          ],
+        },
       },
     });
+
     if (!result) {
-      return next(new RightsError());
+      return next(new RightsError('Access denied or contest is finished'));
     }
     next();
   } catch (e) {

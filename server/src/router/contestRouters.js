@@ -4,6 +4,7 @@ const {
   basicMiddlewares,
   fileUpload,
   validators,
+  paginate,
 } = require('../middlewares');
 const { contestControllers, userControllers } = require('../controllers');
 
@@ -58,6 +59,19 @@ contestRouters.post(
   '/setOfferStatus',
   basicMiddlewares.onlyForCustomerWhoCreateContest,
   contestControllers.setOfferStatus
+);
+
+contestRouters.post(
+  '/getOffersForModeration',
+  basicMiddlewares.onlyForModerator,
+  paginate.paginateOffers,
+  contestControllers.getOffersForModeration
+);
+
+contestRouters.post(
+  '/approveOfferByModerator',
+  basicMiddlewares.onlyForModerator,
+  contestControllers.approveOfferByModerator
 );
 
 module.exports = contestRouters;
