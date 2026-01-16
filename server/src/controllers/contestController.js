@@ -187,7 +187,7 @@ const resolveOffer = async (
         CONSTANTS.CONTEST_STATUS_ACTIVE
       }'
         ELSE '${CONSTANTS.CONTEST_STATUS_PENDING}'
-      `),
+      END`),
     },
     { orderId },
     transaction
@@ -204,7 +204,7 @@ const resolveOffer = async (
       status: db.sequelize.literal(`CASE
         WHEN "id"=${offerId} THEN '${CONSTANTS.OFFER_STATUS_WON}'
         ELSE '${CONSTANTS.OFFER_STATUS_REJECTED}'
-      `),
+      END`),
     },
     { contestId },
     transaction
