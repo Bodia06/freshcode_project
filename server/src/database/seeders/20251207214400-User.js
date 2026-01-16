@@ -1,11 +1,24 @@
 const bcrypt = require('bcrypt');
-const { CUSTOMER, CREATOR, SALT_ROUNDS } = require('../../constants');
+const {
+  MODERATOR,
+  CUSTOMER,
+  CREATOR,
+  SALT_ROUNDS,
+} = require('../../constants');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
       'Users',
       [
+        {
+          firstName: 'moderfn',
+          lastName: 'moderln',
+          displayName: 'moderdn',
+          password: bcrypt.hashSync('123456', SALT_ROUNDS),
+          email: 'moder@gmail.com',
+          role: MODERATOR,
+        },
         {
           firstName: 'buyerfn',
           lastName: 'buyerln',
