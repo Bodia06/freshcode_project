@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { saveFile } from '../../utils/fileCashe';
 import { saveContestToStore } from '../../store/slices/contestCreationSlice';
 import NextButton from '../../components/NextButton/NextButton';
 import ContestForm from '../../components/ContestForm/ContestForm';
@@ -17,7 +18,19 @@ const ContestCreationPage = (props) => {
     : { contestType: props.contestType };
 
   const handleSubmit = (values) => {
-    props.saveContest({ type: props.contestType, info: values });
+    if (values.file) {
+      saveFile(props.contestType, values.file);
+    }
+
+    const { file, ...serializableInfo } = values;
+
+    serializableInfo.haveFile = !!file;
+
+    props.saveContest({
+      type: props.contestType,
+      info: serializableInfo,
+    });
+
     const route =
       props.bundleStore.bundle[props.contestType] === 'payment'
         ? '/payment'

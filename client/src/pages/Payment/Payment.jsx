@@ -1,35 +1,51 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 import { pay, clearPaymentStore } from '../../store/slices/paymentSlice';
+import { getFile } from '../../utils/fileCashe';
 import PayForm from '../../components/PayForm/PayForm';
 import Error from '../../components/Error/Error';
 import styles from './Payment.module.sass';
 
 const Payment = (props) => {
   const navigate = useNavigate();
+  const { contests } = props.contestCreationStore;
+  const { error } = props.payment;
+  const { clearPaymentStore } = props;
+
+  useEffect(() => {
+    if (isEmpty(contests)) {
+      navigate('/startContest', { replace: true });
+    }
+  }, [contests, navigate]);
 
   const pay = (values) => {
-    const { contests } = props.contestCreationStore;
     const contestArray = [];
-    Object.keys(contests).forEach((key) =>
-      contestArray.push({ ...contests[key] })
-    );
-    const { number, expiry, cvc } = values;
     const data = new FormData();
-    for (let i = 0; i < contestArray.length; i++) {
-      data.append('files', contestArray[i].file);
-      contestArray[i].haveFile = !!contestArray[i].file;
-    }
+
+    Object.keys(contests).forEach((key) => {
+      const contest = contests[key];
+      const fileFromCache = getFile(key);
+
+      if (fileFromCache) {
+        data.append('files', fileFromCache);
+      }
+
+      const { file, ...contestData } = contest;
+      contestArray.push(contestData);
+    });
+
+    const { number, expiry, cvc } = values;
+
     data.append('number', number);
     data.append('expiry', expiry);
     data.append('cvc', cvc);
     data.append('contests', JSON.stringify(contestArray));
     data.append('price', '100');
+
     props.pay({
-      data: {
-        formData: data,
-      },
+      data: { formData: data },
       navigate,
     });
   };
@@ -38,11 +54,8 @@ const Payment = (props) => {
     navigate(-1);
   };
 
-  const { contests } = props.contestCreationStore;
-  const { error } = props.payment;
-  const { clearPaymentStore } = props;
   if (isEmpty(contests)) {
-    navigate('/startContest', { replace: true });
+    return null;
   }
   return (
     <div className={styles.mainContainer}>
