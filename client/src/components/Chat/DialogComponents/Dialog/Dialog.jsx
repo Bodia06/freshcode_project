@@ -56,7 +56,7 @@ class Dialog extends React.Component {
         <div
           key={i}
           className={className(
-            userId === message.sender ? styles.ownMessage : styles.message
+            userId === message.senderId ? styles.ownMessage : styles.message
           )}
         >
           <span>{message.body}</span>
