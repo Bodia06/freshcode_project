@@ -18,13 +18,13 @@ class WebSocket {
 
   onSubscribe (socket) {
     socket.on(CONSTANTS.SOCKET_SUBSCRIBE, id => {
-      socket.join(id);
+      socket.join(Number(id));
     });
   }
 
   onUnsubscribe (socket) {
     socket.on(CONSTANTS.SOCKET_UNSUBSCRIBE, id => {
-      socket.leave(id);
+      socket.leave(Number(id));
     });
   }
 }

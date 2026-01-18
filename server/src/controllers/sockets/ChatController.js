@@ -9,18 +9,18 @@ class ChatController extends WebSocket {
 
   onSubscribeChat (socket) {
     socket.on('subscribeChat', id => {
-      socket.join(id);
+      socket.join(parseInt(id));
     });
   }
 
   onUnsubscribeChat (socket) {
     socket.on('unsubscribeChat', id => {
-      socket.join(id);
+      socket.leave(parseInt(id));
     });
   }
 
-  emitNewMessage (target, message) {
-    this.io.to(parseInt(target)).emit(CONSTANTS.NEW_MESSAGE, { message });
+  emitNewMessage (target, data) {
+    this.io.to(parseInt(target)).emit(CONSTANTS.NEW_MESSAGE, data);
   }
 
   emitChangeBlockStatus (target, message) {
