@@ -1,53 +1,68 @@
 .chatContainer
   position: fixed
-  float: right
   top: 30%
   width: 290px
   border-radius: 8px
   box-sizing: border-box
   background-color: #f9fafb
-  height: 390px
+  height: 435px
   z-index: 500
   overflow: visible
   box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.1)
   left: -290px
   transition: left ease 0.25s
 
+  @media (max-width: 480px)
+    width: 260px
+    left: -260px
+    height: 400px 
+
   .buttonsContainer
     display: flex
     flex-direction: row
-    justify-content: space-between
-    align-items: center
-    margin-bottom: 10px
+    justify-content: center
+    align-items: stretch
+    height: 30px
+    background-color: #f3f3f3
 
     .button
       cursor: pointer
-      border-top-left-radius: 6px
-      border-top-right-radius: 6px
       flex: 1
       background-color: #d6d1d1
+      color: #555
       display: flex
       align-items: center
       justify-content: center
-      height: 25px
+      font-size: 14px
+      font-weight: 500
+      transition: all 0.2s ease
+      border: none
+      border-top-left-radius: 8px
+      border-top-right-radius: 8px
+      min-width: 0 
 
-      &:hover
-        box-sizing: border-box
-        border: 0.5px solid #d6d1d1
-        background-color: #f3f3f3
+      @media (max-width: 480px)
+        font-size: 10px
+        padding: 0 2px
 
-    .activeButton
-      transition: margin 0.1s
-      margin: 0 -5px
-      color: white
-      z-index: 500
-      background-color: #4e618d
-
-      &:hover
-        background-color: #4e618d
+      &:first-child
+        border-top-left-radius: 0
+        border-top-right-radius: 8px
 
       &:last-child
-        margin-right: 0
+        border-top-right-radius: 0
+        border-top-left-radius: 8px
+
+      &:hover
+        background-color: #e5e5e5
+        color: #4e618d
+
+    .activeButton
+      background-color: #4e618d
+      color: white
+      z-index: 10
+      transform: translateY(-2px)
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1)
 
   .chatHeader
     height: 50px
@@ -56,26 +71,38 @@
     align-items: center
     justify-content: center
     border-bottom: 1px solid #f3f3f3
-    z-index: 600
 
     img
       width: 120px
+      @media (max-width: 480px)
+        width: 100px
 
   .toggleChat
     cursor: pointer
     position: absolute
-    top: 28px
-    right: -62px
-    -webkit-transform: rotate(90deg)
-    transform: rotate(90deg)
+    top: 30px
+    right: -70px
+    width: 100px         
+    height: 40px         
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
     background-color: #8aca6b
-    padding: 6px
-    box-sizing: border-box
-    border-top-right-radius: 8px
-    width: 90px
-    border-top-left-radius: 8px
     color: white
-    text-align: center
+    font-weight: bold
+    border-top-left-radius: 8px
+    border-top-right-radius: 8px
+    transform: rotate(90deg)
+    transform-origin: center center 
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1)
+    
+    @media (max-width: 480px)
+      width: 80px
+      height: 35px
+      top: 21px
+      right: -58px
+      font-size: 10px
 
 .showChat
   left: 0

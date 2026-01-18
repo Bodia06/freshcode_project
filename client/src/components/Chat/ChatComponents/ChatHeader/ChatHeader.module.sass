@@ -4,16 +4,24 @@
   display: flex
   justify-content: flex-start
   align-items: center
-  border-bottom: 1px solid #f3f3f3
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1)
   box-sizing: border-box
   z-index: 600
-  padding-left: 15px
+  padding: 0 15px
 
   .buttonContainer
     display: flex
     justify-content: center
     align-items: center
     cursor: pointer
+    transition: opacity 0.2s
+    
+    &:hover
+      opacity: 0.7
+
+    img
+      width: 30px
+      height: 30px
 
   .infoContainer
     flex: 1
@@ -25,36 +33,40 @@
     div
       display: flex
       flex-direction: row
-      justify-content: center
       align-items: center
 
+      &:first-child
+        img
+          height: 40px
+          width: 40px
+          border-radius: 50%
+          object-fit: cover
+          border: 2px solid rgba(255, 255, 255, 0.2)
+
+        span
+          display: inline-block
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+          max-width: 120px
+          color: white
+          font-size: 16px
+          font-weight: 600
+          margin-left: 10px
+
       &:last-child
-        margin-right: 15px
+        margin-right: 5px
+        gap: 12px
 
-      i
-        margin-right: 10px
-        font-size: 18px
-        transition: font-size 0.2s ease
-        cursor: pointer
-        &:hover
-          font-size: 22px
-          color: red
-          transition: font-size 0.2s ease
+        i
+          font-size: 18px
+          color: #000
+          cursor: pointer
+          display: inline-block
+          width: 20px
+          text-align: center
+          transition: transform 0.2s ease, color 0.2s ease
 
-      img
-        height: 44px
-        width: 44px
-        border-radius: 50%
-
-      span
-        display: inline-block
-        overflow: hidden
-        text-overflow: ellipsis
-        white-space: nowrap
-        width: 100px
-        color: white
-        font-size: 18px
-        font-weight: 500
-        margin-left: 12px
-
-
+          &:hover
+            transform: scale(1.25) 
+            color: red

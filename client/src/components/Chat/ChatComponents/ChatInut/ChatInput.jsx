@@ -8,12 +8,14 @@ import styles from './ChatInput.module.sass';
 
 const ChatInput = (props) => {
   const submitHandler = (values, { resetForm }) => {
-    props.sendMessage({
-      messageBody: values.message,
-      recipient: props.interlocutor.id,
-      interlocutor: props.interlocutor,
-    });
-    resetForm();
+    if (values.message.trim()) {
+      props.sendMessage({
+        messageBody: values.message,
+        recipient: props.interlocutor.id,
+        interlocutor: props.interlocutor,
+      });
+      resetForm();
+    }
   };
 
   return (
@@ -24,21 +26,20 @@ const ChatInput = (props) => {
         validationSchema={Schems.MessageSchema}
       >
         <Form className={styles.form}>
-          <FormInput
-            name="message"
-            type="text"
-            label="message"
-            classes={{
-              container: styles.container,
-              input: styles.input,
-              notValid: styles.notValid,
-            }}
-          />
-          <button type="submit">
-            <img
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}send.png`}
-              alt="send Message"
+          <div className={styles.container}>
+            <FormInput
+              name="message"
+              type="text"
+              placeholder="Type a message..."
+              classes={{
+                input: styles.input,
+                notValid: styles.notValid,
+                warning: styles.fieldWarning,
+              }}
             />
+          </div>
+          <button type="submit">
+            <img src={`${CONSTANTS.STATIC_IMAGES_PATH}send.png`} alt="Send" />
           </button>
         </Form>
       </Formik>

@@ -1,78 +1,71 @@
 .inputContainer
   display: flex
-  justify-content: flex-start
-  align-items: center
+  flex-direction: column
   border-top: 1px solid #f3f3f3
-  padding: 0 15px
-  margin-top: 8px
-  padding-top: 7px
-  overflow: hidden
-
-  &:last-child
-    border: none
-    margin-top: 0
-    padding-top: 0
+  padding: 15px 15px 25px 15px
+  background-color: white
+  position: relative
 
   .form
     display: flex
     flex-direction: row
-    justify-content: space-between
     align-items: center
-
-    button
-      position: relative
-      padding: 0
-      border: none
-      background-color: white
-      outline: none
-      cursor: pointer
-
-    img
-      position: absolute
-      margin-left: 20px
-      cursor: pointer
-      top: -15px
-      right: -20px
-      transition: transform 0.2s ease
-      transform: rotate(150deg)
-
-      &:hover
-        width: 35px
-        height: 35px
+    justify-content: space-between
+    width: 100%
+    gap: 10px
 
     .container
+      flex: 1
       display: flex
-      padding: 0 15px
-      justify-content: flex-start
-      align-items: center
-
-      .fieldWarning
-        font-size: 15px
-        display: flex
-        flex-direction: row
-        justify-content: center
-        align-items: center
-        color: white
-        border: 1px solid #b72522
-        margin-bottom: 15px
-        padding-bottom: 5px
-        padding-top: 5px
-        text-align: center
-
-      .notValid
-        border: 1px solid red !important
+      flex-direction: column
+      position: relative
 
       .input
-        height: 20px
+        width: 100%
+        height: 38px
         outline: none
-        border-radius: 6px
-        padding: 6px
+        border-radius: 20px
+        padding: 0 15px
         border: 2px solid #d0d0d0
+        font-size: 14px
+        box-sizing: border-box
+        transition: border-color 0.2s ease
 
         &:focus
-          transition: border 0.5s
-          border-color: #28d2d0
+          border-color: #4e618d
 
-        &:hover
-          transition: border 0.5s
-          border-color: #28d2d0
+        &.notValid
+          border-color: #b72522
+
+      .fieldWarning
+        position: absolute
+        top: 42px
+        left: 12px
+        font-size: 11px
+        color: #b72522
+        white-space: nowrap
+        pointer-events: none
+
+    button
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 40px
+      height: 40px
+      flex-shrink: 0
+      border: none
+      background-color: #4e618d
+      border-radius: 50%
+      cursor: pointer
+      transition: background-color 0.2s, transform 0.1s
+      padding: 0
+
+      &:hover
+        background-color: #3b4a6b
+        transform: scale(1.05)
+
+      img
+        width: 18px
+        height: 18px
+        filter: brightness(0) invert(1)
+        display: block

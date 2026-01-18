@@ -22,9 +22,14 @@ class CatalogCreation extends React.Component {
       catalogCreationMode,
       changeShowAddChatToCatalogMenu,
       isFetching,
+      catalogList,
     } = this.props;
+
     const { ADD_CHAT_TO_OLD_CATALOG, CREATE_NEW_CATALOG_AND_ADD_CHAT } =
       CONSTANTS;
+
+    const isOldDisabled = catalogList.length === 0;
+
     return (
       <>
         {!isFetching && (
@@ -32,13 +37,18 @@ class CatalogCreation extends React.Component {
             <i
               className="far fa-times-circle"
               onClick={() => changeShowAddChatToCatalogMenu()}
+              title="Close"
             />
             <div className={styles.buttonsContainer}>
               <span
-                onClick={() => changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG)}
+                onClick={() =>
+                  !isOldDisabled &&
+                  changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG)
+                }
                 className={classNames({
                   [styles.active]:
                     catalogCreationMode === ADD_CHAT_TO_OLD_CATALOG,
+                  [styles.disabled]: isOldDisabled,
                 })}
               >
                 Old
@@ -55,11 +65,19 @@ class CatalogCreation extends React.Component {
                 New
               </span>
             </div>
-            {catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT ? (
-              <CreateCatalog />
-            ) : (
-              <AddToCatalog />
-            )}
+            <div
+              style={{
+                backgroundColor: '#8aca6b',
+                borderBottomLeftRadius: '8px',
+                borderBottomRightRadius: '8px',
+              }}
+            >
+              {catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT ? (
+                <CreateCatalog />
+              ) : (
+                <AddToCatalog />
+              )}
+            </div>
           </div>
         )}
       </>

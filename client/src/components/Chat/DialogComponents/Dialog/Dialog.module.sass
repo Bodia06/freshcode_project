@@ -1,80 +1,78 @@
-.messageBlock
-  display: inline-block
-  color: red
-  width: 100%
-  text-align: center
-  transform: translateY(100%)
-
 .messageList
   height: 280px
-  overflow: auto
-  padding: 0 8px
+  overflow-y: auto
+  padding: 10px 15px
   display: flex
   flex-direction: column
-  justify-content: flex-start
+  background-color: #f5f7f9
 
   &::-webkit-scrollbar
-    width: 5px
+    width: 4px
 
   &::-webkit-scrollbar-track
-    background: #f3f3f3
+    background: #f1f1f1
 
   &::-webkit-scrollbar-thumb
     background: #6b89b0
+    border-radius: 10px
 
   .date
     align-self: center
-    margin: 4px 0
-    color: white
-    background-color: black
-    opacity: 0.4
-    border-radius: 6px
-    padding: 2px
+    margin: 15px 0
+    color: #fff
+    background-color: rgba(0, 0, 0, 0.3)
+    border-radius: 12px
+    padding: 4px 12px
+    font-size: 11px
+    font-weight: 500
+    text-transform: uppercase
 
+  .ownMessage, .message
+    display: flex
+    flex-direction: column
+    max-width: 85%
+    padding: 8px 12px
+    margin: 4px 0
+    font-size: 14px
+    line-height: 1.4
+    position: relative
+    word-wrap: break-word
+
+    span:first-child
+      margin-bottom: 4px
+
+    .messageTime
+      font-size: 10px
+      align-self: flex-end
+      opacity: 0.7
+      margin-top: 2px
 
   .ownMessage
     align-self: flex-end
     color: white
-    max-width: 200px
-    padding: 6px
     background-color: #6b89b0
-    border-bottom-left-radius: 8px
-    border-top-left-radius: 8px
-    border-top-right-radius: 4px
-    border-bottom-right-radius: 8px
-    margin: 4px 0
-    overflow-wrap: break-word
-    box-sizing: border-box
+    border-radius: 14px 14px 2px 14px
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
 
     .messageTime
-      position: relative
-      float: right
-      margin-left: 5px
-      top: 12px
-      font-size: 10px
-      color: white
-
+      color: #e0e0e0
 
   .message
     align-self: flex-start
     color: white
-    max-width: 200px
     background-color: #4e618d
-    border-bottom-left-radius: 8px
-    border-top-left-radius: 4px
-    border-top-right-radius: 8px
-    border-bottom-right-radius: 8px
-    margin: 4px 0
-    padding: 6px
-    overflow-wrap: break-word
-    box-sizing: border-box
+    border-radius: 14px 14px 14px 2px
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
 
     .messageTime
-      position: relative
-      float: right
-      margin-left: 5px
-      top: 12px
-      font-size: 10px
-      color: white
+      color: #d1d1d1
 
-
+.messageBlock
+  display: block
+  color: #b72522
+  width: 100%
+  text-align: center
+  padding: 10px 0
+  font-size: 13px
+  font-weight: 500
+  background-color: #fff

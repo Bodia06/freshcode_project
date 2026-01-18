@@ -8,6 +8,7 @@
   border-bottom: 1px solid #4e618d
   align-self: stretch
   padding: 0 10px
+  transition: background-color 0.2s ease
 
   .infoContainer
     display: flex
@@ -20,15 +21,15 @@
     i
       margin-left: 10px
       font-size: 18px
-      transition: font-size 0.2s
+      display: inline-block
+      transition: transform 0.2s ease, color 0.2s ease
 
       &:hover
         color: red
-        font-size: 24px
-        transition: font-size 0.2s
+        transform: scale(1.3) 
 
   &:hover
-    background-color: #e5e5e5
+    background-color: #f1f3f5
 
   .catalogName
     display: inline-block
@@ -36,5 +37,6 @@
     text-overflow: ellipsis
     white-space: nowrap
     font-size: 16px
-    width: 110px
-    color: black
+    max-width: 140px
+    color: #4e618d
+    font-weight: 500
