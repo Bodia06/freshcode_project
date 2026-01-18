@@ -1,12 +1,20 @@
 .catalogCreationContainer
   position: absolute
-  top: -40px
+  top: -45px
   left: 172px
   width: 160px
   border-radius: 8px
   z-index: 500
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2))
   animation: fadeIn 0.2s ease-out
+
+  @media (max-width: 480px)
+    position: fixed
+    top: 35%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 200px
+    margin: 0
 
   i
     position: absolute
@@ -20,6 +28,12 @@
     border-radius: 50%
     box-shadow: 0 2px 4px rgba(0,0,0,0.2)
     transition: transform 0.2s ease, color 0.2s ease
+
+    @media (max-width: 480px)
+      font-size: 24px
+      top: -12px
+      left: auto
+      right: -12px
 
     &:hover
       color: #b72522
@@ -49,12 +63,20 @@
       flex: 1
       transition: all 0.2s ease
 
+      @media (max-width: 480px)
+        height: 35px
+        font-size: 14px
+
       &:hover
         background-color: #f3f3f3
         color: #4e618d
 
-      &:first-child
-        border-right: none
+      &.disabled
+        opacity: 0.5
+        cursor: not-allowed
+        &:hover
+          background-color: #8aca6b
+          color: white
 
     .active
       background-color: #4e618d
@@ -63,6 +85,9 @@
       z-index: 600
       border-color: transparent
 
+      @media (max-width: 480px)
+        height: 40px
+
       &:hover
         color: white
         background-color: #4e618d
@@ -70,7 +95,7 @@
 @keyframes fadeIn
   from
     opacity: 0
-    transform: translateY(5px)
+    transform: translate(-50%, -45%)
   to
     opacity: 1
-    transform: translateY(0)
+    transform: translate(-50%, -50%)

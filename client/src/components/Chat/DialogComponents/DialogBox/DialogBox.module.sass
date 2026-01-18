@@ -3,31 +3,66 @@
   flex-direction: row
   justify-content: flex-start
   align-items: center
-  height: 60px
+  height: 70px
   cursor: pointer
   border-bottom: 1px solid #4e618d
+  transition: background-color 0.2s ease
 
   &:hover
     background-color: #e5e5e5
+
+  img
+    border-radius: 50%
+    width: 46px
+    height: 46px
+    margin-left: 10px
+    flex-shrink: 0
 
   .infoContainer
     display: flex
     justify-content: space-between
     flex: 1
-    align-items: flex-start
-    padding: 0 15px
-    padding-right: 10px
+    align-items: center
+    padding: 0 10px
     overflow: hidden
-    padding-bottom: 5px
+    min-width: 0
+
+    .interlocutorInfo
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      justify-content: center
+      flex: 1
+      min-width: 0
+
+      .interlocutorName
+        width: 100%
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        color: #000
+        font-weight: 500
+        font-size: 16px
+
+      .interlocutorMessage
+        width: 100%
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        color: grey
+        font-size: 14px
 
     .buttonsContainer
-      align-self: center
       display: flex
       justify-content: flex-end
       align-items: center
+      flex-shrink: 0
+      margin-left: 10px
 
       .time
-        margin-right: 10px
+        margin-right: 8px
+        font-size: 12px
+        color: grey
 
       i
         display: inline-block
@@ -35,41 +70,34 @@
         font-size: 16px
         width: 20px
         text-align: center
+        color: #000
         transition: transform 0.2s ease, color 0.2s ease
 
         &:hover
           transform: scale(1.25)
           color: red
 
-    span
-      color: grey
-      font-size: 15px
+@media (max-width: 360px)
+  .previewChatBox
+    height: 65px
+    
+    img
+      width: 40px
+      height: 40px
 
-    .interlocutorInfo
-      display: flex
-      flex-direction: column
-      align-items: flex-start
-      justify-content: space-between
-
-      .interlocutorMessage
-        overflow: hidden
-        white-space: nowrap
-        text-overflow: ellipsis
-        color: grey
-        font-size: 15px
-        width: 65px
-
+    .infoContainer
+      padding: 0 5px
+      
       .interlocutorName
-        overflow: hidden
-        white-space: nowrap
-        text-overflow: ellipsis
-        color: #6b8ab1
-        width: 65px
-        font-weight: 500
-        font-size: 16px
+        font-size: 14px
+      
+      .interlocutorMessage
+        font-size: 12px
 
-  img
-    border-radius: 50%
-    width: 46px
-    height: 46px
-    margin-left: 10px
+      .buttonsContainer
+        .time
+          display: none
+        
+        i
+          font-size: 18px
+          margin-right: 3px

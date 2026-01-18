@@ -7,7 +7,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1)
   box-sizing: border-box
   z-index: 600
-  padding: 0 15px
+  padding: 0 10px
 
   .buttonContainer
     display: flex
@@ -15,58 +15,87 @@
     align-items: center
     cursor: pointer
     transition: opacity 0.2s
+    flex-shrink: 0
     
     &:hover
       opacity: 0.7
 
     img
-      width: 30px
-      height: 30px
+      width: 24px
+      height: 24px
 
   .infoContainer
     flex: 1
     display: flex
     justify-content: space-between
     align-items: center
-    margin-left: 15px
+    margin-left: 10px
+    min-width: 0
 
     div
       display: flex
       flex-direction: row
       align-items: center
+      min-width: 0
 
       &:first-child
+        flex: 1
+        
         img
-          height: 40px
-          width: 40px
+          height: 36px
+          width: 36px
           border-radius: 50%
           object-fit: cover
-          border: 2px solid rgba(255, 255, 255, 0.2)
+          border: 1px solid rgba(255, 255, 255, 0.2)
+          flex-shrink: 0
 
         span
           display: inline-block
           overflow: hidden
           text-overflow: ellipsis
           white-space: nowrap
-          max-width: 120px
+          max-width: 100%
           color: white
-          font-size: 16px
+          font-size: 15px
           font-weight: 600
-          margin-left: 10px
+          margin-left: 8px
 
       &:last-child
-        margin-right: 5px
-        gap: 12px
+        margin-left: 10px
+        gap: 15px
+        flex-shrink: 0
 
         i
           font-size: 18px
           color: #000
           cursor: pointer
           display: inline-block
-          width: 20px
+          width: 24px
           text-align: center
           transition: transform 0.2s ease, color 0.2s ease
 
           &:hover
-            transform: scale(1.25) 
+            transform: scale(1.2) 
             color: red
+
+@media (max-width: 320px)
+  .chatHeader
+    padding: 0 5px
+    
+    .infoContainer
+      margin-left: 5px
+      
+      div:first-child
+        img
+          height: 32px
+          width: 32px
+        
+        span
+          font-size: 14px
+          max-width: 80px
+          
+      div:last-child
+        gap: 10px
+        
+        i
+          font-size: 16px
