@@ -10,7 +10,6 @@ export default function EventPage() {
 
   const handleOpenModal = () => {
     setOpenModal(!openModal);
-    console.log(openModal);
   };
 
   return (

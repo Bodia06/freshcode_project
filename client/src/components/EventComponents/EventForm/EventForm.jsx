@@ -11,7 +11,7 @@ export default function EventFrom({ close, addEvent }) {
       time: values.time,
       notifyBefore: values.notifyBefore,
     });
-
+    close();
     resetForm();
   };
 
