@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import SCHEMS from '../../utils/validators/validationSchems';
-import CONSTANTS from '../../constants';
+import SCHEMS from '../../../utils/validators/validationSchems';
+import CONSTANTS from '../../../constants';
 import styles from './EventForm.module.sass';
 
 export default function EventFrom({ close, addEvent }) {

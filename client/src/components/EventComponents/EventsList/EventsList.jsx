@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useCountdown } from '../../hooks/useCountdown';
+import { useCountdown } from '../../../hooks/useCountdown';
 import styles from './EventsList.module.sass';
 
 export default function EventsList({ eventData, deleteEvent }) {

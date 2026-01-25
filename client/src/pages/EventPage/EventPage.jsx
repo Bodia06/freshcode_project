@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEvent } from '../../hooks/useEvent';
-import EventForm from '../../components/EventForm/EventForm';
-import EventsList from '../../components/EventsList/EventsList';
+import EventsList from '../../components/EventComponents/EventsList/EventsList';
+import EventFrom from '../../components/EventComponents/EventForm/EventForm';
 import styles from './EventPage.module.sass';
 
 export default function EventPage() {
@@ -21,7 +21,7 @@ export default function EventPage() {
         Add new event
       </button>
 
-      {openModal && <EventForm close={handleOpenModal} addEvent={addEvent} />}
+      {openModal && <EventFrom close={handleOpenModal} addEvent={addEvent} />}
 
       {events.length === 0 ? (
         <p className={styles.eventNotFound}>No events available.</p>
