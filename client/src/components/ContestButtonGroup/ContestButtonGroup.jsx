@@ -1,5 +1,5 @@
-import styles from './ContestButtonGroup.module.sass';
 import CONSTANTS from '../../constants';
+import styles from './ContestButtonGroup.module.sass';
 
 const ContestButtonGroup = ({ setFieldValue, values }) => {
   const handleMainChange = (item) => {

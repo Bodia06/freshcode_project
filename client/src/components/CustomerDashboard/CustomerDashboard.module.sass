@@ -1,85 +1,83 @@
+@import '../../common/vars/CustomerDashboardVar'
+
 .mainContainer
-  width: 1200px
-  margin: 0 auto
-  margin-top: 50px
+  width: 100%
+  max-width: 1200px
+  margin: 50px auto
   display: flex
   flex-direction: row
   justify-content: flex-start
-  @media(max-width: 1400px)
-    width: auto
+  padding: 0 20px
+  box-sizing: border-box
+  
   @media(max-width: 1000px)
     flex-direction: column
+    margin-top: 20px
+    padding: 0 15px
 
-  .errorContainer
-    margin: 0 auto
-    text-align: center
-    display: flex
-    flex-direction: column
-    width: 260px
-    padding: 15px
+.filterContainer
+  min-width: 280px
+  height: fit-content
+  padding: 20px 0
+  margin-right: 50px
+  display: flex
+  flex-direction: column
+  box-shadow: $shadow-main
+  align-items: stretch
+  background-color: $color-white
+  border-radius: $radius-md
+  flex-shrink: 0
 
-    .message
-      color: red
-      font-size: 18px
-
-    .try
-      color: #333
-      font-size: 18px
-
-  .contestsContainer
-    display: flex
-    justify-content: center
+  @media(max-width: 1000px)
     width: 100%
-    margin-top: 15px
+    max-width: 100%
+    margin-right: 0
+    margin-bottom: 30px
+    padding: 15px
+    min-width: 0
+    box-sizing: border-box
 
-  .filterContainer
-    min-width: 250px
-    height: 350px
-    padding-top: 30px
-    margin-right: 50px
-    display: flex
-    flex-direction: column
-    box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.1)
-    align-items: flex-start
-    background-color: white
-    margin-bottom: 15px
-    @media(max-width: 1000px)
-      padding-top: 10px
-      flex-direction: row
-      margin-right: 0
-      justify-content: center
-      height: 80px
+.filter, .activeFilter
+  border: none
+  margin: 8px 15px
+  text-align: center
+  font-size: 16px
+  border-radius: $radius-md
+  padding: 14px 20px
+  cursor: pointer
+  transition: all 0.3s ease
+  display: block
+  width: auto
 
-    .filter
-      border: none
-      background-color: #fff
-      margin-top: 15px
-      align-self: stretch
-      text-align: center
-      color: #46568a
-      font-size: 18px
-      border-radius: 10px
-      padding: 10px
-      cursor: pointer
-      @media(max-width: 1000px)
-        height: 20px
-        margin: 0 5px
+  @media(max-width: 1000px)
+    margin: 8px 0
+    width: 100%
+    box-sizing: border-box
+    white-space: normal
 
-      &:hover
-        background-color: #eefaea
+.filter
+  background-color: transparent
+  color: $color-text-main
+  border: 1px solid transparent
+  
+  &:hover
+    background-color: #f0f2f5
 
-    .activeFilter
-      border: none
-      transition: 0.5s background-color
-      margin-top: 15px
-      align-self: stretch
-      text-align: center
-      font-size: 18px
-      border-radius: 10px
-      padding: 10px
-      background-color: #4e618d
-      color: white
-      pointer-events: none
-      @media(max-width: 1000px)
-        height: 20px
-        margin: 0 5px
+.activeFilter
+  background-color: $color-primary
+  color: $color-white
+  pointer-events: none
+  box-shadow: 0 4px 10px rgba(78, 97, 141, 0.15)
+
+.contestsContainer
+  flex-grow: 1
+  width: 100%
+  display: flex
+  justify-content: center
+  min-width: 0 
+
+.errorContainer
+  width: 100%
+  text-align: center
+  padding: 20px
+  box-sizing: border-box

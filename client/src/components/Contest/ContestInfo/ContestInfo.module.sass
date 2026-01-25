@@ -8,12 +8,20 @@
   padding-bottom: 25px
   border-top: 1px solid #f3f3f3
 
+  @media (max-width: 768px)
+    margin: 15px 15px
+    padding-top: 15px
+
   .infoContainer
     display: flex
     flex-direction: column
     justify-content: flex-start
     align-items: flex-start
     align-self: stretch
+    gap: 15px
+
+    @media (max-width: 768px)
+      gap: 12px
 
     .contestTypeContainer
       align-self: stretch
@@ -21,6 +29,11 @@
       flex-direction: row
       align-items: center
       justify-content: space-between
+      gap: 10px
+
+      @media (max-width: 768px)
+        flex-wrap: wrap-reverse
+        align-items: center
 
       .editBtn
         margin-right: 15px
@@ -29,9 +42,19 @@
         padding: 12px 28px
         border-radius: 8px
         background-color: #8aca6b
+        border: none
+        cursor: pointer
+        transition: all 0.2s
 
         &:hover
           background-color: #6b8ab1
+
+        @media (max-width: 768px)
+          margin-right: 0
+          width: 100%
+          order: 3
+          font-size: 16px
+          padding: 10px 20px
 
     .dataContainer
       align-self: stretch
@@ -44,55 +67,59 @@
         color: #515b5f
         font-size: 15px
         padding: 0
-        padding-top: 8px
-        margin-bottom: 10px
+        padding-top: 4px
+        margin-bottom: 5px
         border: none
         background-color: white
         resize: none
         align-self: stretch
         overflow: visible
         overflow-wrap: break-word
+        line-height: 1.5
+
+        @media (max-width: 768px)
+          font-size: 14px
+          line-height: 1.4
 
       .label
         font-size: 16px
         font-weight: 700
-        margin: 10px 0
+        margin: 0
+        margin-bottom: 4px
+        color: #333
+
+        @media (max-width: 768px)
+          font-size: 14px
+          line-height: 1.2
 
       .file
         align-self: stretch
         text-decoration: underline
+        word-break: break-all
+        line-height: 1.5
 
         &:hover
           color: #6b89b0
+
+        @media (max-width: 768px)
+          font-size: 14px
 
 .dataContainer
   align-self: stretch
   display: flex
   flex-direction: column
-  justify-content: flex-start
-  align-items: flex-start
+  margin-bottom: 15px
 
   .data
     color: #515b5f
     font-size: 15px
-    padding: 0
-    padding-top: 8px
-    margin-bottom: 10px
-    border: none
-    background-color: white
-    resize: none
-    align-self: stretch
-    overflow: visible
-    overflow-wrap: break-word
+    line-height: 1.5
+    @media (max-width: 768px)
+      font-size: 14px
 
   .label
     font-size: 16px
     font-weight: 700
-    margin: 10px 0
-
-  .file
-    align-self: stretch
-    text-decoration: underline
-
-    &:hover
-      color: #6b89b0
+    margin-bottom: 4px
+    @media (max-width: 768px)
+      font-size: 14px

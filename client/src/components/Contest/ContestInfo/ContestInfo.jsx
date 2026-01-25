@@ -2,7 +2,7 @@ import LogoContestSpecialInfo from './LogoContestSpecialInfo';
 import NameContestSpecialInfo from './NameContestSpecialInfo';
 import TaglineContestSpecialInfo from './TaglineContestSpecialInfo';
 import CONSTANTS from '../../../constants';
-import styles from '../../Brief/Brief.module.sass';
+import styles from './ContestInfo.module.sass';
 
 const ContestInfo = (props) => {
   const { changeEditContest, userId, contestData, role, goChat } = props;

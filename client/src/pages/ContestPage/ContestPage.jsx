@@ -203,10 +203,12 @@ class ContestPage extends React.Component {
                 </div>
               )}
             </div>
-            <ContestSideBar
-              contestData={contestData}
-              totalEntries={offers.length}
-            />
+            <div className={styles.sidebarWrapper}>
+              <ContestSideBar
+                contestData={contestData}
+                totalEntries={offers.length}
+              />
+            </div>
           </div>
         )}
       </div>

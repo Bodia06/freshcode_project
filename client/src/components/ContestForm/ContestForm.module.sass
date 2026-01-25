@@ -1,190 +1,152 @@
-.errorContainer
-  display: flex
-  flex-direction: column
-  justify-content: flex-end
-  align-items: center
-  padding: 20px
-  width: 280px
-  margin: 0 auto
-
-  .message
-    font-size: 18px
-    color: red
-
-  .try
-    font-size: 18px
-    color: #333
-
-.changeData
-  float: right
-  margin-top: 50px
-  width: 150px
-  text-align: center
-  margin-right: 15px
-  color: white
-  font-size: 20px
-  padding: 12px 28px
-  border-radius: 8px
-  background-color: #8aca6b
-
-  &:hover
-    background-color: #6b8ab1
-
-.componentInputContainer
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: flex-start
-
-.warning
-  font-size: 18px
-  display: flex
-  justify-content: center
-  align-items: center
-  border: 2px solid #b72522
-  border-radius: 4px
-  padding: 3px 20px
-  color: #333
-
-.textArea
-  width: 550px
-  height: 250px
-  box-sizing: border-box
-  box-shadow: none
-  display: flex
-  align-items: center
-  font-size: 18px
-  background-color: white
-  border: 2px solid #d0d0d0
-  border-radius: 4px
-  cursor: text
-  margin-bottom: 15px
-  outline: none
-  padding: 10px 10px
-  color: #555
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
-  @media(max-width: 700px)
-    width: auto
-
-  &:focus
-    border: 2px solid #28d2d0
-
-.input
-  width: 550px
-  height: 46px
-  box-sizing: border-box
-  box-shadow: none
-  display: flex
-  align-items: center
-  font-size: 18px
-  background-color: white
-  border: 2px solid #d0d0d0
-  border-radius: 4px
-  cursor: text
-  margin-bottom: 15px
-  outline: none
-  padding: 0 10px
-  color: #555
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
-  @media(max-width: 700px)
-    width: auto
-
-  &:focus
-    border: 2px solid #28d2d0
-
+@import '../../common/vars/ContestPageVar'
+@import '../../common/mixins/ContestMixins'
 
 .formContainer
   display: flex
   flex-direction: column
   justify-content: flex-start
   width: 100%
+  
   @media (max-width: 700px)
-    justify-content: center
-
-  .selectInputContainer
-    margin: 15px 0 0 0
-    display: flex
-    flex-direction: column
-    width: 100%
-
-    .select
-      width: 550px
-      height: 46px
-      box-sizing: border-box
-      box-shadow: none
-      display: flex
-      align-items: center
-      font-size: 18px
-      background-color: white
-      border: 2px solid #d0d0d0
-      border-radius: 4px
-      cursor: text
-      margin-bottom: 15px
-      outline: none
-      padding: 0 10px
-      color: #555
-      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
-      @media(max-width: 700px)
-        width: min-content
-
-      &:focus
-        border: 2px solid #28d2d0
-
-    .selectHeader
-      display: inline-block
-      font-size: 19px
-      color: #585859
-      font-weight: 700
-      margin-top: 12px
-      margin-bottom: 5px
+    padding: 0 10px
 
 .inputContainer
-  margin: 15px 0 0 0
+  margin: 25px 0 0 0
   width: 100%
+  display: flex
+  flex-direction: column
+  gap: 8px
 
   .inputHeader
     display: inline-block
-    font-size: 19px
-    color: #585859
+    font-size: 18px
+    color: $text-secondary
     font-weight: 700
-    margin-top: 12px
-    margin-bottom: 5px
+    letter-spacing: 0.2px
 
+    @media (max-width: 700px)
+      font-size: 16px
+
+.input, .textArea, .selectInputContainer .select
+  width: $max-input-width
+  max-width: 100%
+  box-sizing: border-box
+  font-size: 16px
+  line-height: 1.5
+  background-color: white
+  border: 1px solid $border-color
+  border-radius: $border-radius-sm
+  padding: 12px 16px
+  color: #444
+  transition: all $transition-speed ease-in-out
+
+  &:focus
+    @include input-focus
+
+  @media (max-width: 700px)
+    width: 100%
+
+.input
+  height: 48px
+
+.textArea
+  height: 200px
+  resize: vertical
+  @media (max-width: 700px)
+    height: 150px
+
+.selectInputContainer
+  margin-top: 25px
+  display: flex
+  flex-direction: column
+  gap: 8px
+
+  .selectHeader
+    font-size: 18px
+    color: $text-secondary
+    font-weight: 700
 
 .fileUploadContainer
   display: flex
   align-items: center
-  justify-content: center
-  height: 80px
+  justify-content: flex-start
+  gap: 15px
+  min-height: 80px
   box-sizing: border-box
-  width: 350px
-  margin: 10px 0 10px 0
-  padding: 10px 15px
-  background-color: #eee
-  @media(max-width: 700px)
-    width: auto
-  @media(max-width: 600px)
-    display: flex
+  width: $max-input-width
+  margin: 25px 0
+  width: 100%
+  padding: 20px
+  background-color: $bg-light
+  border: 2px dashed $border-color
+  border-radius: $border-radius-md
+
+  @media (max-width: 700px)
     flex-direction: column
-    align-items: center
-    height: 120px
-
-  .label
+    align-items: stretch
     text-align: center
-    display: inline-block
-    width: 150px
-    background-color: white
-    padding: 20px
-    font-size: 16px
-    cursor: pointer
-
-  .fileName
-    width: 100px
-    display: inline-block
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    padding: 12px
 
   .fileInput
     display: none
+
+  .label
+    text-align: center
+    background-color: $primary-green
+    color: white
+    padding: 12px 24px
+    font-size: 16px
+    font-weight: 600
+    cursor: pointer
+    border-radius: $border-radius-sm
+    transition: background-color $transition-speed
+    border: none
+
+    &:hover
+      background-color: $hover-blue
+
+  .fileName
+    font-size: 14px
+    color: $text-muted
+    max-width: 250px
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+.changeData
+  float: right
+  margin-top: 40px
+  width: 160px
+  color: white
+  font-size: 18px
+  font-weight: 700
+  padding: 14px
+  border-radius: $border-radius-md
+  background-color: $primary-green
+  border: none
+  cursor: pointer
+  transition: all $transition-speed
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05)
+
+  &:hover
+    background-color: $hover-blue
+    transform: translateY(-1px)
+
+  @media (max-width: 700px)
+    float: none
+    width: 100%
+
+.warning
+  font-size: 14px
+  display: inline-flex
+  align-items: center
+  border: 1px solid $error-red
+  border-radius: $border-radius-sm
+  padding: 8px 16px
+  color: $error-red
+  background-color: rgba(183, 37, 34, 0.05)
+  margin-bottom: 15px
+
+.componentInputContainer
+  display: flex
+  flex-direction: column
+  width: 100%
