@@ -43,20 +43,20 @@ const CreatorDashboard = () => {
     creatorFilter.contestId || ''
   );
 
-  const lastSearchRef = useRef(null);
+  const filterRef = useRef(creatorFilter);
+  useEffect(() => {
+    filterRef.current = creatorFilter;
+  }, [creatorFilter]);
 
   useEffect(() => {
     dispatch(getDataForContest());
   }, [dispatch]);
 
   useEffect(() => {
-    if (search === lastSearchRef.current) return;
-    lastSearchRef.current = search;
-
     const queryParams = queryString.parse(search);
 
     const filterFromUrl = {
-      typeIndex: parseInt(queryParams.typeIndex) || 0,
+      typeIndex: parseInt(queryParams.typeIndex, 10) || 0,
       contestId: queryParams.contestId || '',
       industry: queryParams.industry || '',
       awardSort: queryParams.awardSort || 'asc',
@@ -74,37 +74,48 @@ const CreatorDashboard = () => {
       );
       setLocalContestId(filterFromUrl.contestId);
     }
-  }, [search, dispatch, creatorFilter]);
+  }, [search, dispatch]);
 
   const updateUrl = useCallback(
     (updatedParams) => {
       const cleanParams = {};
       Object.keys(updatedParams).forEach((key) => {
+        const val = updatedParams[key];
         if (
-          updatedParams[key] !== '' &&
-          updatedParams[key] !== null &&
-          updatedParams[key] !== 0 &&
-          updatedParams[key] !== false
+          val !== '' &&
+          val !== null &&
+          val !== undefined &&
+          val !== 0 &&
+          val !== false &&
+          val !== 'false'
         ) {
-          cleanParams[key] = updatedParams[key];
+          cleanParams[key] = val;
         }
       });
 
       const newSearch = queryString.stringify(cleanParams);
-      if (newSearch !== search.replace('?', '')) {
-        navigate(`${pathname}?${newSearch}`, { replace: true });
+      const currentSearch = search.replace('?', '');
+
+      if (newSearch !== currentSearch) {
+        navigate(`${pathname}${newSearch ? `?${newSearch}` : ''}`, {
+          replace: true,
+        });
       }
     },
     [navigate, pathname, search]
   );
 
   const changePredicate = (name, value) => {
-    updateUrl({ ...creatorFilter, [name]: value });
+    const newFilters = {
+      ...filterRef.current,
+      [name]: value,
+    };
+    updateUrl(newFilters);
   };
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      if (localContestId !== creatorFilter.contestId) {
+      if (localContestId !== filterRef.current.contestId) {
         changePredicate('contestId', localContestId);
       }
     }, 500);
@@ -147,7 +158,7 @@ const CreatorDashboard = () => {
             >
               {types.map((el, i) => (
                 <option key={i} value={el}>
-                  {el === '' ? 'All types' : el}
+                  {el === '' ? 'All Contest Types' : el}
                 </option>
               ))}
             </select>

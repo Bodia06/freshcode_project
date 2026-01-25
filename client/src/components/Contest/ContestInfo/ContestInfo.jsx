@@ -6,6 +6,11 @@ import styles from './ContestInfo.module.sass';
 
 const ContestInfo = (props) => {
   const { changeEditContest, userId, contestData, role, goChat } = props;
+
+  if (!contestData || !contestData.User) {
+    return null;
+  }
+
   const {
     typeOfTagline,
     brandStyle,
@@ -21,6 +26,7 @@ const ContestInfo = (props) => {
     User,
     status,
   } = contestData;
+
   return (
     <div className={styles.mainContestInfoContainer}>
       <div className={styles.infoContainer}>
@@ -29,7 +35,7 @@ const ContestInfo = (props) => {
             <span className={styles.label}>Contest Type</span>
             <span className={styles.data}>{contestType}</span>
           </div>
-          {User.id === userId &&
+          {User?.id === userId &&
             status !== CONSTANTS.CONTEST_STATUS_FINISHED && (
               <button
                 onClick={() => changeEditContest(true)}
@@ -39,7 +45,10 @@ const ContestInfo = (props) => {
               </button>
             )}
           {role !== CONSTANTS.CUSTOMER && (
-            <i onClick={goChat} className="fas fa-comments" />
+            <i
+              onClick={goChat}
+              className={`fas fa-comments ${styles.chatIcon}`}
+            />
           )}
         </div>
         <div className={styles.dataContainer}>
@@ -70,7 +79,7 @@ const ContestInfo = (props) => {
         </div>
         <div className={styles.dataContainer}>
           <span className={styles.label}>
-            Description target customers of company{' '}
+            Description target customers of company
           </span>
           <span className={styles.data}>{targetCustomer}</span>
         </div>
