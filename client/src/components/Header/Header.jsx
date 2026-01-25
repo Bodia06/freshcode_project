@@ -1,97 +1,41 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styles from './Header.module.sass';
-import CONSTANTS from '../../constants';
-import { clearUserStore } from '../../store/slices/userSlice';
-import { getUser } from '../../store/slices/userSlice';
+import { clearUserStore, getUser } from '../../store/slices/userSlice';
 import withRouter from '../../hocs/withRouter';
 import withEventContext from '../../hocs/withEventContext';
+import UserProfile from './UserProfile/UserProfile';
+import Navigation from './Navigation/Navigation';
+import CONSTANTS from '../../constants';
+import styles from './Header.module.sass';
 
-class Header extends React.Component {
-  componentDidMount() {
-    if (!this.props.data) {
-      this.props.getUser();
+const Header = (props) => {
+  const { navigate, eventContext } = props;
+  const dispatch = useDispatch();
+
+  const { isFetching, data } = useSelector((state) => state.userStore);
+
+  useEffect(() => {
+    if (!data) {
+      dispatch(getUser());
     }
-  }
+  }, [data, dispatch]);
 
-  logOut = () => {
+  const logOut = () => {
     localStorage.clear();
-    this.props.clearUserStore();
-    this.props.navigate('/login', { replace: true });
+    dispatch(clearUserStore());
+    navigate('/login', { replace: true });
   };
 
-  startContests = () => {
-    this.props.navigate('/startContest');
-  };
-
-  goToHomePage = () => {
-    this.props.navigate('/');
-  };
-
-  renderLoginButtons = () => {
-    const { notificationCount } = this.props.eventContext;
-
-    if (this.props.data) {
+  const renderLoginButtons = () => {
+    if (data) {
       return (
         <>
-          <div className={styles.userInfo}>
-            <img
-              src={
-                this.props.data.avatar === 'anon.png'
-                  ? CONSTANTS.ANONYM_IMAGE_PATH
-                  : `${CONSTANTS.publicURL}${this.props.data.avatar}`
-              }
-              alt="user"
-            />
-            <span>{`Hi, ${this.props.data.displayName}`}</span>
-            <img
-              src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-              alt="menu"
-            />
-            <ul>
-              <li>
-                <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-                  <span>View Dashboard</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/account" style={{ textDecoration: 'none' }}>
-                  <span>My Account</span>
-                </Link>
-              </li>
-              {this.props.data.role === 'moderator' && (
-                <li>
-                  <Link to="/moderation" style={{ textDecoration: 'none' }}>
-                    <span>Moderation Panel</span>
-                  </Link>
-                </li>
-              )}
-              <li>
-                <Link to="/events" className={styles.navLink}>
-                  <span>Events</span>
-                  {notificationCount > 0 && (
-                    <span
-                      className={styles.badge}
-                    >{`NEW ${notificationCount}`}</span>
-                  )}
-                </Link>
-              </li>
-              <li>
-                <Link to="#" style={{ textDecoration: 'none' }}>
-                  <span>Messages</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="#" style={{ textDecoration: 'none' }}>
-                  <span>Affiliate Dashboard</span>
-                </Link>
-              </li>
-              <li>
-                <span onClick={this.logOut}>Logout</span>
-              </li>
-            </ul>
-          </div>
+          <UserProfile
+            data={data}
+            logOut={logOut}
+            notificationCount={eventContext.notificationCount}
+          />
           <img
             src={`${CONSTANTS.STATIC_IMAGES_PATH}email.png`}
             className={styles.emailIcon}
@@ -112,198 +56,51 @@ class Header extends React.Component {
     );
   };
 
-  render() {
-    if (this.props.isFetching) {
-      return null;
-    }
-    return (
-      <div className={styles.headerContainer}>
-        <div className={styles.fixedHeader}>
-          <span className={styles.info}>
-            Squadhelp recognized as one of the Most Innovative Companies by Inc
-            Magazine.
-          </span>
-          <a href="#">Read Announcement</a>
+  if (isFetching) {
+    return null;
+  }
+
+  return (
+    <header className={styles.headerContainer}>
+      <div className={styles.fixedHeader}>
+        <span className={styles.info}>
+          Squadhelp recognized as one of the Most Innovative Companies by Inc
+          Magazine.
+        </span>
+        <a href="#">Read Announcement</a>
+      </div>
+      <div className={styles.loginSignnUpHeaders}>
+        <div className={styles.numberContainer}>
+          <img src={`${CONSTANTS.STATIC_IMAGES_PATH}phone.png`} alt="phone" />
+          <a href="tel:(877)355-3585">(877) 355-3585</a>
         </div>
-        <div className={styles.loginSignnUpHeaders}>
-          <div className={styles.numberContainer}>
-            <img src={`${CONSTANTS.STATIC_IMAGES_PATH}phone.png`} alt="phone" />
-            <a href="tel:(877)355-3585">(877)&nbsp;355-3585</a>
-          </div>
-          <div className={styles.userButtonsContainer}>
-            {this.renderLoginButtons()}
-          </div>
-        </div>
-        <div className={styles.navContainer}>
-          <img
-            src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
-            className={styles.logo}
-            alt="blue_logo"
-            onClick={this.goToHomePage}
-          />
-          <div className={styles.leftNav}>
-            <div className={styles.nav}>
-              <ul>
-                <li>
-                  <span>NAME IDEAS</span>
-                  <img
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                    alt="menu"
-                  />
-                  <ul>
-                    <li>
-                      <a href="#">Beauty</a>
-                    </li>
-                    <li>
-                      <a href="#">Consulting</a>
-                    </li>
-                    <li>
-                      <a href="#">E-Commerce</a>
-                    </li>
-                    <li>
-                      <a href="#">Fashion & Clothing</a>
-                    </li>
-                    <li>
-                      <a href="#">Finance</a>
-                    </li>
-                    <li>
-                      <a href="#">Real Estate</a>
-                    </li>
-                    <li>
-                      <a href="#">Tech</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href="#">More Categories</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <Link to="/atom" className={styles.navLink}>
-                    <span>Atom</span>
-                  </Link>
-                </li>
-                <li>
-                  <span>CONTESTS</span>
-                  <img
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                    alt="menu"
-                  />
-                  <ul>
-                    <li>
-                      <a href="#">HOW IT WORKS</a>
-                    </li>
-                    <li>
-                      <a href="#">PRICING</a>
-                    </li>
-                    <li>
-                      <a href="#">AGENCY SERVICE</a>
-                    </li>
-                    <li>
-                      <a href="#">ACTIVE CONTESTS</a>
-                    </li>
-                    <li>
-                      <a href="#">WINNERS</a>
-                    </li>
-                    <li>
-                      <a href="#">LEADERBOARD</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href="#">BECOME A CREATIVE</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Our Work</span>
-                  <img
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                    alt="menu"
-                  />
-                  <ul>
-                    <li>
-                      <a href="#">NAMES</a>
-                    </li>
-                    <li>
-                      <a href="#">TAGLINES</a>
-                    </li>
-                    <li>
-                      <a href="#">LOGOS</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href="#">TESTIMONIALS</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Names For Sale</span>
-                  <img
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                    alt="menu"
-                  />
-                  <ul>
-                    <li>
-                      <a href="#">POPULAR NAMES</a>
-                    </li>
-                    <li>
-                      <a href="#">SHORT NAMES</a>
-                    </li>
-                    <li>
-                      <a href="#">INTRIGUING NAMES</a>
-                    </li>
-                    <li>
-                      <a href="#">NAMES BY CATEGORY</a>
-                    </li>
-                    <li>
-                      <a href="#">VISUAL NAME SEARCH</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href="#">SELL YOUR DOMAINS</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span>Blog</span>
-                  <img
-                    src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
-                    alt="menu"
-                  />
-                  <ul>
-                    <li>
-                      <a href="#">ULTIMATE NAMING GUIDE</a>
-                    </li>
-                    <li>
-                      <a href="#">POETIC DEVICES IN BUSINESS NAMING</a>
-                    </li>
-                    <li>
-                      <a href="#">CROWDED BAR THEORY</a>
-                    </li>
-                    <li className={styles.last}>
-                      <a href="#">ALL ARTICLES</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            {this.props.data && this.props.data.role !== CONSTANTS.CREATOR && (
-              <button
-                className={styles.startContestBtn}
-                onClick={this.startContests}
-              >
-                START CONTEST
-              </button>
-            )}
-          </div>
+        <div className={styles.userButtonsContainer}>
+          {renderLoginButtons()}
         </div>
       </div>
-    );
-  }
-}
+      <div className={styles.navContainer}>
+        <img
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
+          className={styles.logo}
+          alt="blue_logo"
+          onClick={() => navigate('/')}
+        />
 
-const mapStateToProps = (state) => state.userStore;
-const mapDispatchToProps = (dispatch) => ({
-  getUser: () => dispatch(getUser()),
-  clearUserStore: () => dispatch(clearUserStore()),
-});
+        <div className={styles.leftNav}>
+          <Navigation />
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(withEventContext(Header))
-);
+          {data && data.role !== CONSTANTS.CREATOR && (
+            <button
+              className={styles.startContestBtn}
+              onClick={() => navigate('/startContest')}
+            >
+              START CONTEST
+            </button>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default withRouter(withEventContext(Header));
