@@ -1,76 +1,111 @@
+@import '../../common/vars/UserPageVar'
+
+.pageWrapper
+  width: 100%
+  background-color: $color-bg-light
+  display: flex
+  justify-content: center
+
 .mainContainer
+  width: 100%
+  max-width: 1200px
   margin: 0 auto
   display: flex
   flex-direction: row
-  align-items: flex-start
-  justify-content: flex-start
-  padding: 100px
-  @media(max-width: 800px)
-    padding: 40px
+  align-items: start
+  padding: 50px 20px
+  gap: $gap-main
+  box-sizing: border-box
+
+  @media(max-width: 850px)
     flex-direction: column
-  @media(max-width: 590px)
-    padding: 15px
-  @media(max-width: 345px)
-    padding: 10px 0
+    padding: 20px 15px
+    gap: 20px
 
-  .notMoney
-    margin-bottom: 20px
-    color: #455a89
-    font-size: 18px
-    font-weight: 500
+.aside
+  width: 280px
+  background: $color-white
+  border-radius: $radius-lg
+  box-shadow: $shadow-sm
+  overflow: hidden
+  flex-shrink: 0
 
-  .container
-    display: flex
-    flex-direction: row
-    justify-content: center
-    align-items: flex-start
+  @media(max-width: 850px)
     width: 100%
-    padding-top: 30px
+    border-radius: $radius-md
 
-  .aside
-    margin-right: 40px
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-    justify-content: flex-start
-    box-shadow: 0 5px 10px 3px rgba(0, 0, 0, 0.1)
-    @media(max-width: 800px)
-      align-self: stretch
-      margin-right: 0
-      margin-bottom: 15px
+.headerAside
+  padding: 20px
+  background-color: $color-primary
+  color: $color-white
+  font-size: 18px
+  font-weight: 600
+  text-align: center
 
-    .headerAside
-      align-self: stretch
-      font-size: 18px
-      padding: 20px 26px
-      background-color: #f3f3f3
-      font-weight: 500
+.optionsContainer
+  display: flex
+  flex-direction: column
+  padding: 10px
 
-    .optionsContainer
-      display: flex
-      flex-direction: column
-      align-items: flex-start
-      justify-content: flex-start
-      align-self: stretch
-      padding: 15px 0
-      margin-bottom: 10px
+  @media(max-width: 850px)
+    flex-direction: row
+    padding: 5px
+    gap: 5px
 
-      .optionContainer
-        border-radius: 8px
-        margin-top: 5px
-        cursor: pointer
-        color: #455a89
-        font-size: 16px
-        font-weight: 600
-        padding: 14px 58px
-        align-self: stretch
-        @media(max-width: 800px)
-          text-align: center
+.optionContainer
+  padding: 14px 20px
+  border-radius: $radius-md
+  cursor: pointer
+  color: $color-text-main
+  font-size: 16px
+  font-weight: 500
+  transition: all 0.2s ease
+  text-align: left
 
-        &:hover
-          background-color: #455a89
-          color: white
+  &:hover
+    background-color: $color-border-light
 
-      .currentOption
-        background-color: #455a89
-        color: white
+  @media(max-width: 850px)
+    flex: 1
+    text-align: center
+    padding: 12px 10px
+
+.currentOption
+  background-color: $color-primary !important
+  color: $color-white !important
+
+.contentArea
+  flex-grow: 1
+  width: 100%
+  display: flex
+  flex-direction: column
+
+.container
+  width: 100%
+  display: flex
+  justify-content: center
+  padding: 0
+
+.notMoneyCard
+  width: 100%
+  background: $color-white
+  padding: 40px
+  border-radius: $radius-lg
+  text-align: center
+  border: 1px dashed $color-border
+
+.notMoney
+  color: $color-text-main
+  font-size: 18px
+  font-weight: 500
+
+.paymentSection
+  width: 100%
+  max-width: 600px
+
+.error
+  width: 100%
+  text-align: center
+  padding: 40px
+  color: $color-error
+  font-weight: bold

@@ -10,13 +10,9 @@ import CONSTANTS from '../../constants';
 import styles from './UserProfile.module.sass';
 
 const UserProfile = (props) => {
-  if (props.isFetching) {
-    return <Spinner />;
-  }
-
-  if (!props.data) {
+  if (props.isFetching) return <Spinner />;
+  if (!props.data)
     return <div className={styles.error}>User data not found</div>;
-  }
 
   const { balance, role } = props.data;
   const { profileViewMode, changeProfileViewMode, error, clearPaymentStore } =
@@ -28,10 +24,10 @@ const UserProfile = (props) => {
   };
 
   return (
-    <div>
+    <div className={styles.pageWrapper}>
       <div className={styles.mainContainer}>
-        <div className={styles.aside}>
-          <span className={styles.headerAside}>Select Option</span>
+        <aside className={styles.aside}>
+          <div className={styles.headerAside}>Account Options</div>
           <div className={styles.optionsContainer}>
             <div
               className={classNames(styles.optionContainer, {
@@ -40,7 +36,7 @@ const UserProfile = (props) => {
               })}
               onClick={() => changeProfileViewMode(CONSTANTS.USER_INFO_MODE)}
             >
-              UserInfo
+              User Info
             </div>
 
             {role === CONSTANTS.CREATOR && (
@@ -55,46 +51,44 @@ const UserProfile = (props) => {
               </div>
             )}
           </div>
-        </div>
-
-        {profileViewMode === CONSTANTS.USER_INFO_MODE ? (
-          <UserInfo />
-        ) : (
-          <div className={styles.container}>
-            {parseFloat(balance) === 0 ? (
-              <span className={styles.notMoney}>
-                There is no money on your balance
-              </span>
-            ) : (
-              <div>
-                {error && (
-                  <Error
-                    data={error.data}
-                    status={error.status}
-                    clearError={clearPaymentStore}
-                  />
-                )}
-                <PayForm sendRequest={pay} />
-              </div>
-            )}
-          </div>
-        )}
+        </aside>
+        <main className={styles.contentArea}>
+          {profileViewMode === CONSTANTS.USER_INFO_MODE ? (
+            <UserInfo />
+          ) : (
+            <div className={styles.container}>
+              {parseFloat(balance) === 0 ? (
+                <div className={styles.notMoneyCard}>
+                  <span className={styles.notMoney}>
+                    There is no money on your balance
+                  </span>
+                </div>
+              ) : (
+                <div className={styles.paymentSection}>
+                  {error && (
+                    <Error
+                      data={error.data}
+                      status={error.status}
+                      clearError={clearPaymentStore}
+                    />
+                  )}
+                  <PayForm sendRequest={pay} />
+                </div>
+              )}
+            </div>
+          )}
+        </main>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  const { data, isFetching } = state.userStore;
-  const { profileViewMode } = state.userProfile;
-  const { error } = state.payment;
-  return {
-    data,
-    isFetching,
-    profileViewMode,
-    error,
-  };
-};
+const mapStateToProps = (state) => ({
+  data: state.userStore.data,
+  isFetching: state.userStore.isFetching,
+  profileViewMode: state.userProfile.profileViewMode,
+  error: state.payment.error,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   cashOut: (data) => dispatch(cashOut(data)),
