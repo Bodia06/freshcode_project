@@ -1,19 +1,22 @@
 @import '../../common/vars/ModeratorPageVar'
 
 .offerItem
+  width: 100%
   background-color: $white
   padding: 30px
   border-radius: $border-radius
-  border: 1px solid rgba($border-color, 0.8)
+  border: 1px solid rgba($border-color, 0.6)
   display: flex
   flex-direction: column
-  transition: all 0.3s ease
   box-sizing: border-box
+  margin: 0
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+  box-shadow: $shadow-sm
 
   &:hover
     transform: translateY(-8px)
     box-shadow: $shadow-md
-    border-color: rgba($primary-blue, 0.2)
+    border-color: $primary-blue
 
 .idInfo
   display: flex
@@ -22,24 +25,23 @@
   
   span
     font-size: 12px
-    color: $text-gray
-    background: #f8f9fa
-    padding: 4px 12px
+    font-weight: 700
+    color: $primary-blue
+    background: rgba($primary-blue, 0.05)
+    padding: 5px 12px
     border-radius: 6px
-    border: 1px solid $border-color
-    font-weight: 600
 
 .contentCell
   flex-grow: 1
+  min-height: 180px
   display: flex
   justify-content: center
   align-items: center
+  background: #fcfcfc
+  border-radius: 15px
   margin-bottom: 30px
-  min-height: 160px
-  padding: 20px
-  background: #fafafa
-  border: 1px solid #f1f1f1
-  border-radius: 12px
+  border: 1px dashed $border-color
+  overflow: hidden
 
 .offerImage
   max-width: 100%
@@ -47,45 +49,42 @@
   object-fit: contain
 
 .offerText
-  font-size: 18px
-  font-weight: 600
+  font-size: 20px
+  font-weight: 700
   color: $text-dark
   text-align: center
-  line-height: 1.6
+  word-break: break-word
 
 .actionButtons
   display: flex
-  gap: 12px
+  gap: 15px
   width: 100%
   
-  .approveBtn, .rejectBtn
+  button
     flex: 1
-    padding: 14px 10px
-    border-radius: 10px
-    font-weight: 700
-    font-size: 14px
+    padding: 15px 5px
+    border-radius: 12px
+    font-weight: 800
+    text-transform: uppercase
+    letter-spacing: 1px
+    border: none
     cursor: pointer
     transition: all 0.2s ease
-    text-transform: uppercase
-    letter-spacing: 0.5px
-    border: 2px solid transparent
 
 .approveBtn
   background-color: $primary-green
-  color: white
-  border-color: $primary-green
+  color: $white
+  box-shadow: 0 4px 12px rgba($primary-green, 0.3)
   
   &:hover
-    background-color: darken($primary-green, 5%)
-    border-color: darken($primary-green, 5%)
-    transform: translateY(-2px)
+    background-color: darken($primary-green, 8%)
+    box-shadow: 0 6px 18px rgba($primary-green, 0.4)
 
 .rejectBtn
-  background-color: white
-  color: $error-red
-  border-color: $error-red
+  background-color: $error-red
+  color: $white
+  box-shadow: 0 4px 12px rgba($error-red, 0.3)
   
   &:hover
-    background-color: $error-red
-    color: white
-    transform: translateY(-2px)
+    background-color: darken($error-red, 8%)
+    box-shadow: 0 6px 18px rgba($error-red, 0.4)
