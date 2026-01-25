@@ -3,31 +3,55 @@
   display: flex
   flex-direction: column
   align-items: center
+  width: 100%
+
+.loginContainer
+  width: 100%
+  display: flex
+  justify-content: center
 
 .headerAuthPage
   display: flex
   flex-direction: row
   justify-content: space-between
   align-items: center
-  min-width: 300px
-  width: 1200px
+  width: 100%
+  max-width: 1200px
   margin-top: 26px
-  padding-left: 45px
-  padding-right: 100px
-  @media (max-width: 530px)
-    padding-right: 45px
+  padding: 0 20px
+  box-sizing: border-box
+
+  @media (min-width: 768px)
+    padding-left: 45px
+    padding-right: 100px
+
+  @media (max-width: 450px)
+    margin-top: 15px
+    padding: 0 15px
+
+    img
+      height: 30px 
 
 .linkAuthContainer
   border: 1px solid white
-  width: 80px
+  min-width: 80px
+  padding: 0 10px
   border-radius: 4px
   display: flex
   justify-content: center
   align-items: center
-  font-size: 18px
+  font-size: 14px
   font-weight: bold
   height: 40px
-  text-decoration: none
+  transition: all 0.3s ease
+
+  &:hover
+    background-color: white
+    span
+      color: #3ea9f5
+
+  @media (min-width: 768px)
+    font-size: 18px
 
   span
     color: white
