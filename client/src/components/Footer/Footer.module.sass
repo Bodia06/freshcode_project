@@ -1,37 +1,107 @@
+@import '../../common/vars/FooterVar'
+
 .footerContainer
   width: 100%
+  font-family: 'Raleway', sans-serif
+
+  .footerTop
+    width: 100%
+    background-color: $footer-bg-top
+    padding: 60px 0
+    color: $white
+
+    & > div
+      margin: 0 auto
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: center
+      gap: 20px
+      padding: 0 20px
+      box-sizing: border-box
+
+      @media (min-width: 768px)
+        width: 750px
+        justify-content: space-around
+      @media (min-width: 992px)
+        width: 970px
+      @media (min-width: 1200px)
+        width: 1170px
+
+      & > div
+        display: flex
+        flex-direction: column
+        flex: 1
+        min-width: 200px
+        max-width: 280px
+        padding: 15px
+        
+        @media (max-width: 500px)
+          min-width: 100%
+          text-align: center
+
+        h4
+          font-size: 16px
+          color: $white
+          display: block
+          padding-bottom: 20px
+          margin: 0
+          font-weight: 700
+          text-transform: uppercase
+
+        a
+          padding-bottom: 10px
+          font-size: 14px
+          text-decoration: none
+          color: $text-muted
+          transition: all 0.3s ease
+
+          &:hover
+            color: $accent-orange
+            padding-left: 5px
 
   .bottomFooterContainer
-    padding: 40px
+    padding: 40px 20px
     box-sizing: border-box
     display: flex
-    flex-direction: row
-    align-items: center
     justify-content: center
-    background: #232828
+    background: $footer-bg-bottom
 
     .bottomFooterWrapper
-      width: 80%
+      width: 100%
+      max-width: 1170px
       display: flex
       flex-direction: row
       justify-content: space-between
+      align-items: center
 
       @media (max-width: 768px)
         flex-direction: column
+        gap: 30px
+        text-align: center
 
       .logo
         display: flex
         flex-direction: row
-        justify-content: center
         align-items: center
+        
+        @media (max-width: 768px)
+          flex-direction: column
+
+        img
+          height: 30px
 
         span
-          float: left
-          padding: 10px 0 10px 30px
-          margin: 0 0 5px 33px
-          border-left: 1px solid #3d4141
+          padding: 10px 0 10px 25px
+          margin: 0 0 0 25px
+          border-left: 1px solid $border-dark
           font-size: 14px
-          color: #666868
+          color: $text-light
+          
+          @media (max-width: 768px)
+            border-left: none
+            margin: 10px 0 0 0
+            padding: 0
 
       .socialLinks
         display: flex
@@ -45,54 +115,20 @@
           align-items: center
           height: 40px
           width: 40px
-          border: 1px solid #fff
-          border-radius: 100%
+          border: 1px solid rgba($white, 0.4)
+          border-radius: 50%
           margin-left: 15px
+          transition: all 0.3s ease
+          cursor: pointer
 
-  .footerTop
-    width: 100%
-    background-color: #2B3030
-    padding: 80px 0
-    color: white
-    font-family: 'Raleway', sans-serif
+          &:first-child
+            margin-left: 0
 
-    div
-      margin: 0 auto
-      display: flex
-      flex-direction: row
-      align-items: baseline
-      flex-wrap: wrap
-      justify-content: space-around
-      @media (min-width: 768px)
-        width: 750px
-
-      @media (min-width: 992px)
-        width: 970px
-
-      @media (min-width: 1200px)
-        width: 1170px
-
-      div
-        display: flex
-        flex: 1
-        min-width: 250px
-        max-width: 300px
-        flex-direction: column
-        padding: 15px
-
-        h4
-          font-size: 16px
-          color: #fff
-          display: block
-          padding-bottom: 20px
-          margin-bottom: 0
-
-        a
-          padding-bottom: 7px
-          font-size: 14px
-          text-decoration: none
-          color: #767979
-
-        a:hover
-          color: rgb(249, 118, 75)
-
+          &:hover
+            border-color: $white
+            background-color: rgba($white, 0.1)
+            transform: translateY(-3px)
+            
+          img
+            width: 18px
+            height: 18px
