@@ -39,26 +39,26 @@ class ContestPage extends React.Component {
   };
 
   setOffersList = () => {
-    const array = [];
-    for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
-      array.push(
-        <OfferBox
-          data={this.props.contestByIdStore.offers[i]}
-          key={this.props.contestByIdStore.offers[i].id}
-          needButtons={this.needButtons}
-          setOfferStatus={this.setOfferStatus}
-          contestType={this.props.contestByIdStore.contestData.contestType}
-          date={new Date()}
-        />
+    const { offers, contestData } = this.props.contestByIdStore;
+
+    if (offers.length === 0) {
+      return (
+        <div className={styles.notFound}>
+          There is no suggestion at this moment
+        </div>
       );
     }
-    return array.length !== 0 ? (
-      array
-    ) : (
-      <div className={styles.notFound}>
-        There is no suggestion at this moment
-      </div>
-    );
+
+    return offers.map((offer) => (
+      <OfferBox
+        data={offer}
+        key={offer.id}
+        needButtons={this.needButtons}
+        setOfferStatus={this.setOfferStatus}
+        contestType={contestData.contestType}
+        date={new Date()}
+      />
+    ));
   };
 
   needButtons = (offerStatus) => {

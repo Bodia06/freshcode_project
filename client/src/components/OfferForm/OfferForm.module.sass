@@ -1,111 +1,85 @@
+@import '../../common/vars/ContestPageVar'
+
 .offerContainer
-  align-self: center
-  margin-top: 10px
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
   width: 100%
-  @media(max-width: 500px)
-    align-self: stretch
-    flex-direction: column
+  background: $color-bg-light
+  border: 1px solid $color-border-soft
+  border-radius: $radius-lg
+  padding: 20px
+  box-sizing: border-box
 
   .form
-    margin-top: 10px
-    flex: 1
     display: flex
     flex-direction: column
-    justify-content: center
-    align-items: center
-
-    .btnOffer
-      margin-top: 10px
-      background-color: #8aca6b
-      border-radius: 6px
-      color: white
-      font-size: 16px
-      text-align: center
-      outline: none
-      cursor: pointer
-      padding: 6px 12px
-      @media(max-width: 500px)
-        margin-left: 0
-        margin-top: 10px
-
-      &:hover
-        background-color: #4e618d
+    width: 100%
+    max-width: 500px
+    margin: 0 auto
+    gap: 15px
 
     .inputContainer
-      display: flex
-      flex-direction: column
-      justify-content: center
+      width: 100%
+      
+      .input
+        width: 100%
+        box-sizing: border-box
+        background-color: white
+        border: 2px solid $color-border-input
+        border-radius: $radius-md
+        color: $color-text-main
+        font-size: 16px
+        padding: 12px 15px
+        transition: border-color $transition-base
+        
+        &:focus
+          border-color: $color-primary-blue
+          outline: none
 
       .fieldWarning
-        align-self: flex-end
-        margin-top: 2px
-        font-size: 15px
-        display: flex
-        flex-direction: row
-        justify-content: center
-        align-items: center
-        color: red
-        text-align: center
+        color: $color-error-red
+        font-size: 13px
+        margin-top: 5px
+        font-weight: 500
 
-      .input
-        background-color: white
-        border-color: #6b89b0
-        border-radius: 4px
-        color: #9ca8b7
-        font-size: 16px
-        padding: 4px 6px
-        outline: none
-
-      .notValid
-        border: 2px solid red !important
+    .btnOffer
+      width: 100%
+      background-color: $color-success-green
+      border: none
+      border-radius: $radius-md
+      color: white
+      font-size: 16px
+      font-weight: 700
+      padding: 14px
+      cursor: pointer
+      transition: transform 0.1s, background-color $transition-base
+      
+      &:hover
+        background-color: $color-success-green-dark
+      
+      &:active
+        transform: scale(0.98)
 
     .imageUploadContainer
-      display: flex
-      flex-direction: column
-      justify-content: flex-start
-
-      img
-        display: none
-
+      width: 100%
+      text-align: center
+      
       .imgStyle
-        display: block
-        width: 120px
-        height: 120px
-        align-self: center
+        width: 150px
+        height: 150px
+        object-fit: contain
+        border-radius: $radius-md
+        margin-bottom: 10px
+        border: 1px solid rgba($color-border-input, 0.5)
 
       .uploadInputContainer
-        display: flex
-        flex-direction: column
-        align-items: center
-        justify-content: flex-start
-        margin-bottom: 10px
-
-        span
-          font-size: 14px
-          margin-bottom: 4px
-          color: red
-
-        input
-          display: none
-          border: none
-          border-radius: 8px
-          color: white
-          background-color: #66afe9
-
         label
-          padding: 5px 10px
+          display: inline-block
+          padding: 10px 20px
+          background: $color-primary-blue
           color: white
-          background-color: #455a89
-          border-radius: 4px
-          align-self: flex-end
+          border-radius: $radius-sm
           cursor: pointer
-
+          font-weight: 600
+          transition: background-color $transition-base
+          
           &:hover
-            color: white
-            background-color: #f27e51
-
-
+            background: $color-primary-blue-dark

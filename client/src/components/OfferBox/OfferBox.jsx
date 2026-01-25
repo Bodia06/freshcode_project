@@ -109,49 +109,58 @@ const OfferBox = (props) => {
   const { avatar, firstName, lastName, email, rating } = props.data.User;
   return (
     <div className={styles.offerContainer}>
-      {offerStatus()}
       <div className={styles.mainInfoContainer}>
-        <div className={styles.userInfo}>
-          <div className={styles.creativeInfoContainer}>
-            <img
-              src={
-                avatar === 'anon.png'
-                  ? CONSTANTS.ANONYM_IMAGE_PATH
-                  : `${CONSTANTS.publicURL}${avatar}`
-              }
-              alt="user"
-            />
-            <div className={styles.nameAndEmail}>
-              <span>{`${firstName} ${lastName}`}</span>
-              <span>{email}</span>
+        <div className={styles.headerRow}>
+          <div className={styles.userInfo}>
+            <div className={styles.creativeInfoContainer}>
+              <img
+                src={
+                  avatar === 'anon.png'
+                    ? CONSTANTS.ANONYM_IMAGE_PATH
+                    : `${CONSTANTS.publicURL}${avatar}`
+                }
+                className={styles.avatar}
+                alt="user"
+              />
+              <div className={styles.nameAndEmail}>
+                <span
+                  className={styles.name}
+                >{`${firstName} ${lastName}`}</span>
+                <span className={styles.email}>{email}</span>
+              </div>
+            </div>
+
+            <div className={styles.creativeRating}>
+              <span className={styles.userScoreLabel}>Rating</span>
+              <div className={styles.ratingContainer}>
+                <Rating
+                  initialRating={rating}
+                  readonly
+                  fractions={2}
+                  fullSymbol={
+                    <img
+                      src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                      alt="star"
+                    />
+                  }
+                  placeholderSymbol={
+                    <img
+                      src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                      alt="star"
+                    />
+                  }
+                  emptySymbol={
+                    <img
+                      src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
+                      alt="star-outline"
+                    />
+                  }
+                />
+              </div>
             </div>
           </div>
-          <div className={styles.creativeRating}>
-            <span className={styles.userScoreLabel}>Creative Rating </span>
-            <Rating
-              initialRating={rating}
-              fractions={2}
-              fullSymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
-                />
-              }
-              placeholderSymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
-                />
-              }
-              emptySymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
-                  alt="star-outline"
-                />
-              }
-              readonly
-            />
-          </div>
+
+          <div className={styles.statusBadge}>{offerStatus()}</div>
         </div>
         <div className={styles.responseConainer}>
           {contestType === CONSTANTS.LOGO_CONTEST ? (
@@ -169,43 +178,51 @@ const OfferBox = (props) => {
           ) : (
             <span className={styles.response}>{data.text}</span>
           )}
-          {data.User.id !== id && (
-            <Rating
-              fractions={2}
-              fullSymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
-                />
-              }
-              placeholderSymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
-                  alt="star"
-                />
-              }
-              emptySymbol={
-                <img
-                  src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
-                  alt="star"
-                />
-              }
-              onClick={changeMark}
-              placeholderRating={data.mark}
+        </div>
+        <div className={styles.footerRow}>
+          <div className={styles.ratingContainer}>
+            {data.User.id !== id && (
+              <Rating
+                fractions={2}
+                fullSymbol={
+                  <img
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                    alt="star"
+                  />
+                }
+                placeholderSymbol={
+                  <img
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`}
+                    alt="star"
+                  />
+                }
+                emptySymbol={
+                  <img
+                    src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`}
+                    alt="star-outline"
+                  />
+                }
+                onClick={changeMark}
+                placeholderRating={data.mark}
+              />
+            )}
+          </div>
+
+          {role !== CONSTANTS.CREATOR && (
+            <i
+              onClick={goChat}
+              className={classNames('fas fa-comments', styles.chatIcon)}
             />
           )}
         </div>
-        {role !== CONSTANTS.CREATOR && (
-          <i onClick={goChat} className="fas fa-comments" />
-        )}
       </div>
       {props.needButtons(data.status) && (
         <div className={styles.btnsContainer}>
           <div onClick={resolveOffer} className={styles.resolveBtn}>
-            Resolve
+            Accept
           </div>
           <div onClick={rejectOffer} className={styles.rejectBtn}>
-            Reject
+            Decline
           </div>
         </div>
       )}
