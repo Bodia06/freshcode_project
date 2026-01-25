@@ -14,9 +14,11 @@ const ContestBox = (props) => {
 
   const getPreferenceContest = () => {
     const { data } = props;
-    if (data.contestType === CONSTANTS.NAME_CONTEST) return data.typeOfName;
-    if (data.contestType === CONSTANTS.LOGO_CONTEST) return data.brandStyle;
-    return data.typeOfTagline;
+    if (data.contestType === CONSTANTS.NAME_CONTEST)
+      return data.typeOfName || '';
+    if (data.contestType === CONSTANTS.LOGO_CONTEST)
+      return data.brandStyle || '';
+    return data.typeOfTagline || '';
   };
 
   const ucFirstLetter = (string) =>

@@ -5,29 +5,26 @@
   align-items: center
   justify-content: space-between
   background-color: $color-white
-  border: none
   border-radius: $radius-main
-  padding: 28px
+  padding: 24px
   margin-bottom: 24px
   cursor: pointer
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05)
   box-sizing: border-box
   width: 100%
   position: relative
+  min-width: 0
 
   &:hover
     transform: translateY(-5px)
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1)
-    
-    .title
-      color: $color-accent
 
   @media(max-width: 850px)
     flex-direction: column
     align-items: stretch
-    padding: 20px
+    padding: 16px
+    gap: 16px
 
 .mainContestInfo
   flex: 1
@@ -44,19 +41,21 @@
     display: flex
     align-items: center
     gap: 10px
+    flex-wrap: wrap
 
     .title
       color: $color-text-main
       font-size: 20px
       font-weight: 800
       letter-spacing: -0.5px
-      transition: color 0.2s
+      line-height: 1.2
+      word-break: break-word
 
     .id
       color: $color-text-label
       font-size: 13px
       font-weight: 600
-      background: #f1f5f9
+      background: $color-bg-light
       padding: 2px 8px
       border-radius: 6px
 
@@ -67,6 +66,7 @@
       font-weight: 700
       text-transform: uppercase
       letter-spacing: 0.5px
+      word-break: break-word
       
     &:nth-child(3)
       margin-top: 4px
@@ -82,6 +82,7 @@
     display: flex
     align-items: center
     gap: 16px
+    flex-wrap: wrap
 
     .guaranteedContainer
       display: flex
@@ -92,6 +93,7 @@
       font-size: 13px
 
       div
+        flex-shrink: 0
         background-color: $color-success
         height: 16px
         width: 16px
@@ -118,22 +120,25 @@
 
 .entryAndTimeContainer
   display: flex
-  background-color: #f8fafc
+  background-color: $color-bg-light
   border-radius: 12px
-  padding: 20px
-  min-width: 240px
-  gap: 10px
+  padding: 16px
+  width: 240px
+  flex-shrink: 0
+  justify-content: space-around
+  box-sizing: border-box
 
   @media(max-width: 850px)
     width: 100%
     min-width: 0
-    margin-top: 10px
+    flex-shrink: 1
 
   .entriesContainer, .timeContainer
     display: flex
     flex-direction: column
     align-items: center
     flex: 1
+    min-width: 0
 
     span:last-child
       font-size: 10px
@@ -142,20 +147,27 @@
       font-weight: 800
       letter-spacing: 1px
       margin-top: 6px
+      text-align: center
 
   .entriesContainer
-    border-right: 1px solid #e2e8f0
+    border-right: 1px solid $color-border-light
 
     .entriesCounter
       display: flex
       align-items: center
       gap: 8px
-      font-size: 24px
-      color: $color-text-main
-      font-weight: 800
+      
+      img
+        flex-shrink: 0
+      
+      span
+        font-size: 24px
+        color: $color-text-main
+        font-weight: 800
 
   .timeContainer
     .timeContest
       font-size: 20px
       color: #f59e0b
       font-weight: 800
+      text-align: center
