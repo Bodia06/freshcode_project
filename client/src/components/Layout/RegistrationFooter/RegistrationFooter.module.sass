@@ -1,41 +1,50 @@
+@import '../../../common/vars/RegistrationPageVar'
+
 .footer
-  padding-top: 80px
-  background: white
+  padding: 80px 0
+  background: $color-white
   display: flex
   justify-content: center
+  width: 100%
+  box-sizing: border-box
 
 .articlesMainContainer
-  width: 60%
+  width: 100%
+  max-width: 800px
   display: flex
-  min-width: 300px
-  flex-direction: row
-  justify-content: center
-  align-items: flex-start
-  @media(max-width: 1000px)
-    flex-direction: column
+  flex-direction: column
+  padding: 0 $mobile-padding
+  box-sizing: border-box
+  gap: 40px 
 
 .ColumnContainer
   display: flex
   flex-direction: column
-  justify-content: flex-start
-  align-items: flex-start
-  margin-right: 48px
-  margin-left: 48px
-  flex: 1
+  width: 100%
+  gap: 40px 
 
 .headerArticle
-  font-size: 16px
-  font-weight: 500
-  color: #363945
-  margin-bottom: 20px
+  font-size: 20px
+  font-weight: 700
+  color: $color-text-dark
+  margin-bottom: 12px
+  line-height: 1.4
 
 .article
-  color: #9ca8b7
-  line-height: 30px
-  padding: 0
-  font-size: 16px
-  font-weight: 500
-  margin-bottom: 10px
+  color: #6c757d
+  line-height: 1.7
+  font-size: 15px
+  font-weight: 400
+  margin: 0
+  text-align: left
 
 .orangeSpan
   color: #f18762
+  font-weight: 600
+  cursor: pointer
+  border-bottom: 1px solid transparent
+  transition: $transition-base
+  
+  &:hover
+    color: darken(#f18762, 10%)
+    border-bottom-color: #f18762
