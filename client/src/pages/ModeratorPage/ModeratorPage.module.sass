@@ -4,69 +4,98 @@
   width: 100%
   min-height: 100vh
   background-color: $bg-light
-  padding: 80px 20px
+  padding: 60px 0
+  overflow-x: hidden
+  box-sizing: border-box
 
 .contentWrapper
   width: 100%
   max-width: 1200px
   margin: 0 auto
+  padding: 0 20px
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
 
 .header
   text-align: center
   margin-bottom: 60px
-  position: relative
-  &::before
-    content: ''
-    display: block
-    width: 40px
-    height: 4px
-    background-color: $blue-primary
-    margin: 0 auto 15px
-    border-radius: 2px
+  display: flex
+  flex-direction: column
+  align-items: center
+  
   h2
     font-size: 36px
     color: $text-dark
+    margin: 0 0 12px 0
+    font-weight: 800
+    letter-spacing: -0.5px
+
   p
-    font-size: 18px
+    font-size: 15px
     color: $text-gray
+    margin: 0
+    padding: 8px 20px
+    background: white
+    border-radius: 30px
+    box-shadow: $shadow-sm
+    border: 1px solid rgba($border-color, 0.5)
+    
     strong
-      color: $blue-primary
+      color: $primary-blue
+      font-weight: 800
+
+.listContainer
+  min-height: 500px
+  transition: opacity 0.3s ease
+  width: 100%
 
 .offersList
-  list-style: none
-  padding: 0
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) 
   gap: 30px
-  margin-bottom: 50px
-  min-height: 400px
-  position: relative
+  padding: 0
+  margin: 0 0 60px 0
+  list-style: none
+  width: 100%
 
 .empty
   grid-column: 1 / -1
-  display: flex
-  justify-content: center
-  align-items: center
-  height: 400px
-  font-size: 22px
-  color: $text-gray
-  background-color: rgba($white, 0.6)
-  border-radius: 16px
-  border: 2px dashed #e5e7eb
   text-align: center
+  padding: 100px 0
+  font-size: 18px
+  color: $text-gray
+  font-weight: 500
 
 .paginationControls
   display: flex
   justify-content: center
   align-items: center
   gap: 20px
+  padding: 20px 0 80px
+  margin-top: auto
+  
+  span
+    font-weight: 700
+    color: $text-dark
+    min-width: 100px
+    text-align: center
+
   button
-    padding: 12px 24px
-    background: $white
-    border: 1px solid #e5e7eb
-    border-radius: 30px
+    padding: 12px 28px
+    background: white
+    border: 1px solid $border-color
+    border-radius: $border-radius
+    font-weight: 700
     cursor: pointer
-    font-weight: 600
+    transition: all 0.3s ease
+    width: 120px
+    
     &:hover:not(:disabled)
-      border-color: $blue-primary
-      color: $blue-primary
+      background-color: $primary-blue
+      border-color: $primary-blue
+      color: white
+    
+    &:disabled
+      opacity: 0.5
+      cursor: not-allowed
