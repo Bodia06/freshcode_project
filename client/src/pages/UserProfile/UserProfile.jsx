@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import { changeProfileViewMode } from '../../store/slices/userProfileSlice';
 import { cashOut, clearPaymentStore } from '../../store/slices/paymentSlice';
@@ -9,18 +9,24 @@ import Spinner from '../../components/Spinner/Spinner';
 import CONSTANTS from '../../constants';
 import styles from './UserProfile.module.sass';
 
-const UserProfile = (props) => {
-  if (props.isFetching) return <Spinner />;
-  if (!props.data)
-    return <div className={styles.error}>User data not found</div>;
+const UserProfile = () => {
+  const dispatch = useDispatch();
 
-  const { balance, role } = props.data;
-  const { profileViewMode, changeProfileViewMode, error, clearPaymentStore } =
-    props;
+  const { data, isFetching } = useSelector((state) => state.userStore);
+  const { profileViewMode } = useSelector((state) => state.userProfile);
+  const { error } = useSelector((state) => state.payment);
+
+  if (isFetching) return <Spinner />;
+
+  if (!data) {
+    return <div className={styles.error}>User data not found</div>;
+  }
+
+  const { balance, role } = data;
 
   const pay = (values) => {
     const { number, expiry, cvc, sum } = values;
-    props.cashOut({ number, expiry, cvc, sum });
+    dispatch(cashOut({ number, expiry, cvc, sum }));
   };
 
   return (
@@ -34,7 +40,9 @@ const UserProfile = (props) => {
                 [styles.currentOption]:
                   profileViewMode === CONSTANTS.USER_INFO_MODE,
               })}
-              onClick={() => changeProfileViewMode(CONSTANTS.USER_INFO_MODE)}
+              onClick={() =>
+                dispatch(changeProfileViewMode(CONSTANTS.USER_INFO_MODE))
+              }
             >
               User Info
             </div>
@@ -45,7 +53,9 @@ const UserProfile = (props) => {
                   [styles.currentOption]:
                     profileViewMode === CONSTANTS.CASHOUT_MODE,
                 })}
-                onClick={() => changeProfileViewMode(CONSTANTS.CASHOUT_MODE)}
+                onClick={() =>
+                  dispatch(changeProfileViewMode(CONSTANTS.CASHOUT_MODE))
+                }
               >
                 Cashout
               </div>
@@ -69,7 +79,7 @@ const UserProfile = (props) => {
                     <Error
                       data={error.data}
                       status={error.status}
-                      clearError={clearPaymentStore}
+                      clearError={() => dispatch(clearPaymentStore())}
                     />
                   )}
                   <PayForm sendRequest={pay} />
@@ -83,17 +93,4 @@ const UserProfile = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  data: state.userStore.data,
-  isFetching: state.userStore.isFetching,
-  profileViewMode: state.userProfile.profileViewMode,
-  error: state.payment.error,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  cashOut: (data) => dispatch(cashOut(data)),
-  changeProfileViewMode: (data) => dispatch(changeProfileViewMode(data)),
-  clearPaymentStore: () => dispatch(clearPaymentStore()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default UserProfile;
