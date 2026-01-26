@@ -41,6 +41,11 @@ module.exports.getContestById = async (req, res, next) => {
   } = req;
 
   try {
+    const contest = await db.Contests.findOne({ where: { id: contestid } });
+    if (!contest) return next(new ServerError('Contest not found'));
+
+    const isFinished = contest.status === CONSTANTS.CONTEST_STATUS_FINISHED;
+
     let contestInfo = await db.Contests.findOne({
       where: { id: contestid },
       order: [[db.Offers, 'id', 'asc']],
@@ -57,7 +62,9 @@ module.exports.getContestById = async (req, res, next) => {
           required: false,
           where:
             tokenData.role === CONSTANTS.CUSTOMER
-              ? { status: CONSTANTS.OFFER_STATUS_PENDING }
+              ? isFinished
+                ? { status: CONSTANTS.OFFER_STATUS_WON }
+                : { status: CONSTANTS.OFFER_STATUS_PENDING }
               : tokenData.role === CONSTANTS.CREATOR
               ? { userId: tokenData.userId }
               : {},
@@ -80,8 +87,6 @@ module.exports.getContestById = async (req, res, next) => {
         },
       ],
     });
-
-    if (!contestInfo) return next(new ServerError('Contest not found'));
 
     contestInfo = contestInfo.get({ plain: true });
     contestInfo.Offers.forEach(offer => {
@@ -243,18 +248,21 @@ const resolveOffer = async (
     transaction
   );
 
-  const updatedOffers = await contestQueries.updateOfferStatus(
+  const [count, updatedOffers] = await db.Offers.update(
     {
       status: db.sequelize.literal(`CASE
         WHEN "id"=${offerId} THEN '${CONSTANTS.OFFER_STATUS_WON}'
         ELSE '${CONSTANTS.OFFER_STATUS_REJECTED}'
       END`),
     },
-    { contestId },
-    transaction
+    {
+      where: { contestId },
+      transaction,
+      returning: true,
+    }
   );
 
-  transaction.commit();
+  await transaction.commit();
 
   const arrayRoomsId = updatedOffers
     .filter(
@@ -276,7 +284,7 @@ const resolveOffer = async (
     .getNotificationController()
     .emitChangeOfferStatus(creatorId, 'Someone of your offers WIN', contestId);
 
-  return updatedOffers[0].dataValues;
+  return updatedOffers.find(offer => offer.id === offerId);
 };
 
 module.exports.setOfferStatus = async (req, res, next) => {
@@ -285,22 +293,13 @@ module.exports.setOfferStatus = async (req, res, next) => {
   } = req;
 
   try {
-    const offer = await db.Offers.findOne({
-      where: {
-        id: offerId,
-        status: CONSTANTS.OFFER_STATUS_PENDING,
-      },
-    });
-
-    if (!offer) {
-      return next(new ServerError('Offer not found or not moderated yet'));
-    }
-
-    let transaction;
     if (command === 'reject') {
       const result = await rejectOffer(offerId, creatorId, contestId);
-      res.send(result);
-    } else if (command === 'resolve') {
+      return res.send(result);
+    }
+
+    if (command === 'resolve') {
+      let transaction;
       try {
         transaction = await db.sequelize.transaction();
         const winningOffer = await resolveOffer(
@@ -311,10 +310,10 @@ module.exports.setOfferStatus = async (req, res, next) => {
           priority,
           transaction
         );
-        res.send(winningOffer);
+        return res.send(winningOffer);
       } catch (err) {
         if (transaction) await transaction.rollback();
-        next(err);
+        return next(err);
       }
     }
   } catch (err) {
