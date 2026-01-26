@@ -1,0 +1,78 @@
+@import '../../../common/mixins/HomeMixins'
+
+.container__description
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  @media screen and (max-width: 768px)
+    padding: 20px 20px 40px
+    box-sizing: border-box
+    width: 100%
+
+.cardContainer
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  align-items: flex-start
+  @media screen and (max-width: 768px)
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+    width: 100%
+
+.card
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: flex-start
+  max-width: 300px
+  margin: 40px 40px 40px 0
+  font-family: Raleway, sans-serif
+
+  h3
+    margin-top: 20px
+    font-size: 22px
+    font-weight: 500
+
+  p
+    margin-top: 10px
+    font-size: 14px
+    line-height: 20px
+    font-weight: 400
+
+  img
+    max-height: 85px
+
+  &:last-child
+    margin-right: 0
+
+  @media screen and (max-width: 768px)
+    max-width: 100%
+    margin: 20px 0 40px 0
+    align-items: center
+    text-align: center
+
+    &:last-child
+      margin-bottom: 0
+
+    h3
+      font-size: 20px
+      margin-top: 15px
+
+    p
+      margin-right: 0
+      font-size: 16px
+      line-height: 24px
+
+.blueUnderline
+  @include underline
+  margin-bottom: 30px
+  
+  &:after
+    background: #455A89
+  
+  @media screen and (max-width: 768px)
+    font-size: 28px
+    margin-bottom: 40px

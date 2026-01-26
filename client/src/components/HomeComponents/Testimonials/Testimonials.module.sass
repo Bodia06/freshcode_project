@@ -1,0 +1,24 @@
+@import '../../../common/mixins/HomeMixins'
+
+.blueContainer
+  @include innerContainer
+  background-color: #2B62EC
+  color: white
+  
+  @media screen and (max-width: 768px)
+    padding: 40px 20px
+    box-sizing: border-box
+    width: 100%
+    text-align: center
+
+  h2
+    margin-bottom: 40px
+
+    @media screen and (max-width: 768px)
+      font-size: 24px
+      margin-bottom: 30px
+
+.whiteUnderline
+  @include underline
+  &:after
+    background: white
