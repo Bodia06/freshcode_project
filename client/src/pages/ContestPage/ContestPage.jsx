@@ -16,9 +16,9 @@ import {
 } from '../../store/slices/contestByIdSlice';
 import Error from '../../components/Error/Error';
 import TryAgain from '../../components/TryAgain/TryAgain';
-import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
-import OfferBox from '../../components/OfferBox/OfferBox';
-import OfferForm from '../../components/OfferForm/OfferForm';
+import ContestSideBar from '../../components/ContestComponents/ContestSideBar/ContestSideBar';
+import OfferBox from '../../components/OffersComponents/OfferBox/OfferBox';
+import OfferForm from '../../components/OffersComponents/OfferForm/OfferForm';
 import Brief from '../../components/Brief/Brief';
 import Spinner from '../../components/Spinner/Spinner';
 import CONSTANTS from '../../constants';

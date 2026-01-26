@@ -5,7 +5,7 @@ import {
   changeOfferStatus,
 } from '../../store/slices/moderatorSlice';
 import Spinner from '../../components/Spinner/Spinner';
-import ModeratorOfferItem from '../../components/ModeratorOfferItem/ModeratorOfferItem';
+import ModeratorOfferItem from '../../components/OffersComponents/ModeratorOfferItem/ModeratorOfferItem';
 import styles from './ModeratorPage.module.sass';
 
 const ModeratorPage = () => {

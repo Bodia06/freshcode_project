@@ -1,0 +1,127 @@
+$color-bg: #ffffff
+$color-border: #dcdfe6
+$color-primary: #f3875d
+$color-primary-hover: #e76f41
+$color-text: #2c3e50
+$color-error: #f56c6c
+$radius: 8px
+
+.payFormContainer
+  display: flex
+  flex-direction: column
+  width: 100%
+  max-width: 100%
+  box-sizing: border-box
+  overflow-x: hidden
+
+  *
+    box-sizing: border-box
+
+  .headerInfo
+    font-size: 20px
+    font-weight: 600
+    color: $color-text
+    margin-bottom: 20px
+
+  .cardVisual
+    margin-bottom: 30px
+    display: flex
+    justify-content: center
+    width: 100%
+    
+    & > div
+      @media(max-width: 340px)
+        transform: scale(0.85)
+        transform-origin: center
+
+  .formContainer
+    display: flex
+    flex-direction: column
+    gap: 15px
+
+    .row
+      display: flex
+      flex-direction: row
+      gap: 15px
+      
+      @media(max-width: 450px)
+        flex-direction: column
+
+  .inputWrapper
+    display: flex
+    flex-direction: column
+    gap: 5px
+    flex: 1
+    min-width: 0
+
+    label
+      font-size: 13px
+      font-weight: 500
+      color: #606266
+
+    input
+      width: 100%
+      height: 44px
+      padding: 10px 12px
+      font-size: 16px
+      border: 1px solid $color-border
+      border-radius: $radius
+      outline: none
+      overflow: hidden
+      text-overflow: ellipsis
+
+.footer
+  margin-top: 30px
+  padding-top: 25px
+  border-top: 1px solid #eee
+  width: 100%
+  box-sizing: border-box
+
+  .actions
+    display: flex
+    flex-direction: row
+    gap: 12px
+    width: 100%
+    box-sizing: border-box
+
+    @media(max-width: 500px)
+      flex-direction: column
+      gap: 10px
+
+    button
+      appearance: none
+      border: none
+      outline: none
+      flex: 1
+      min-height: 50px
+      padding: 12px 20px
+      border-radius: $radius
+      font-size: 16px
+      font-weight: 600
+      cursor: pointer
+      transition: all 0.2s ease-in-out
+      display: flex
+      align-items: center
+      justify-content: center
+      text-align: center
+      white-space: normal
+      line-height: 1.2
+
+      &:active
+        transform: scale(0.98)
+
+    .payButton
+      background-color: $color-primary
+      color: white
+      @media(max-width: 500px)
+        order: -1 
+      
+      &:hover
+        background-color: $color-primary-hover
+
+    .backButton
+      background-color: #f4f4f5
+      color: #606266
+      
+      &:hover
+        background-color: #e9e9eb

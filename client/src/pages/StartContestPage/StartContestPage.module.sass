@@ -1,139 +1,102 @@
-.combinedBundles
-  padding: 25px 0
-  box-sizing: border-box
+.mainContainer
+  width: 100%
   display: flex
   flex-direction: column
-  align-items: center
-  justify-content: flex-start
 
-  .baseBundles
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-around
-    padding-right: 15px
-    padding-left: 15px
-    box-sizing: border-box
-    flex-wrap: wrap
-    max-width: 1200px
-
-  .infoCombinedBundles
-    padding-left: 15px
-    padding-right: 15px
-    padding-bottom: 20px
-    display: flex
-    flex-direction: column
-    justify-content: flex-start
-    align-items: center
-
-    .headerInfo
-      font-size: 32px
-      margin-top: 20px
-      margin-bottom: 10px
-      line-height: 1.1
-      text-align: center
-      color: #333
-
-    .info
-      color: #333
-      text-align: center
-      font-size: 18px
-      margin-bottom: 10px
-      font-weight: 300
-
-    hr
-      width: 100px
-      margin-top: 20px
-      margin-bottom: 20px
-      border-top: 2px solid #28d2d1
-
-.baseBundleContainer
-  background-color: #28d2d1
-  padding: 25px 0
-  display: flex
-  flex-direction: column
-  align-items: center
-
-  .baseBundles
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-around
-    padding-right: 15px
-    padding-left: 15px
-    box-sizing: border-box
-    flex-wrap: wrap
-    max-width: 1200px
-
-
-  .infoBaseBundles
-    padding-left: 15px
-    padding-right: 15px
-    padding-bottom: 20px
-    display: flex
-    flex-direction: column
-    justify-content: flex-start
-    align-items: center
-
-    hr
-      width: 100px
-      margin-top: 20px
-      margin-bottom: 20px
-      border-top: 2px solid white
-
-    .info
-      color: white
-      text-align: center
-      font-size: 18px
-      margin-bottom: 10px
-      font-weight: 300
-
-    .headerInfo
-      font-size: 32px
-      margin-top: 20px
-      margin-bottom: 10px
-      line-height: 1.1
-      text-align: center
-      color: white
-
-      span
-        font-weight: 700
-
+.separator
+  width: 100px
+  height: 2px
+  margin: 20px 0
+  border: none
 
 .startContestHeader
   display: flex
   flex-direction: row
-  padding: 35px
+  padding: 40px 20px
   box-sizing: border-box
   justify-content: center
+  align-items: center
+  gap: 50px
+  max-width: 1200px
+  margin: 0 auto
+
+  @media(max-width: 900px)
+    flex-direction: column
+    text-align: center
+    gap: 30px
 
   .startContestInfo
-    display: flex
-    flex-direction: column
-    justify-content: flex-start
-    padding-right: 15px
-    padding-left: 15px
-    box-sizing: border-box
-    max-width: 480px
-    @media(max-width: 750px)
-      max-width: none
-
+    max-width: 550px
     h2
-      color: #333333
+      color: #333
       font-weight: 700
       font-size: 28px
       text-transform: uppercase
-      margin-top: 20px
-      margin-bottom: 10px
-      line-height: 1.1
-
+      margin-bottom: 15px
     span
       font-weight: 300
-      padding-right: 20px
-      margin-bottom: 10px
-      font-size: 14px
-      line-height: 1.428
-      color: #333333
+      font-size: 16px
+      line-height: 1.5
+      color: #333
 
-  .zaglushka
-    width: 630px
+.baseBundles
+  display: flex
+  flex-direction: row
+  justify-content: center
+  flex-wrap: wrap
+  gap: 30px
+  padding: 20px
+  width: 100%
+  max-width: 1200px
+  box-sizing: border-box
+
+  & > div
+    flex: 1 1 300px
+    max-width: 360px
+
+.baseBundleContainer
+  background-color: #28d2d1
+  padding: 60px 0
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .separator
+    background-color: #fff
+
+  .infoBaseBundles
+    text-align: center
+    color: #fff
+    padding: 0 20px
+    .headerInfo
+      font-size: 32px
+      display: block
+      margin-bottom: 10px
+      span
+        font-weight: 700
+    .info
+      font-size: 18px
+      font-weight: 300
+      max-width: 700px
+
+.combinedBundles
+  padding: 60px 0
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .separator
+    background-color: #28d2d1
+
+  .infoCombinedBundles
+    text-align: center
+    padding: 0 20px
+    .headerInfo
+      font-size: 32px
+      color: #333
+      font-weight: 400
+    .info
+      font-size: 18px
+      color: #666
+      font-weight: 300
+      max-width: 700px

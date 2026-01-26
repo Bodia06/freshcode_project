@@ -1,0 +1,148 @@
+@import '../../../common/vars/ContestPageVar'
+@import '../../../common/mixins/ContestMixins'
+
+.formContainer
+  display: flex
+  flex-direction: column
+  width: 100%
+  
+  @media (max-width: 700px)
+    padding: 0 5px
+
+.inputContainer
+  margin: 30px 0 0 0
+  width: 100%
+  display: flex
+  flex-direction: column
+  gap: 10px
+
+  &:first-child
+    margin-top: 10px
+
+  .inputHeader
+    display: block
+    font-size: 18px
+    color: $color-text-header
+    font-weight: 700
+    letter-spacing: 0.2px
+
+    @media (max-width: 700px)
+      font-size: 16px
+
+.input
+  @include input-base
+  height: 48px
+
+.textArea
+  @include input-base
+  height: 180px
+  resize: vertical
+  
+  @media (max-width: 700px)
+    height: 140px
+
+.selectInputContainer
+  @extend .inputContainer
+  
+  .selectHeader
+    @extend .inputHeader
+
+  .select
+    @include input-base
+    cursor: pointer
+    appearance: none
+
+.fileUploadContainer
+  display: flex
+  align-items: stretch
+  gap: 20px
+  width: 100%
+  margin: 35px 0
+  padding: 25px
+  background-color: $color-bg-light
+  border: 2px dashed $color-border
+  border-radius: $radius-md
+  box-sizing: border-box
+  transition: border-color $transition-speed
+
+  &:hover
+    border-color: $color-focus
+
+  @media (max-width: 700px)
+    flex-direction: column
+    text-align: center
+    padding: 20px
+    max-width: 100%
+
+  .fileInput
+    display: none
+
+  .label
+    display: inline-block
+    background-color: $color-primary
+    color: $color-white
+    padding: 12px 24px
+    font-size: 16px
+    font-weight: 600
+    cursor: pointer
+    border-radius: $radius-sm
+    transition: background-color $transition-speed
+    border: none
+    white-space: nowrap
+
+    &:hover
+      background-color: $color-primary-hover
+
+  .fileName
+    font-size: 14px
+    color: $color-text-muted
+    max-width: 250px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+.changeData
+  display: block
+  margin: 40px 0 20px auto
+  width: 100%
+  max-width: 200px
+  color: $color-white
+  font-size: 18px
+  font-weight: 700
+  padding: 15px
+  border-radius: $radius-md
+  background-color: $color-primary
+  border: none
+  cursor: pointer
+  transition: all $transition-speed
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+
+  &:hover
+    background-color: $color-primary-hover
+    transform: translateY(-2px)
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15)
+
+  &:active
+    transform: translateY(0)
+
+  @media (max-width: 700px)
+    max-width: 100%
+    margin: 40px 0 0 0
+
+.warning
+  font-size: 14px
+  display: flex
+  align-items: center
+  border-radius: $radius-sm
+  padding: 10px 15px
+  color: $color-error
+  background-color: rgba($color-error, 0.08)
+  margin-top: 8px
+  width: 100%
+  max-width: $max-input-width
+  box-sizing: border-box
+
+.componentInputContainer
+  display: flex
+  flex-direction: column
+  width: 100%

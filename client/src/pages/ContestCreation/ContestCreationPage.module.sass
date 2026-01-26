@@ -1,89 +1,90 @@
+.mainContainer
+  width: 100%
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
 .startContestHeader
   display: flex
   flex-direction: row
-  padding: 35px
+  padding: 35px 20px
   box-sizing: border-box
   justify-content: center
+  align-items: center
+  gap: 40px
+  max-width: 1100px
+  margin: 0 auto
+  width: 100%
+
+  @media(max-width: 850px)
+    flex-direction: column
+    text-align: center
+    padding: 20px
+    gap: 20px
 
   .startContestInfo
     display: flex
     flex-direction: column
-    justify-content: flex-start
-    padding-right: 15px
-    padding-left: 15px
-    box-sizing: border-box
     max-width: 480px
-    @media(max-width: 750px)
-      max-width: none
-
+    
     h2
       color: #333333
       font-weight: 700
       font-size: 28px
       text-transform: uppercase
-      margin-top: 20px
-      margin-bottom: 10px
+      margin-top: 0
+      margin-bottom: 15px
       line-height: 1.1
 
     span
       font-weight: 300
-      padding-right: 20px
-      margin-bottom: 10px
       font-size: 14px
-      line-height: 1.428
+      line-height: 1.5
       color: #333333
 
-
 .container
-  padding: 40px 0 15px 0
+  padding: 40px 15px
   background: #f8f8f8
   display: flex
-  flex-direction: column
   justify-content: center
-  align-items: center
   border-bottom: 1px solid #eee
+  flex: 1
 
   .formContainer
-    display: flex
-    flex-direction: column
-    justify-content: flex-start
-    align-items: center
-    margin: 0 10px
-    width: 1200px
-    @media(max-width: 1300px)
-      width: 1000px
-    @media(max-width: 1100px)
-      width: 800px
-    @media(max-width: 900px)
-      width: auto
+    width: 100%
+    max-width: 800px
+    background: #ffffff
+    padding: 25px
+    border-radius: 8px
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05)
+    box-sizing: border-box
 
+    @media(max-width: 900px)
+      max-width: 100%
+      padding: 15px
 
 .footerButtonsContainer
-  margin: 0 auto
-  display: flex
-  justify-content: center
-  align-items: center
-  width: 1200px
-  @media(max-width: 1300px)
-    width: 1000px
-  @media(max-width: 1100px)
-    width: 800px
-  @media(max-width: 900px)
-    width: auto
+  width: 100%
+  background: #ffffff
+  padding: 20px 0
 
   .lastContainer
-    width: 1400px
+    max-width: 1100px
     margin: 0 auto
-    margin-top: 30px
-    margin-bottom: 30px
+    padding: 0 20px
     display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: flex-end
-    @media(max-width: 900px)
-      justify-content: center
+    justify-content: center
 
     .buttonsContainer
       display: flex
-      justify-content: flex-start
+      flex-direction: row
+      justify-content: space-between
       align-items: center
+      width: 100%
+      max-width: 800px
+      gap: 20px
+
+      @media(max-width: 480px)
+        flex-direction: column-reverse
+        & > *
+          width: 100%

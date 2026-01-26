@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import CustomerDashboard from '../../components/CustomerDashboard/CustomerDashboard';
-import CreatorDashboard from '../../components/CreatorDashboard/CreatorDashboard';
+import CustomerDashboard from '../../components/DashboardComponents/CustomerDashboard/CustomerDashboard';
+import CreatorDashboard from '../../components/DashboardComponents/CreatorDashboard/CreatorDashboard';
 import CONSTANTS from '../../constants';
 
 const Dashboard = (props) => {

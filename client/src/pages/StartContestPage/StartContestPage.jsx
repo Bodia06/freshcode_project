@@ -1,17 +1,23 @@
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateBundle } from '../../store/slices/bundleSlice';
 import BundleBox from '../../components/BundleBox/BundleBox';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import ProgressBar from '../../components/ContestComponents/ProgressBar/ProgressBar';
 import CONSTANTS from '../../constants';
 import styles from './StartContestPage.module.sass';
 
-const StartContestPage = (props) => {
+const StartContestPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  if (props.userStore.data.role !== CONSTANTS.CUSTOMER) {
-    navigate('/', { replace: true });
-  }
+  const { data: userData } = useSelector((state) => state.userStore);
+
+  useEffect(() => {
+    if (userData.role !== CONSTANTS.CUSTOMER) {
+      navigate('/', { replace: true });
+    }
+  }, [userData.role, navigate]);
 
   const setBundle = (bundleStr) => {
     const array = bundleStr.toLowerCase().split('+');
@@ -20,13 +26,13 @@ const StartContestPage = (props) => {
     for (let i = 0; i < array.length; i++) {
       bundleList[array[i]] = i === array.length - 1 ? 'payment' : array[i + 1];
     }
-    props.choseBundle(bundleList);
+    dispatch(updateBundle(bundleList));
     navigate(`/startContest/${bundleList.first}Contest`);
   };
 
   return (
-    <div>
-      <div className={styles.startContestHeader}>
+    <main className={styles.mainContainer}>
+      <header className={styles.startContestHeader}>
         <div className={styles.startContestInfo}>
           <h2>START A CONTEST</h2>
           <span>
@@ -37,18 +43,17 @@ const StartContestPage = (props) => {
           </span>
         </div>
         <ProgressBar currentStep={1} />
-      </div>
-      <div className={styles.baseBundleContainer}>
+      </header>
+      <section className={styles.baseBundleContainer}>
         <div className={styles.infoBaseBundles}>
           <span className={styles.headerInfo}>
-            Our Most Popular
-            <span>Categories</span>
+            Our Most Popular <span>Categories</span>
           </span>
-          <span className={styles.info}>
+          <p className={styles.info}>
             Pick from our most popular categories, launch a contest and begin
             receiving submissions right away
-          </span>
-          <hr />
+          </p>
+          <div className={styles.separator} />
         </div>
         <div className={styles.baseBundles}>
           <BundleBox
@@ -70,16 +75,16 @@ const StartContestPage = (props) => {
             setBundle={setBundle}
           />
         </div>
-      </div>
-      <div className={styles.combinedBundles}>
+      </section>
+      <section className={styles.combinedBundles}>
         <div className={styles.infoCombinedBundles}>
           <span className={styles.headerInfo}>
             Save With Our Bundle Packages
           </span>
-          <span className={styles.info}>
+          <p className={styles.info}>
             Launch multiple contests and pay a discounted bundle price
-          </span>
-          <hr />
+          </p>
+          <div className={styles.separator} />
         </div>
         <div className={styles.baseBundles}>
           <BundleBox
@@ -107,18 +112,9 @@ const StartContestPage = (props) => {
             setBundle={setBundle}
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
-const mapStateToProps = (state) => {
-  const { bundleStore, userStore } = state;
-  return { bundleStore, userStore };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  choseBundle: (bundle) => dispatch(updateBundle(bundle)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage);
+export default StartContestPage;

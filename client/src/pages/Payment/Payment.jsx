@@ -1,18 +1,22 @@
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
-import { pay, clearPaymentStore } from '../../store/slices/paymentSlice';
+import {
+  pay as payAction,
+  clearPaymentStore,
+} from '../../store/slices/paymentSlice';
 import { getFile } from '../../utils/fileCashe';
-import PayForm from '../../components/PayForm/PayForm';
+import PayForm from '../../components/PaymentComponents/PayForm/PayForm';
 import Error from '../../components/Error/Error';
 import styles from './Payment.module.sass';
 
-const Payment = (props) => {
+const Payment = () => {
   const navigate = useNavigate();
-  const { contests } = props.contestCreationStore;
-  const { error } = props.payment;
-  const { clearPaymentStore } = props;
+  const dispatch = useDispatch();
+
+  const { contests } = useSelector((state) => state.contestCreationStore);
+  const { error } = useSelector((state) => state.payment);
 
   useEffect(() => {
     if (isEmpty(contests)) {
@@ -20,7 +24,7 @@ const Payment = (props) => {
     }
   }, [contests, navigate]);
 
-  const pay = (values) => {
+  const handlePay = (values) => {
     const contestArray = [];
     const data = new FormData();
 
@@ -44,56 +48,49 @@ const Payment = (props) => {
     data.append('contests', JSON.stringify(contestArray));
     data.append('price', '100');
 
-    props.pay({
-      data: { formData: data },
-      navigate,
-    });
+    dispatch(payAction({ data: { formData: data }, navigate }));
   };
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  if (isEmpty(contests)) return null;
 
-  if (isEmpty(contests)) {
-    return null;
-  }
   return (
-    <div className={styles.mainContainer}>
-      <div className={styles.paymentContainer}>
-        <span className={styles.headerLabel}>Checkout</span>
-        {error && (
-          <Error
-            data={error.data}
-            status={error.status}
-            clearError={clearPaymentStore}
+    <main className={styles.mainContainer}>
+      <div className={styles.contentWrapper}>
+        <section className={styles.paymentContainer}>
+          <h2 className={styles.headerLabel}>Checkout</h2>
+          {error && (
+            <Error
+              data={error.data}
+              status={error.status}
+              clearError={() => dispatch(clearPaymentStore())}
+            />
+          )}
+          <PayForm
+            sendRequest={handlePay}
+            back={() => navigate(-1)}
+            isPayForOrder
           />
-        )}
-        <PayForm sendRequest={pay} back={goBack} isPayForOrder />
+        </section>
+
+        <aside className={styles.orderInfoContainer}>
+          <div className={styles.orderCard}>
+            <h3 className={styles.orderHeader}>Order Summary</h3>
+            <div className={styles.packageInfoContainer}>
+              <span className={styles.packageName}>Standard Package</span>
+              <span className={styles.packagePrice}>$100.00 USD</span>
+            </div>
+            <div className={styles.resultPriceContainer}>
+              <span>Total:</span>
+              <span className={styles.totalPrice}>$100.00 USD</span>
+            </div>
+            <a href="http://www.google.com" className={styles.promoCode}>
+              Have a promo code?
+            </a>
+          </div>
+        </aside>
       </div>
-      <div className={styles.orderInfoContainer}>
-        <span className={styles.orderHeader}>Order Summary</span>
-        <div className={styles.packageInfoContainer}>
-          <span className={styles.packageName}>Package Name: Standard</span>
-          <span className={styles.packagePrice}>$100 USD</span>
-        </div>
-        <div className={styles.resultPriceContainer}>
-          <span>Total:</span>
-          <span>$100.00 USD</span>
-        </div>
-        <a href="http://www.google.com">Have a promo code?</a>
-      </div>
-    </div>
+    </main>
   );
 };
 
-const mapStateToProps = (state) => ({
-  payment: state.payment,
-  contestCreationStore: state.contestCreationStore,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  pay: ({ data, navigate }) => dispatch(pay({ data, navigate })),
-  clearPaymentStore: () => dispatch(clearPaymentStore()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+export default Payment;

@@ -1,0 +1,86 @@
+@import '../../../common/vars/ContestPageVar'
+
+.container
+  display: flex
+  flex-direction: column
+  margin-bottom: 30px
+  width: 100%
+
+.header
+  font-size: 17px
+  font-weight: 700
+  color: $text-dark
+  margin-bottom: 20px
+  margin-top: 25px
+  line-height: 1.4
+
+.row
+  display: flex
+  gap: 20px
+  width: 100%
+
+  @media (max-width: 768px)
+    flex-direction: column
+    gap: 15px
+
+.card
+  position: relative
+  flex: 1
+  background: #fff
+  border: 1px solid $border-light
+  border-radius: $border-radius-card
+  padding: 24px
+  cursor: pointer
+  transition: $transition-base
+  display: flex
+  flex-direction: column
+  gap: 12px
+
+  &:hover
+    border-color: $accent-cyan
+    transform: translateY(-2px)
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08)
+
+  &.active
+    border: 2px solid $primary-blue
+    background-color: $bg-active
+    padding: 23px
+
+.cardLabel
+  font-size: 18px
+  font-weight: 700
+  color: $text-main
+  margin: 0
+  display: block
+
+.cardDescription
+  font-size: 14px
+  color: $text-muted
+  line-height: 1.6 
+
+.recommended
+  position: absolute
+  top: -12px
+  right: 20px
+  background-color: #2563eb
+  color: white
+  font-size: 11px
+  font-weight: 700
+  text-transform: uppercase
+  letter-spacing: 0.5px
+  padding: 4px 12px
+  border-radius: 20px
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3)
+
+.checkMark
+  position: absolute
+  top: 15px
+  right: 15px
+  color: $primary-blue
+  font-size: 18px
+
+.infoText
+  margin-top: 20px
+  font-size: 14px
+  color: #888
+  line-height: 1.5

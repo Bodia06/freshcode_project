@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Formik } from 'formik';
 import { checkAuth, clearAuth } from '../../store/slices/authSlice';
-import FormInput from '../FormInput/FormInput';
+import FormInput from '../InputComponents/FormInput/FormInput';
 import Schems from '../../utils/validators/validationSchems';
 import Error from '../Error/Error';
 import CONSTANTS from '../../constants';

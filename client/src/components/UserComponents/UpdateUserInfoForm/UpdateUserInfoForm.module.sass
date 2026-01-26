@@ -1,0 +1,135 @@
+@import '../../../common/vars/UserPageVar'
+
+.updateContainer
+  width: 100%
+  display: flex
+  flex-direction: column
+  gap: 30px
+  padding: 10px 0
+  box-sizing: border-box
+
+.inputsWrapper
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 20px
+  width: 100%
+
+  @media (max-width: 600px)
+    grid-template-columns: 1fr
+
+.container
+  display: flex
+  flex-direction: column
+  gap: 8px
+
+.label
+  font-size: 14px
+  font-weight: 700
+  color: $color-text-label
+  text-transform: uppercase
+  letter-spacing: 0.5px
+
+.inputContainer
+  width: 100%
+  
+  .input
+    width: 100%
+    height: 46px
+    border: 2px solid $color-border-input
+    border-radius: $radius-input
+    padding: 0 16px
+    font-size: 16px
+    background-color: $color-bg-input
+    transition: all 0.2s ease
+    box-sizing: border-box
+
+    &:focus
+      outline: none
+      border-color: $color-primary
+      background-color: $color-white
+      box-shadow: $shadow-input
+
+  .notValid
+    border-color: $color-error !important
+
+  .error
+    color: $color-error
+    font-size: 12px
+    margin-top: 5px
+    font-weight: 500
+
+.imageSection
+  background: #fdfdfd
+  border: 2px dashed $color-border-dash
+  border-radius: $radius-section
+  padding: 20px
+  transition: border-color 0.3s ease
+  
+  &:hover
+    border-color: $color-primary
+
+.imageUploadContainer
+  display: flex
+  align-items: center
+  gap: 25px
+
+  @media (max-width: 480px)
+    flex-direction: column
+    text-align: center
+
+  .imgStyle
+    width: 100px
+    height: 100px
+    border-radius: 50%
+    object-fit: cover
+    border: 3px solid $color-white
+    box-shadow: $shadow-avatar
+
+  .uploadInputContainer
+    display: flex
+    flex-direction: column
+    gap: 10px
+
+    input[type="file"]
+      display: none 
+
+    label
+      display: inline-flex
+      align-items: center
+      justify-content: center
+      padding: 12px 22px
+      background-color: $color-primary
+      color: $color-white
+      border-radius: $radius-btn
+      font-size: 14px
+      font-weight: 600
+      cursor: pointer
+      transition: all 0.2s ease
+      
+      &:hover
+        background-color: $color-primary-dark
+
+.submitBtn
+  align-self: center
+  width: 100%
+  max-width: 280px
+  padding: 14px 0
+  margin-top: 10px
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%)
+  color: $color-white
+  border: none
+  border-radius: 12px
+  font-size: 16px
+  font-weight: 700
+  cursor: pointer
+  transition: all 0.3s ease
+
+  &:hover
+    background: linear-gradient(135deg, $color-accent 0%, $color-accent-dark 100%)
+    box-shadow: 0 6px 15px rgba(242, 126, 81, 0.3)
+    transform: translateY(-2px)
+
+  &:disabled
+    background: #bdc3c7
+    cursor: not-allowed
+    transform: none

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 import { sendMessage } from '../../../../store/slices/chatSlice';
-import FormInput from '../../../FormInput/FormInput';
+import FormInput from '../../../InputComponents/FormInput/FormInput';
 import Schems from '../../../../utils/validators/validationSchems';
 import CONSTANTS from '../../../../constants';
 import styles from './ChatInput.module.sass';

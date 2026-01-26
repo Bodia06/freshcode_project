@@ -1,0 +1,83 @@
+@import '../../../common/vars/CustomerDashboardVar'
+
+.mainContainer
+  width: 100%
+  max-width: 1200px
+  margin: 50px auto
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  padding: 0 20px
+  box-sizing: border-box
+  
+  @media(max-width: 1000px)
+    flex-direction: column
+    margin-top: 20px
+    padding: 0 15px
+
+.filterContainer
+  min-width: 280px
+  height: fit-content
+  padding: 20px 0
+  margin-right: 50px
+  display: flex
+  flex-direction: column
+  box-shadow: $shadow-main
+  align-items: stretch
+  background-color: $color-white
+  border-radius: $radius-md
+  flex-shrink: 0
+
+  @media(max-width: 1000px)
+    width: 100%
+    max-width: 100%
+    margin-right: 0
+    margin-bottom: 30px
+    padding: 15px
+    min-width: 0
+    box-sizing: border-box
+
+.filter, .activeFilter
+  border: none
+  margin: 8px 15px
+  text-align: center
+  font-size: 16px
+  border-radius: $radius-md
+  padding: 14px 20px
+  cursor: pointer
+  transition: all 0.3s ease
+  display: block
+  width: auto
+
+  @media(max-width: 1000px)
+    margin: 8px 0
+    width: 100%
+    box-sizing: border-box
+    white-space: normal
+
+.filter
+  background-color: transparent
+  color: $color-text-main
+  border: 1px solid transparent
+  
+  &:hover
+    background-color: #f0f2f5
+
+.activeFilter
+  background-color: $color-primary
+  color: $color-white
+  pointer-events: none
+  box-shadow: 0 4px 10px rgba(78, 97, 141, 0.15)
+
+.contestsContainer
+  flex-grow: 1
+  width: 100%
+  display: flex
+  justify-content: center
+  min-width: 0 
+
+.errorContainer
+  width: 100%
+  text-align: center
+  padding: 20px
+  box-sizing: border-box
