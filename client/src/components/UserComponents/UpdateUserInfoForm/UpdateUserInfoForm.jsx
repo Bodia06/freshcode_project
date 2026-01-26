@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearUserError } from '../../../store/slices/userSlice';
 import ImageUpload from '../../InputComponents/ImageUpload/ImageUpload';
 import FormInput from '../../InputComponents/FormInput/FormInput';
@@ -7,8 +7,16 @@ import Schems from '../../../utils/validators/validationSchems';
 import Error from '../../Error/Error';
 import styles from './UpdateUserInfoForm.module.sass';
 
-const UpdateUserInfoForm = (props) => {
-  const { onSubmit, submitting, error, clearUserError, initialValues } = props;
+const UpdateUserInfoForm = ({ onSubmit }) => {
+  const dispatch = useDispatch();
+
+  const { data, error, isFetching } = useSelector((state) => state.userStore);
+
+  const initialValues = {
+    firstName: data?.firstName || '',
+    lastName: data?.lastName || '',
+    displayName: data?.displayName || '',
+  };
 
   return (
     <Formik
@@ -22,7 +30,7 @@ const UpdateUserInfoForm = (props) => {
           <Error
             data={error.data}
             status={error.status}
-            clearError={clearUserError}
+            clearError={() => dispatch(clearUserError())}
           />
         )}
 
@@ -85,30 +93,13 @@ const UpdateUserInfoForm = (props) => {
         <button
           className={styles.submitBtn}
           type="submit"
-          disabled={submitting}
+          disabled={isFetching}
         >
-          {submitting ? 'Updating...' : 'Save Changes'}
+          {isFetching ? 'Updating...' : 'Save Changes'}
         </button>
       </Form>
     </Formik>
   );
 };
 
-const mapStateToProps = (state) => {
-  const { data, error, isFetching } = state.userStore;
-  return {
-    error,
-    submitting: isFetching,
-    initialValues: {
-      firstName: data.firstName || '',
-      lastName: data.lastName || '',
-      displayName: data.displayName || '',
-    },
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  clearUserError: () => dispatch(clearUserError()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserInfoForm);
+export default UpdateUserInfoForm;

@@ -1,12 +1,16 @@
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import UpdateUserInfoForm from '../UpdateUserInfoForm/UpdateUserInfoForm';
 import { updateUser } from '../../../store/slices/userSlice';
 import { changeEditModeOnUserProfile } from '../../../store/slices/userProfileSlice';
 import CONSTANTS from '../../../constants';
 import styles from './UserInfo.module.sass';
 
-const UserInfo = (props) => {
-  const { isEdit, changeEditMode, data } = props;
+const UserInfo = () => {
+  const dispatch = useDispatch();
+
+  const { data } = useSelector((state) => state.userStore);
+  const { isEdit } = useSelector((state) => state.userProfile);
+
   const { avatar, firstName, lastName, displayName, email, role, balance } =
     data;
 
@@ -16,7 +20,7 @@ const UserInfo = (props) => {
     formData.append('firstName', values.firstName);
     formData.append('lastName', values.lastName);
     formData.append('displayName', values.displayName);
-    props.updateUser(formData);
+    dispatch(updateUser(formData));
   };
 
   return (
@@ -73,7 +77,7 @@ const UserInfo = (props) => {
 
         <div className={styles.actions}>
           <button
-            onClick={() => changeEditMode(!isEdit)}
+            onClick={() => dispatch(changeEditModeOnUserProfile(!isEdit))}
             className={styles.buttonEdit}
           >
             {isEdit ? 'Cancel' : 'Edit Profile'}
@@ -84,15 +88,4 @@ const UserInfo = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { data } = state.userStore;
-  const { isEdit } = state.userProfile;
-  return { data, isEdit };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  updateUser: (data) => dispatch(updateUser(data)),
-  changeEditMode: (data) => dispatch(changeEditModeOnUserProfile(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+export default UserInfo;
