@@ -4,7 +4,7 @@ import EventsList from '../../components/EventComponents/EventsList/EventsList';
 import EventFrom from '../../components/EventComponents/EventForm/EventForm';
 import styles from './EventPage.module.sass';
 
-export default function EventPage() {
+function EventPage() {
   const { events, addEvent, deleteEvent } = useEvent();
   const [openModal, setOpenModal] = useState(false);
 
@@ -38,3 +38,5 @@ export default function EventPage() {
     </div>
   );
 }
+
+export default EventPage;
