@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import LightBox from 'react-18-image-lightbox';
 import 'react-18-image-lightbox/style.css';
-
 import { goToExpandedDialog } from '../../store/slices/chatSlice';
 import {
   getContestById,
@@ -15,7 +14,6 @@ import {
   changeContestViewMode,
   changeShowImage,
 } from '../../store/slices/contestByIdSlice';
-
 import Error from '../../components/Error/Error';
 import TryAgain from '../../components/TryAgain/TryAgain';
 import ContestSideBar from '../../components/ContestComponents/ContestSideBar/ContestSideBar';

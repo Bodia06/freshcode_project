@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useCountdown } from '../../../hooks/useCountdown';
 import styles from './EventsList.module.sass';
 
-export default function EventsList({ eventData, deleteEvent }) {
+function EventsList({ eventData, deleteEvent }) {
   const separator = eventData.date.includes('T') ? '' : 'T';
   const fullDateTime = `${eventData.date}${separator}${eventData.time}`;
 
@@ -55,3 +55,5 @@ export default function EventsList({ eventData, deleteEvent }) {
     </li>
   );
 }
+
+export default EventsList;

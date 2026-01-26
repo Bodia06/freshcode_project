@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './AtomFAQItem.module.sass';
 
-export default function AtomFAQItem({ data }) {
+function AtomFAQItem({ data }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const content = data.description;
@@ -60,3 +60,5 @@ export default function AtomFAQItem({ data }) {
     </div>
   );
 }
+
+export default AtomFAQItem;

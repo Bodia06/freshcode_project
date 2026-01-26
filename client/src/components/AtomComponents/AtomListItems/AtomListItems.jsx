@@ -1,6 +1,6 @@
 import styles from './AtomListItems.module.sass';
 
-export default function AtomListItems({ data }) {
+function AtomListItems({ data }) {
   const { title, description, buttonText, iconPath, iconColor } = data;
 
   return (
@@ -20,3 +20,5 @@ export default function AtomListItems({ data }) {
     </li>
   );
 }
+
+export default AtomListItems;

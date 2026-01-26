@@ -37,4 +37,5 @@ const ProgressBar = (props) => {
 
   return <div className={styles.progressBarContainer}>{renderProgress()}</div>;
 };
+
 export default ProgressBar;

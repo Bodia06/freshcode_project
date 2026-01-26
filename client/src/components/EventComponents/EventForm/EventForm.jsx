@@ -3,7 +3,7 @@ import SCHEMS from '../../../utils/validators/validationSchems';
 import CONSTANTS from '../../../constants';
 import styles from './EventForm.module.sass';
 
-export default function EventFrom({ close, addEvent }) {
+function EventFrom({ close, addEvent }) {
   const handleSubmit = (values, { resetForm }) => {
     addEvent({
       name: values.name,
@@ -92,3 +92,5 @@ export default function EventFrom({ close, addEvent }) {
     </div>
   );
 }
+
+export default EventFrom;

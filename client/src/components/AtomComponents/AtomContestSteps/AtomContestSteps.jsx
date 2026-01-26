@@ -1,6 +1,6 @@
 import styles from './AtomContestSteps.module.sass';
 
-export default function AtomContestSteps({ data, stepNumber, isLast }) {
+function AtomContestSteps({ data, stepNumber, isLast }) {
   const { description } = data;
 
   return (
@@ -27,3 +27,5 @@ export default function AtomContestSteps({ data, stepNumber, isLast }) {
     </>
   );
 }
+
+export default AtomContestSteps;
