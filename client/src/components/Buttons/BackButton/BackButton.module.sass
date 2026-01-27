@@ -1,4 +1,4 @@
-@import '../../../common/vars/ButtonsVar'
+@use '../../../common/vars/ButtonsVar'
   
 .buttonContainer
   display: flex
@@ -9,22 +9,22 @@
   font-family: inherit
   font-weight: 700
   color: white
-  background-color: $color-back
-  width: $btn-width
-  height: $btn-height
-  font-size: $btn-font-size
-  border-radius: $btn-radius
+  background-color: ButtonsVar.$color-back
+  width: ButtonsVar.$btn-width
+  height: ButtonsVar.$btn-height
+  font-size: ButtonsVar.$btn-font-size
+  border-radius: ButtonsVar.$btn-radius
   margin: 0 15px
   cursor: pointer
-  transition: all $transition-speed ease-in-out
+  transition: all ButtonsVar.$transition-speed ease-in-out
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
 
   span
-    transition: transform $transition-speed ease-in-out
+    transition: transform ButtonsVar.$transition-speed ease-in-out
     display: inline-block
 
   &:hover
-    background-color: $color-back-hover
+    background-color: ButtonsVar.$color-back-hover
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
     span
       transform: scale(1.05)

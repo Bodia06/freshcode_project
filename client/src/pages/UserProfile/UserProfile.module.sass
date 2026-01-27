@@ -1,8 +1,8 @@
-@import '../../common/vars/UserPageVar'
+@use '../../common/vars/UserPageVar'
 
 .pageWrapper
   width: 100%
-  background-color: $color-bg-light
+  background-color: UserPageVar.$color-bg-light
   display: flex
   justify-content: center
 
@@ -14,7 +14,7 @@
   flex-direction: row
   align-items: start
   padding: 50px 20px
-  gap: $gap-main
+  gap: UserPageVar.$gap-main
   box-sizing: border-box
 
   @media(max-width: 850px)
@@ -24,20 +24,20 @@
 
 .aside
   width: 280px
-  background: $color-white
-  border-radius: $radius-lg
-  box-shadow: $shadow-sm
+  background: UserPageVar.$color-white
+  border-radius: UserPageVar.$radius-lg
+  box-shadow: UserPageVar.$shadow-sm
   overflow: hidden
   flex-shrink: 0
 
   @media(max-width: 850px)
     width: 100%
-    border-radius: $radius-md
+    border-radius: UserPageVar.$radius-md
 
 .headerAside
   padding: 20px
-  background-color: $color-primary
-  color: $color-white
+  background-color: UserPageVar.$color-primary
+  color: UserPageVar.$color-white
   font-size: 18px
   font-weight: 600
   text-align: center
@@ -54,16 +54,16 @@
 
 .optionContainer
   padding: 14px 20px
-  border-radius: $radius-md
+  border-radius: UserPageVar.$radius-md
   cursor: pointer
-  color: $color-text-main
+  color: UserPageVar.$color-text-main
   font-size: 16px
   font-weight: 500
   transition: all 0.2s ease
   text-align: left
 
   &:hover
-    background-color: $color-border-light
+    background-color: UserPageVar.$color-border-light
 
   @media(max-width: 850px)
     flex: 1
@@ -71,11 +71,11 @@
     padding: 12px 10px
 
   &.currentOption
-    background-color: $color-primary
-    color: $color-white
+    background-color: UserPageVar.$color-primary
+    color: UserPageVar.$color-white
 
     &:hover
-      background-color: $color-primary 
+      background-color: UserPageVar.$color-primary 
       cursor: default
 
 .contentArea
@@ -91,14 +91,14 @@
 
 .notMoneyCard
   width: 100%
-  background: $color-white
+  background: UserPageVar.$color-white
   padding: 40px
-  border-radius: $radius-lg
+  border-radius: UserPageVar.$radius-lg
   text-align: center
-  border: 1px dashed $color-border
+  border: 1px dashed UserPageVar.$color-border
 
 .notMoney
-  color: $color-text-main
+  color: UserPageVar.$color-text-main
   font-size: 18px
   font-weight: 500
 
@@ -110,5 +110,5 @@
   width: 100%
   text-align: center
   padding: 40px
-  color: $color-error
+  color: UserPageVar.$color-error
   font-weight: bold

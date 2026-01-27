@@ -1,4 +1,4 @@
-@import '../../../common/vars/PaymentPageVar'
+@use '../../../common/vars/PaymentPageVar'
 
 .payFormContainer
   display: flex
@@ -14,7 +14,7 @@
   .headerInfo
     font-size: 20px
     font-weight: 600
-    color: $color-text
+    color: PaymentPageVar.$color-text
     margin-bottom: 20px
 
   .cardVisual
@@ -58,8 +58,8 @@
       height: 44px
       padding: 10px 12px
       font-size: 16px
-      border: 1px solid $color-border
-      border-radius: $radius
+      border: 1px solid PaymentPageVar.$color-border
+      border-radius: PaymentPageVar.$radius
       outline: none
       overflow: hidden
       text-overflow: ellipsis
@@ -89,7 +89,7 @@
       flex: 1
       min-height: 50px
       padding: 12px 20px
-      border-radius: $radius
+      border-radius: PaymentPageVar.$radius
       font-size: 16px
       font-weight: 600
       cursor: pointer
@@ -105,13 +105,13 @@
         transform: scale(0.98)
 
     .payButton
-      background-color: $color-primary
+      background-color: PaymentPageVar.$color-primary
       color: white
       @media(max-width: 500px)
         order: -1 
       
       &:hover
-        background-color: $color-primary-hover
+        background-color: PaymentPageVar.$color-primary-hover
 
     .backButton
       background-color: #f4f4f5

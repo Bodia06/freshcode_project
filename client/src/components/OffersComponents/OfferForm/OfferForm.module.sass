@@ -1,10 +1,10 @@
-@import '../../../common/vars/ContestPageVar'
+@use '../../../common/vars/ContestPageVar'
 
 .offerContainer
   width: 100%
-  background: $color-bg-light
-  border: 1px solid $color-border-soft
-  border-radius: $radius-lg
+  background: ContestPageVar.$color-bg-light
+  border: 1px solid ContestPageVar.$color-border-soft
+  border-radius: ContestPageVar.$radius-lg
   padding: 20px
   box-sizing: border-box
 
@@ -23,37 +23,37 @@
         width: 100%
         box-sizing: border-box
         background-color: white
-        border: 2px solid $color-border-input
-        border-radius: $radius-md
-        color: $color-text-main
+        border: 2px solid ContestPageVar.$color-border-input
+        border-radius: ContestPageVar.$radius-md
+        color: ContestPageVar.$color-text-main
         font-size: 16px
         padding: 12px 15px
-        transition: border-color $transition-base
+        transition: border-color ContestPageVar.$transition-base
         
         &:focus
-          border-color: $color-primary-blue
+          border-color: ContestPageVar.$color-primary-blue
           outline: none
 
       .fieldWarning
-        color: $color-error-red
+        color: ContestPageVar.$color-error-red
         font-size: 13px
         margin-top: 5px
         font-weight: 500
 
     .btnOffer
       width: 100%
-      background-color: $color-success-green
+      background-color: ContestPageVar.$color-success 
       border: none
-      border-radius: $radius-md
+      border-radius: ContestPageVar.$radius-md
       color: white
       font-size: 16px
       font-weight: 700
       padding: 14px
       cursor: pointer
-      transition: transform 0.1s, background-color $transition-base
+      transition: transform 0.1s, background-color ContestPageVar.$transition-base
       
       &:hover
-        background-color: $color-success-green-dark
+        background-color: ContestPageVar.$color-success-green-dark
       
       &:active
         transform: scale(0.98)
@@ -66,20 +66,20 @@
         width: 150px
         height: 150px
         object-fit: contain
-        border-radius: $radius-md
+        border-radius: ContestPageVar.$radius-md
         margin-bottom: 10px
-        border: 1px solid rgba($color-border-input, 0.5)
+        border: 1px solid ContestPageVar.$color-border-input 
 
       .uploadInputContainer
         label
           display: inline-block
           padding: 10px 20px
-          background: $color-primary-blue
+          background: ContestPageVar.$color-primary-blue
           color: white
-          border-radius: $radius-sm
+          border-radius: ContestPageVar.$radius-sm
           cursor: pointer
           font-weight: 600
-          transition: background-color $transition-base
+          transition: background-color ContestPageVar.$transition-base
           
           &:hover
-            background: $color-primary-blue-dark
+            background: ContestPageVar.$color-primary-blue-dark

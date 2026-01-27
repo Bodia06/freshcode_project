@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     {
       name: 'transform-js-to-jsx',
-      async transform(code, id) {
+      async transform (code, id) {
         if (!id.match(/src\/.*\.js$/)) {
           return null;
         }
@@ -19,6 +19,26 @@ export default defineConfig({
     },
     react(),
   ],
+  css: {
+    preprocessorOptions: {
+      sass: {
+        silenceDeprecations: [
+          'legacy-js-api',
+          'import',
+          'color-functions',
+          'global-builtin',
+        ],
+      },
+      scss: {
+        silenceDeprecations: [
+          'legacy-js-api',
+          'import',
+          'color-functions',
+          'global-builtin',
+        ],
+      },
+    },
+  },
   server: {
     port: 3000,
     host: true,

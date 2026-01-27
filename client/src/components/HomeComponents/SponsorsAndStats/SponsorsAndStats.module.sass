@@ -1,7 +1,7 @@
-@import '../../../common/mixins/HomeMixins'
+@use '../../../common/mixins/HomeMixins'
 
 .greyContainer
-  @include innerContainer
+  @include HomeMixins.innerContainer
   background-color: #FAFAFA
   @media screen and (max-width: 768px)
     padding: 40px 20px

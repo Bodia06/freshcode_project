@@ -1,4 +1,4 @@
-@import '../../../common/vars/CustomerDashboardVar'
+@use '../../../common/vars/CustomerDashboardVar'
 
 .mainContainer
   width: 100%
@@ -22,10 +22,10 @@
   margin-right: 50px
   display: flex
   flex-direction: column
-  box-shadow: $shadow-main
+  box-shadow: CustomerDashboardVar.$shadow-main
   align-items: stretch
-  background-color: $color-white
-  border-radius: $radius-md
+  background-color: CustomerDashboardVar.$color-white
+  border-radius: CustomerDashboardVar.$radius-md
   flex-shrink: 0
 
   @media(max-width: 1000px)
@@ -42,7 +42,7 @@
   margin: 8px 15px
   text-align: center
   font-size: 16px
-  border-radius: $radius-md
+  border-radius: CustomerDashboardVar.$radius-md
   padding: 14px 20px
   cursor: pointer
   transition: all 0.3s ease
@@ -57,15 +57,15 @@
 
 .filter
   background-color: transparent
-  color: $color-text-main
+  color: CustomerDashboardVar.$color-text-main
   border: 1px solid transparent
   
   &:hover
     background-color: #f0f2f5
 
 .activeFilter
-  background-color: $color-primary
-  color: $color-white
+  background-color: CustomerDashboardVar.$color-primary
+  color: CustomerDashboardVar.$color-white
   pointer-events: none
   box-shadow: 0 4px 10px rgba(78, 97, 141, 0.15)
 

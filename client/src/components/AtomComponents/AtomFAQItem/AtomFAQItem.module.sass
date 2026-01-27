@@ -1,4 +1,4 @@
-@import '../../../common/vars/AtomPageVar.sass'
+@use '../../../common/vars/AtomPageVar.sass'
 
 .faqItem
   background: #fff
@@ -10,19 +10,19 @@
   transition: all 0.3s ease
 
   &.open
-    background-color: $blue-primary
-    border-color: $blue-primary
+    background-color: AtomPageVar.$blue-primary
+    border-color: AtomPageVar.$blue-primary
     box-shadow: 0 10px 20px rgba(55, 125, 255, 0.15)
 
     .questionTitle
-      color: $text-white
+      color: AtomPageVar.$text-white
 
     .icon
-      color: $text-white
+      color: AtomPageVar.$text-white
     
     .faqBody
       p
-        color: $text-white
+        color: AtomPageVar.$text-white
 
 .faqHeader
   display: flex
@@ -34,7 +34,7 @@
   line-height: 1.4
   font-size: 18px
   font-weight: 600
-  color: $dark-text
+  color: AtomPageVar.$dark-text
   margin: 0
   padding-right: 20px
 
@@ -44,7 +44,7 @@
   justify-content: center
   min-width: 20px
   height: 20px
-  color: $blue-primary
+  color: AtomPageVar.$blue-primary
   transition: color 0.3s ease
 
 .faqBody

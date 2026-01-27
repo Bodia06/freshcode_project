@@ -1,4 +1,4 @@
-@import '../../common/vars/PaymentPageVar'
+@use '../../common/vars/PaymentPageVar'
 
 .mainContainer
   width: 100%
@@ -30,10 +30,10 @@
   flex: 1
   width: 100%
   max-width: 100% // Щоб не вилазило на мобільних
-  background: $color-white
+  background: PaymentPageVar.$color-white
   padding: 30px
-  border-radius: $radius-lg
-  box-shadow: $shadow-card
+  border-radius: PaymentPageVar.$radius-lg
+  box-shadow: PaymentPageVar.$shadow-card
   box-sizing: border-box
 
   @media(max-width: 480px)
@@ -42,9 +42,9 @@
   .headerLabel
     font-size: 28px
     font-weight: 700
-    color: $color-text-dark
+    color: PaymentPageVar.$color-text-dark
     margin-bottom: 25px
-    border-bottom: 2px solid $color-accent
+    border-bottom: 2px solid PaymentPageVar.$color-accent
     display: inline-block
     padding-bottom: 5px
     max-width: 100% // Щоб довгий текст не ламав верстку
@@ -60,10 +60,10 @@
     position: static
 
   .orderCard
-    background: $color-white
+    background: PaymentPageVar.$color-white
     padding: 30px
-    border-radius: $radius-lg
-    box-shadow: $shadow-card
+    border-radius: PaymentPageVar.$radius-lg
+    box-shadow: PaymentPageVar.$shadow-card
     display: flex
     flex-direction: column
     box-sizing: border-box
@@ -71,10 +71,10 @@
     .orderHeader
       font-size: 22px
       font-weight: 700
-      color: $color-text-dark
+      color: PaymentPageVar.$color-text-dark
       margin-bottom: 20px
       padding-bottom: 15px
-      border-bottom: 1px solid $color-border
+      border-bottom: 1px solid PaymentPageVar.$color-border
 
     .packageInfoContainer
       display: flex
@@ -92,7 +92,7 @@
       .packagePrice
         font-weight: 600
         font-size: 18px
-        color: $color-text-dark
+        color: PaymentPageVar.$color-text-dark
         white-space: nowrap // Ціна завжди в один рядок
 
     .resultPriceContainer
@@ -101,23 +101,23 @@
       align-items: center
       margin-top: 20px
       padding-top: 20px
-      border-top: 2px solid $color-border
+      border-top: 2px solid PaymentPageVar.$color-border
       gap: 10px
 
       span
         font-size: 20px
         font-weight: 700
-        color: $color-text-dark
+        color: PaymentPageVar.$color-text-dark
 
       .totalPrice
-        color: $color-accent
+        color: PaymentPageVar.$color-accent
         font-size: 24px
         white-space: nowrap
 
     .promoCode
       margin-top: 20px
       font-size: 14px
-      color: $color-accent
+      color: PaymentPageVar.$color-accent
       text-decoration: none
       font-weight: 500
       text-align: right

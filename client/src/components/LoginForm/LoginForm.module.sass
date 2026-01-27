@@ -1,4 +1,4 @@
-@import '../../common/vars/LoginPageVar'
+@use '../../common/vars/LoginPageVar'
 
 .loginForm
   width: 100%
@@ -7,11 +7,11 @@
   flex-direction: column
   align-items: stretch
   justify-content: center
-  padding: $form-padding
+  padding: LoginPageVar.$form-padding
   box-sizing: border-box
   margin: 0 auto
   background: rgba(255, 255, 255, 0.08)
-  border-radius: $form-radius
+  border-radius: LoginPageVar.$form-radius
   backdrop-filter: blur(12px)
   border: 1px solid rgba(255, 255, 255, 0.1)
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1)
@@ -38,32 +38,32 @@
     .input
       background-color: white
       border: 2px solid transparent
-      border-radius: $input-radius
-      color: $color-text-dark
+      border-radius: LoginPageVar.$input-radius
+      color: LoginPageVar.$color-text-dark
       font-size: 16px
       padding: 18px 22px
       outline: none
       width: 100%
       box-sizing: border-box
-      transition: $transition-smooth
+      transition: LoginPageVar.$transition-smooth
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02)
 
       &::placeholder
-        color: $color-placeholder
+        color: LoginPageVar.$color-placeholder
 
       &:focus
-        border-color: $color-accent-teal
-        box-shadow: 0 8px 20px rgba($color-accent-teal, 0.15)
+        border-color: LoginPageVar.$color-accent-teal
+        box-shadow: 0 8px 20px rgba(LoginPageVar.$color-accent-teal, 0.15)
         transform: translateY(-2px)
 
       &.notValid
-        border-color: $color-error
+        border-color: LoginPageVar.$color-error
         background-color: #fffcfc
         &:focus
-          box-shadow: 0 8px 20px rgba($color-error, 0.15)
+          box-shadow: 0 8px 20px rgba(LoginPageVar.$color-error, 0.15)
 
       &.valid
-        border-color: $color-accent-teal
+        border-color: LoginPageVar.$color-accent-teal
 
     .fieldWarning
       font-size: 13px
@@ -71,7 +71,7 @@
       display: flex
       justify-content: center
       align-items: center
-      color: $color-error
+      color: LoginPageVar.$color-error
       background-color: white
       border-radius: 8px
       margin-top: 10px
@@ -82,28 +82,28 @@
 
   .submitContainer
     width: 100%
-    border-radius: $button-radius
+    border-radius: LoginPageVar.$button-radius
     display: flex
     justify-content: center
     align-items: center
-    background: linear-gradient(135deg, $color-accent-teal 0%, $color-accent-dark 100%)
+    background: linear-gradient(135deg, LoginPageVar.$color-accent-teal 0%, LoginPageVar.$color-accent-dark 100%)
     height: 62px
     border: 0
     cursor: pointer
-    transition: $transition-smooth
+    transition: LoginPageVar.$transition-smooth
     margin-top: 10px
-    box-shadow: 0 6px 20px rgba($color-accent-teal, 0.3)
+    box-shadow: 0 6px 20px rgba(LoginPageVar.$color-accent-teal, 0.3)
 
     &:hover:not(:disabled)
       transform: translateY(-2px)
-      box-shadow: 0 10px 25px rgba($color-accent-teal, 0.4)
+      box-shadow: 0 10px 25px rgba(LoginPageVar.$color-accent-teal, 0.4)
       filter: brightness(1.05)
 
     &:active:not(:disabled)
       transform: translateY(1px)
 
     &:disabled
-      background: $color-disabled
+      background: LoginPageVar.$color-disabled
       box-shadow: none
       cursor: not-allowed
       opacity: 0.6

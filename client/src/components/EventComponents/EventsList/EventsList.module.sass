@@ -1,4 +1,4 @@
-@import '../../../common/vars/EventPageVar'
+@use '../../../common/vars/EventPageVar'
 
 .eventItem
   position: relative
@@ -17,7 +17,7 @@
 
   &:hover
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08)
-    border-color: rgba($primary-green, 0.5)
+    border-color: rgba(EventPageVar.$primary-green, 0.5)
 
   &.expired
     border-color: #ffcfcf
@@ -38,7 +38,7 @@
   bottom: 0
   left: 0
   height: 4px
-  background-color: $primary-green
+  background-color: EventPageVar.$primary-green
   transition: width 1s linear
   opacity: 0.8
 
@@ -57,7 +57,7 @@
 .name
   font-size: 17px
   font-weight: 700
-  color: $text-dark
+  color: EventPageVar.$text-dark
   margin: 0
   white-space: nowrap
   overflow: hidden
@@ -70,7 +70,7 @@
 
 .timer
   font-size: 14px
-  color: $primary-green
+  color: EventPageVar.$primary-green
   font-weight: 700
   white-space: nowrap
   background: rgba(138, 202, 107, 0.1)
@@ -97,7 +97,7 @@
   z-index: 5
 
   &:hover
-    color: $error-red
+    color: EventPageVar.$error-red
 
   @media (max-width: 550px)
     top: 15px

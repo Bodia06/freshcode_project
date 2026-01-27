@@ -1,4 +1,4 @@
-@import '../../../common/vars/ContestPageVar'
+@use '../../../common/vars/ContestPageVar' as *
 
 .container
   display: flex
@@ -9,7 +9,7 @@
 .header
   font-size: 17px
   font-weight: 700
-  color: $text-dark
+  color: $color-text-body
   margin-bottom: 20px
   margin-top: 25px
   line-height: 1.4
@@ -27,8 +27,8 @@
   position: relative
   flex: 1
   background: #fff
-  border: 1px solid $border-light
-  border-radius: $border-radius-card
+  border: 1px solid $color-border-light 
+  border-radius: $radius-md
   padding: 24px
   cursor: pointer
   transition: $transition-base
@@ -37,25 +37,25 @@
   gap: 12px
 
   &:hover
-    border-color: $accent-cyan
+    border-color: $color-focus
     transform: translateY(-2px)
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08)
 
   &.active
-    border: 2px solid $primary-blue
+    border: 2px solid $color-primary-blue
     background-color: $bg-active
     padding: 23px
 
 .cardLabel
   font-size: 18px
   font-weight: 700
-  color: $text-main
+  color: $color-text-header
   margin: 0
   display: block
 
 .cardDescription
   font-size: 14px
-  color: $text-muted
+  color: $color-text-muted
   line-height: 1.6 
 
 .recommended
@@ -76,7 +76,7 @@
   position: absolute
   top: 15px
   right: 15px
-  color: $primary-blue
+  color: $color-primary-blue
   font-size: 18px
 
 .infoText

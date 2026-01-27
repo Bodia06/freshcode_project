@@ -1,10 +1,11 @@
-@import '../../../common/vars/ContestPageVar'
+@use "sass:color"
+@use '../../../common/vars/ContestPageVar'
 
 .offerContainer
   display: flex
   flex-direction: column
   background: #ffffff
-  border: 1px solid rgba($color-border-light, 0.7)
+  border: 1px solid rgba(ContestPageVar.$color-border-light, 0.7)
   border-radius: 20px
   padding: 24px
   position: relative
@@ -17,7 +18,7 @@
   &:hover
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08)
     transform: translateY(-5px)
-    border-color: rgba($color-primary, 0.3)
+    border-color: rgba(ContestPageVar.$color-primary, 0.3)
 
 .mainInfoContainer
   display: flex
@@ -49,13 +50,13 @@
     
     .name
       font-weight: 800
-      color: $color-text-main
+      color: ContestPageVar.$color-text-main
       font-size: 16px
       letter-spacing: -0.3px
 
     .email
       font-size: 13px
-      color: $color-text-muted
+      color: ContestPageVar.$color-text-muted
       max-width: 140px
       overflow: hidden
       text-overflow: ellipsis
@@ -67,10 +68,10 @@
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1))
   
   .resolve
-    color: $color-win
+    color: ContestPageVar.$color-win
     
   .reject
-    color: $color-reject
+    color: ContestPageVar.$color-reject
 
 .creativeRating
   display: flex
@@ -102,9 +103,9 @@
   align-items: center
   justify-content: center
   padding: 24px
-  background: $color-bg-soft
+  background: ContestPageVar.$color-bg-soft
   border-radius: 16px
-  border: 1px dashed rgba($color-primary, 0.2)
+  border: 1px dashed rgba(ContestPageVar.$color-primary, 0.2)
   margin: 4px 0
 
   .responseLogo
@@ -168,20 +169,20 @@
     border: none
 
   .resolveBtn
-    background: $color-win
+    background: ContestPageVar.$color-win
     color: #ffffff
     &:hover
-      background: darken($color-win, 5%)
-      box-shadow: 0 4px 12px rgba($color-win, 0.3)
+      background: color.adjust(ContestPageVar.$color-win, $lightness: -5%)
+      box-shadow: 0 4px 12px rgba(ContestPageVar.$color-win, 0.3)
 
   .rejectBtn
     background: #ffffff
-    color: $color-reject
+    color: ContestPageVar.$color-reject
     border: 2px solid #fee2e2
     padding: 12px
     &:hover
       background: #fef2f2
-      border-color: $color-reject
+      border-color: ContestPageVar.$color-reject
 
 @media(max-width: 500px)
   .offerContainer

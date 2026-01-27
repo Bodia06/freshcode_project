@@ -1,7 +1,7 @@
-@import '../../../common/mixins/HomeMixins'
+@use '../../../common/mixins/HomeMixins'
 
 .blueContainer
-  @include innerContainer
+  @include HomeMixins.innerContainer
   background-color: #2B62EC
   color: white
   
@@ -19,6 +19,6 @@
       margin-bottom: 30px
 
 .whiteUnderline
-  @include underline
+  @include HomeMixins.underline
   &:after
     background: white

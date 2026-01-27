@@ -1,4 +1,4 @@
-@import '../../../common/mixins/HomeMixins'
+@use '../../../common/mixins/HomeMixins'
 
 h2
   text-align: center
@@ -11,17 +11,17 @@ h2
     margin: 20px 0
 
 .whiteContainer
-  @include innerContainer
+  @include HomeMixins.innerContainer
   background-color: white
   padding-bottom: 30px
 
 .greenContainer
-  @include innerContainer
+  @include HomeMixins.innerContainer
   background-color: #28D2D0
   padding-bottom: 30px
 
 .greyContainer
-  @include innerContainer
+  @include HomeMixins.innerContainer
   background-color: #FAFAFA
   padding-bottom: 30px
 
@@ -33,7 +33,7 @@ h2
   padding: 40px 0
 
   div
-    @include stepCard
+    @include HomeMixins.stepCard
     display: flex
     flex-direction: column
     justify-content: flex-start
@@ -104,7 +104,7 @@ h2
       order: 1
 
 .greenStep
-  @include stepCard
+  @include HomeMixins.stepCard
   color: white
   width: 50%
   padding: 0 40px

@@ -1,9 +1,10 @@
-@import '../../common/vars/ModeratorPageVar'
+@use "sass:color"
+@use '../../common/vars/ModeratorPageVar'
 
 .mainContainer
   width: 100%
   min-height: 100vh
-  background-color: $bg-light
+  background-color: ModeratorPageVar.$bg-light
   padding: 40px 0
   box-sizing: border-box
   overflow-x: hidden
@@ -26,7 +27,7 @@
   
   h2
     font-size: 32px
-    color: $text-dark
+    color: ModeratorPageVar.$text-dark
     font-weight: 800
     margin: 0 0 15px 0
     @media (min-width: 768px)
@@ -35,15 +36,15 @@
   p
     display: inline-block
     padding: 10px 25px
-    background: $white
+    background: ModeratorPageVar.$white
     border-radius: 50px
-    box-shadow: $shadow-sm
+    box-shadow: ModeratorPageVar.$shadow-sm
     font-size: 16px
-    color: $text-gray
-    border: 1px solid rgba($primary-blue, 0.1)
+    color: ModeratorPageVar.$text-gray
+    border: 1px solid rgba(ModeratorPageVar.$primary-blue, 0.1)
     
     strong
-      color: $primary-blue
+      color: ModeratorPageVar.$primary-blue
       font-size: 18px
 
 .listContainer
@@ -72,7 +73,7 @@
   text-align: center
   padding: 100px 0
   font-size: 18px
-  color: $text-gray
+  color: ModeratorPageVar.$text-gray
   grid-column: 1 / -1
 
 .paginationControls
@@ -87,27 +88,27 @@
 
   button
     padding: 14px 25px
-    background-color: $primary-blue
-    color: $white
+    background-color: ModeratorPageVar.$primary-blue
+    color: ModeratorPageVar.$white
     border: none
-    border-radius: $border-radius
+    border-radius: ModeratorPageVar.$border-radius
     font-weight: 700
     cursor: pointer
     transition: all 0.3s ease
-    box-shadow: 0 4px 15px rgba($primary-blue, 0.2)
+    box-shadow: 0 4px 15px rgba(ModeratorPageVar.$primary-blue, 0.2)
     min-width: 120px
     flex: 0 1 auto
 
     &:hover:not(:disabled)
-      background-color: darken($primary-blue, 10%)
+      background-color: color.adjust(ModeratorPageVar.$primary-blue, $lightness: -10%)
       transform: translateY(-2px)
-      box-shadow: 0 6px 20px rgba($primary-blue, 0.3)
+      box-shadow: 0 6px 20px rgba(ModeratorPageVar.$primary-blue, 0.3)
 
     &:active:not(:disabled)
       transform: translateY(0)
 
     &:disabled
-      background-color: $color-disabled
+      background-color: ModeratorPageVar.$color-disabled
       box-shadow: none
       cursor: not-allowed
       opacity: 0.6
@@ -120,7 +121,7 @@
 
   span
     font-weight: 700
-    color: $text-dark
+    color: ModeratorPageVar.$text-dark
     font-size: 16px
     min-width: 100px
     text-align: center
@@ -134,9 +135,9 @@
 .error
   width: 100%
   padding: 20px
-  background: rgba($error-red, 0.1)
-  color: $error-red
-  border-radius: $border-radius
+  background: rgba(ModeratorPageVar.$error-red, 0.1)
+  color: ModeratorPageVar.$error-red
+  border-radius: ModeratorPageVar.$border-radius
   text-align: center
   margin-bottom: 30px
-  border: 1px solid rgba($error-red, 0.2)
+  border: 1px solid rgba(ModeratorPageVar.$error-red, 0.2)

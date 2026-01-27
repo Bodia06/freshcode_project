@@ -1,5 +1,5 @@
-@import '../../../common/vars/ContestPageVar'
-@import '../../../common/mixins/ContestMixins'
+@use '../../../common/vars/ContestPageVar'
+@use '../../../common/mixins/ContestMixins'
 
 .formContainer
   display: flex
@@ -22,7 +22,7 @@
   .inputHeader
     display: block
     font-size: 18px
-    color: $color-text-header
+    color: ContestPageVar.$color-text-header
     font-weight: 700
     letter-spacing: 0.2px
 
@@ -30,11 +30,11 @@
       font-size: 16px
 
 .input
-  @include input-base
+  @include ContestMixins.input-base
   height: 48px
 
 .textArea
-  @include input-base
+  @include ContestMixins.input-base
   height: 180px
   resize: vertical
   
@@ -48,7 +48,7 @@
     @extend .inputHeader
 
   .select
-    @include input-base
+    @include ContestMixins.input-base
     cursor: pointer
     appearance: none
 
@@ -59,14 +59,14 @@
   width: 100%
   margin: 35px 0
   padding: 25px
-  background-color: $color-bg-light
-  border: 2px dashed $color-border
-  border-radius: $radius-md
+  background-color: ContestPageVar.$color-bg-light
+  border: 2px dashed ContestPageVar.$color-border
+  border-radius: ContestPageVar.$radius-md
   box-sizing: border-box
-  transition: border-color $transition-speed
+  transition: border-color ContestPageVar.$transition-speed
 
   &:hover
-    border-color: $color-focus
+    border-color: ContestPageVar.$color-focus
 
   @media (max-width: 700px)
     flex-direction: column
@@ -79,23 +79,23 @@
 
   .label
     display: inline-block
-    background-color: $color-primary
-    color: $color-white
+    background-color: ContestPageVar.$color-primary
+    color: ContestPageVar.$color-white
     padding: 12px 24px
     font-size: 16px
     font-weight: 600
     cursor: pointer
-    border-radius: $radius-sm
-    transition: background-color $transition-speed
+    border-radius: ContestPageVar.$radius-sm
+    transition: background-color ContestPageVar.$transition-speed
     border: none
     white-space: nowrap
 
     &:hover
-      background-color: $color-primary-hover
+      background-color: ContestPageVar.$color-primary-hover
 
   .fileName
     font-size: 14px
-    color: $color-text-muted
+    color: ContestPageVar.$color-text-muted
     max-width: 250px
     overflow: hidden
     text-overflow: ellipsis
@@ -106,19 +106,19 @@
   margin: 40px 0 20px auto
   width: 100%
   max-width: 200px
-  color: $color-white
+  color: ContestPageVar.$color-white
   font-size: 18px
   font-weight: 700
   padding: 15px
-  border-radius: $radius-md
-  background-color: $color-primary
+  border-radius: ContestPageVar.$radius-md
+  background-color: ContestPageVar.$color-primary
   border: none
   cursor: pointer
-  transition: all $transition-speed
+  transition: all ContestPageVar.$transition-speed
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
 
   &:hover
-    background-color: $color-primary-hover
+    background-color: ContestPageVar.$color-primary-hover
     transform: translateY(-2px)
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15)
 
@@ -133,13 +133,13 @@
   font-size: 14px
   display: flex
   align-items: center
-  border-radius: $radius-sm
+  border-radius: ContestPageVar.$radius-sm
   padding: 10px 15px
-  color: $color-error
-  background-color: rgba($color-error, 0.08)
+  color: ContestPageVar.$color-error
+  background-color: rgba(ContestPageVar.$color-error, 0.08)
   margin-top: 8px
   width: 100%
-  max-width: $max-input-width
+  max-width: ContestPageVar.$max-input-width
   box-sizing: border-box
 
 .componentInputContainer

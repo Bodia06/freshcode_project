@@ -1,4 +1,4 @@
-@import '../../../common/vars/ButtonsVar'
+@use '../../../common/vars/ButtonsVar'
 
 .buttonContainer
   display: flex
@@ -9,30 +9,30 @@
   font-family: inherit
   font-weight: 700
   color: white
-  background-color: $color-next
-  width: $btn-width
-  height: $btn-height
-  font-size: $btn-font-size
-  border-radius: $btn-radius
+  background-color: ButtonsVar.$color-next
+  width: ButtonsVar.$btn-width
+  height: ButtonsVar.$btn-height
+  font-size: ButtonsVar.$btn-font-size
+  border-radius: ButtonsVar.$btn-radius
   margin: 0 15px
   cursor: pointer
-  transition: all $transition-speed ease-in-out
-  box-shadow: 0 4px 6px rgba($color-next, 0.2)
+  transition: all ButtonsVar.$transition-speed ease-in-out
+  box-shadow: 0 4px 6px rgba(ButtonsVar.$color-next, 0.2)
   overflow: hidden
 
   span
-    transition: transform $transition-speed ease-in-out
+    transition: transform ButtonsVar.$transition-speed ease-in-out
     display: inline-block
 
   &:hover
-    background-color: $color-next-hover
-    box-shadow: 0 6px 15px rgba($color-next, 0.3)
+    background-color: ButtonsVar.$color-next-hover
+    box-shadow: 0 6px 15px rgba(ButtonsVar.$color-next, 0.3)
     span
       transform: scale(1.05)
 
   &:active
     transform: translateY(1px)
-    box-shadow: 0 2px 4px rgba($color-next, 0.2)
+    box-shadow: 0 2px 4px rgba(ButtonsVar.$color-next, 0.2)
 
   @media (max-width: 768px)
     width: 160px

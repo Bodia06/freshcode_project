@@ -1,4 +1,5 @@
-@import '../../common/vars/AtomPageVar.sass'
+@use "sass:color"
+@use '../../common/vars/AtomPageVar.sass'
 
 .startInfo, .startUsingAtomInfo, .contestStepsSection, .faqSection, .searchSection
   box-sizing: border-box
@@ -29,7 +30,7 @@
   .badge
     display: inline-block
     background-color: #eef4ff
-    color: $blue-accent
+    color: AtomPageVar.$blue-accent
     padding: 8px 16px
     border-radius: 20px
     font-size: 14px
@@ -38,7 +39,7 @@
 
   h2
     font-size: 42px
-    color: $dark-text
+    color: AtomPageVar.$dark-text
     font-weight: 800
     margin-bottom: 20px
     line-height: 1.2
@@ -48,7 +49,7 @@
   p
     font-size: 18px
     line-height: 1.6
-    color: $grey-text
+    color: AtomPageVar.$grey-text
 
 .startInfoMedia
   flex: 1
@@ -64,7 +65,7 @@
 
 .startUsingAtomInfo
   margin-bottom: 60px
-  background: linear-gradient(to bottom, $bg-gradient-start, $bg-gradient-end)
+  background: linear-gradient(to bottom, AtomPageVar.$bg-gradient-start, AtomPageVar.$bg-gradient-end)
   padding: 80px 20px
   font-family: 'Helvetica Neue', Arial, sans-serif
 
@@ -76,7 +77,7 @@
   .serviceBadge
     display: inline-block
     background-color: #e2f0fe
-    color: $blue-accent
+    color: AtomPageVar.$blue-accent
     padding: 6px 14px
     border-radius: 16px
     font-size: 12px
@@ -88,13 +89,13 @@
   h2
     font-size: 36px
     font-weight: 800
-    color: $dark-text
+    color: AtomPageVar.$dark-text
     margin-bottom: 15px
     line-height: 1.2
 
   p
     font-size: 18px
-    color: $dark-text
+    color: AtomPageVar.$dark-text
     font-weight: 500
 
 .usingAtomListContainer
@@ -134,7 +135,7 @@
   h2
     font-size: 32px
     font-weight: 800
-    color: $dark-text
+    color: AtomPageVar.$dark-text
     margin: 0
 
 .stepsContainer
@@ -164,7 +165,7 @@
     line-height: 1.4
     font-size: 36px
     font-weight: 800
-    color: $dark-text
+    color: AtomPageVar.$dark-text
 
 .faqNavContainer
   max-width: 900px
@@ -217,7 +218,7 @@
   .categoryTitle
     font-size: 24px
     font-weight: 700
-    color: $blue-primary
+    color: AtomPageVar.$blue-primary
     margin-bottom: 24px
     text-align: left
 
@@ -248,13 +249,13 @@
   box-sizing: border-box
 
   &:focus-within, &:hover
-    border-color: rgba($blue-primary, 0.3)
+    border-color: rgba(AtomPageVar.$blue-primary, 0.3)
     box-shadow: 0 4px 25px rgba(55, 125, 255, 0.15)
 
 .searchIconLeft
   position: absolute
   left: 20px
-  color: $grey-text
+  color: AtomPageVar.$grey-text
   pointer-events: none
 
 .searchInput
@@ -263,13 +264,13 @@
   border: none
   border-radius: 50px
   font-size: 16px
-  color: $dark-text
+  color: AtomPageVar.$dark-text
   outline: none
   background: transparent
   box-sizing: border-box
   
   &::placeholder
-    color: lighten($grey-text, 10%)
+    color: color.adjust(AtomPageVar.$grey-text, $lightness: 10%)
     font-weight: 400
 
 .searchButton
@@ -279,7 +280,7 @@
   width: 46px
   height: 46px
   border-radius: 50%
-  background: $red-accent
+  background: AtomPageVar.$red-accent
   border: none
   display: flex
   align-items: center
@@ -290,7 +291,7 @@
 
   &:hover
     transform: translateY(-50%) scale(1.05)
-    background: darken($red-accent, 5%)
+    background: color.adjust(AtomPageVar.$red-accent, $lightness: -5%)
   
   svg
     width: 20px
@@ -305,8 +306,8 @@
 
 .tagItem
   padding: 8px 16px
-  background-color: rgba($blue-primary, 0.1)
-  color: $blue-primary
+  background-color: rgba(AtomPageVar.$blue-primary, 0.1)
+  color: AtomPageVar.$blue-primary
   border-radius: 20px
   font-size: 14px
   font-weight: 500

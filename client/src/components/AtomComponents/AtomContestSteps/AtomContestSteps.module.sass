@@ -1,4 +1,4 @@
-@import '../../../common/vars/AtomPageVar.sass'
+@use '../../../common/vars/AtomPageVar.sass'
 
 .stepCard
   box-sizing: border-box
@@ -21,7 +21,7 @@
     max-width: 650px
 
 .stepBadge
-  background-color: $purple-badge
+  background-color: AtomPageVar.$purple-badge
   color: #fff
   padding: 6px 16px
   border-radius: 20px
@@ -33,7 +33,7 @@
 .stepDescription
   font-size: 15px
   line-height: 1.6
-  color: $grey-text
+  color: AtomPageVar.$grey-text
   margin: 0
   @media (max-width: 1300px)
     text-align: center
@@ -46,7 +46,7 @@
   color: #dbe2ea
   
   svg
-    stroke: $purple-badge
+    stroke: AtomPageVar.$purple-badge
     width: 30px
     height: 30px
     @media (max-width: 1300px)
