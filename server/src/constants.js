@@ -1,8 +1,18 @@
 const path = require('path');
 
 const env = process.env.NODE_ENV || 'development';
+const LOGS_DIR = path.resolve(__dirname, process.env.LOGS_DIR_NAME || 'logs');
 
 module.exports = {
+  LOGS_DIR,
+  ERRORS_LOG_PATH: path.join(
+    LOGS_DIR,
+    (process.env.LOG_FILE_NAME || 'errors') + '.log'
+  ),
+  ARCHIVE_DIR_PATH: path.join(
+    LOGS_DIR,
+    process.env.ARCHIVE_DIR_NAME || 'archive'
+  ),
   STATIC_PATH:
     env === 'production'
       ? '../../var/www/html'

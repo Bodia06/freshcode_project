@@ -1,4 +1,6 @@
-module.exports.errorHandler = (err, req, res, next) => {
+const saveErrorToLog = require('../utils/logger');
+
+module.exports.errorHandler = async (err, req, res, next) => {
   if (
     err.message ===
       'new row for relation "Banks" violates check constraint "Banks_balance_ck"' ||
@@ -8,9 +10,15 @@ module.exports.errorHandler = (err, req, res, next) => {
     err.message = 'Not Enough money';
     err.code = 406;
   }
-  if (!err.message || !err.code) {
-    res.status(500).send('Server Error');
-  } else {
-    res.status(err.code).send(err.message);
+
+  if (!err.code) {
+    err.code = 500;
   }
+  if (!err.message) {
+    err.message = 'Server Error';
+  }
+
+  await saveErrorToLog(err);
+
+  res.status(err.code).send(err.message);
 };
