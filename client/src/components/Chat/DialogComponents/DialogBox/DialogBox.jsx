@@ -1,52 +1,89 @@
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
+import {
+  changeChatFavorite,
+  changeChatBlock,
+} from '../../../../store/slices/chatSlice';
 import CONSTANTS from '../../../../constants';
 import styles from './DialogBox.module.sass';
 
-const DialogBox = (props) => {
+const DialogBox = ({
+  chatPreview,
+  userId,
+  getTimeStr,
+  catalogOperation,
+  goToExpandedDialog,
+  chatMode,
+}) => {
+  const dispatch = useDispatch();
+
   const {
-    chatPreview,
-    userId,
-    getTimeStr,
-    changeFavorite,
-    changeBlackList,
-    catalogOperation,
-    goToExpandedDialog,
-    chatMode,
     interlocutor,
-  } = props;
+    favoriteList,
+    participants,
+    blackList,
+    _id,
+    text,
+    createAt,
+  } = chatPreview;
 
-  if (!interlocutor) {
-    return;
-  }
+  if (!interlocutor) return null;
 
-  const { favoriteList, participants, blackList, _id, text, createAt } =
-    chatPreview;
-  const isFavorite = favoriteList[participants.indexOf(userId)];
-  const isBlocked = blackList[participants.indexOf(userId)];
+  const userIndex = participants.findIndex(
+    (id) => Number(id) === Number(userId)
+  );
+
+  const isFavorite = userIndex !== -1 ? favoriteList[userIndex] : false;
+  const isBlocked = userIndex !== -1 ? blackList[userIndex] : false;
+
+  const handleFavoriteClick = (event) => {
+    event.stopPropagation();
+    dispatch(
+      changeChatFavorite({
+        conversationId: _id,
+        participants,
+        favoriteFlag: !isFavorite,
+      })
+    );
+  };
+
+  const handleBlackListClick = (event) => {
+    event.stopPropagation();
+    dispatch(
+      changeChatBlock({
+        conversationId: _id,
+        participants,
+        blackListFlag: !isBlocked,
+      })
+    );
+  };
+
+  const handleCatalogClick = (event) => {
+    event.stopPropagation();
+    catalogOperation(event, _id);
+  };
+
+  const handleBoxClick = () => {
+    goToExpandedDialog({
+      interlocutor,
+      conversationData: {
+        _id,
+        participants,
+        blackList,
+        favoriteList,
+      },
+    });
+  };
+
+  const avatarSrc =
+    interlocutor.avatar === 'anon.png'
+      ? CONSTANTS.ANONYM_IMAGE_PATH
+      : `${CONSTANTS.publicURL}${interlocutor.avatar}`;
 
   return (
-    <div
-      className={styles.previewChatBox}
-      onClick={() =>
-        goToExpandedDialog({
-          interlocutor,
-          conversationData: {
-            participants,
-            _id,
-            blackList,
-            favoriteList,
-          },
-        })
-      }
-    >
-      <img
-        src={
-          interlocutor.avatar === 'anon.png'
-            ? CONSTANTS.ANONYM_IMAGE_PATH
-            : `${CONSTANTS.publicURL}${interlocutor.avatar}`
-        }
-        alt="user"
-      />
+    <div className={styles.previewChatBox} onClick={handleBoxClick}>
+      <img src={avatarSrc} alt="user avatar" />
+
       <div className={styles.infoContainer}>
         <div className={styles.interlocutorInfo}>
           <span className={styles.interlocutorName}>
@@ -54,46 +91,37 @@ const DialogBox = (props) => {
           </span>
           <span className={styles.interlocutorMessage}>{text}</span>
         </div>
+
         <div className={styles.buttonsContainer}>
           <span className={styles.time}>{getTimeStr(createAt)}</span>
+
           <i
-            onClick={(event) =>
-              changeFavorite(
-                {
-                  participants,
-                  favoriteFlag: !isFavorite,
-                },
-                event
-              )
-            }
-            className={classNames({
-              'far fa-heart': !isFavorite,
-              'fas fa-heart': isFavorite,
-            })}
+            onClick={handleFavoriteClick}
+            className={classNames(isFavorite ? 'fas fa-heart' : 'far fa-heart')}
+            title={isFavorite ? 'Remove from favorite' : 'Add to favorite'}
           />
+
           <i
-            onClick={(event) =>
-              changeBlackList(
-                {
-                  participants,
-                  blackListFlag: !isBlocked,
-                },
-                event
-              )
-            }
-            className={classNames({
-              'fas fa-user-lock': !isBlocked,
-              'fas fa-unlock': isBlocked,
-            })}
+            onClick={handleBlackListClick}
+            className={classNames(
+              isBlocked ? 'fas fa-unlock' : 'fas fa-user-lock'
+            )}
+            title={isBlocked ? 'Unblock user' : 'Block user'}
           />
+
           <i
-            onClick={(event) => catalogOperation(event, _id)}
+            onClick={handleCatalogClick}
             className={classNames({
               'far fa-plus-square':
                 chatMode !== CONSTANTS.CATALOG_PREVIEW_CHAT_MODE,
               'fas fa-minus-circle':
                 chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE,
             })}
+            title={
+              chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
+                ? 'Remove from catalog'
+                : 'Add to catalog'
+            }
           />
         </div>
       </div>

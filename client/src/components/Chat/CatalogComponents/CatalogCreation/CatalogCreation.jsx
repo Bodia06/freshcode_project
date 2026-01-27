@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 import {
   changeTypeOfChatAdding,
@@ -11,87 +11,78 @@ import CreateCatalog from '../CreateCatalog/CreateCatalog';
 import CONSTANTS from '../../../../constants';
 import styles from './CatalogCreation.module.sass';
 
-class CatalogCreation extends React.Component {
-  componentDidMount() {
-    this.props.getCatalogList();
-  }
+const CatalogCreation = () => {
+  const dispatch = useDispatch();
 
-  render() {
-    const {
-      changeTypeOfChatAdding,
-      catalogCreationMode,
-      changeShowAddChatToCatalogMenu,
-      isFetching,
-      catalogList,
-    } = this.props;
+  const catalogCreationMode = useSelector(
+    (state) => state.chatStore.catalogCreationMode
+  );
+  const isFetching = useSelector((state) => state.chatStore.isFetching);
+  const catalogList = useSelector((state) => state.chatStore.catalogList);
 
-    const { ADD_CHAT_TO_OLD_CATALOG, CREATE_NEW_CATALOG_AND_ADD_CHAT } =
-      CONSTANTS;
+  const { ADD_CHAT_TO_OLD_CATALOG, CREATE_NEW_CATALOG_AND_ADD_CHAT } =
+    CONSTANTS;
 
-    const isOldDisabled = catalogList.length === 0;
+  useEffect(() => {
+    dispatch(getCatalogList());
+  }, [dispatch]);
 
-    return (
-      <>
-        {!isFetching && (
-          <div className={styles.catalogCreationContainer}>
-            <i
-              className="far fa-times-circle"
-              onClick={() => changeShowAddChatToCatalogMenu()}
-              title="Close"
-            />
-            <div className={styles.buttonsContainer}>
-              <span
-                onClick={() =>
-                  !isOldDisabled &&
-                  changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG)
-                }
-                className={classNames({
-                  [styles.active]:
-                    catalogCreationMode === ADD_CHAT_TO_OLD_CATALOG,
-                  [styles.disabled]: isOldDisabled,
-                })}
-              >
-                Old
-              </span>
-              <span
-                onClick={() =>
-                  changeTypeOfChatAdding(CREATE_NEW_CATALOG_AND_ADD_CHAT)
-                }
-                className={classNames({
-                  [styles.active]:
-                    catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT,
-                })}
-              >
-                New
-              </span>
-            </div>
-            <div
-              style={{
-                backgroundColor: '#8aca6b',
-                borderBottomLeftRadius: '8px',
-                borderBottomRightRadius: '8px',
-              }}
+  const isOldDisabled = catalogList.length === 0;
+
+  return (
+    <>
+      {!isFetching && (
+        <div className={styles.catalogCreationContainer}>
+          <i
+            className="far fa-times-circle"
+            onClick={() => dispatch(changeShowAddChatToCatalogMenu())}
+            title="Close"
+          />
+          <div className={styles.buttonsContainer}>
+            <span
+              onClick={() =>
+                !isOldDisabled &&
+                dispatch(changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG))
+              }
+              className={classNames({
+                [styles.active]:
+                  catalogCreationMode === ADD_CHAT_TO_OLD_CATALOG,
+                [styles.disabled]: isOldDisabled,
+              })}
             >
-              {catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT ? (
-                <CreateCatalog />
-              ) : (
-                <AddToCatalog />
-              )}
-            </div>
+              Old
+            </span>
+            <span
+              onClick={() =>
+                dispatch(
+                  changeTypeOfChatAdding(CREATE_NEW_CATALOG_AND_ADD_CHAT)
+                )
+              }
+              className={classNames({
+                [styles.active]:
+                  catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT,
+              })}
+            >
+              New
+            </span>
           </div>
-        )}
-      </>
-    );
-  }
-}
+          <div
+            style={{
+              backgroundColor: '#8aca6b',
+              borderBottomLeftRadius: '8px',
+              borderBottomRightRadius: '8px',
+            }}
+          >
+            {catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT ? (
+              <CreateCatalog />
+            ) : (
+              <AddToCatalog />
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
-const mapStateToProps = (state) => state.chatStore;
-
-const mapDispatchToProps = (dispatch) => ({
-  changeTypeOfChatAdding: (data) => dispatch(changeTypeOfChatAdding(data)),
-  changeShowAddChatToCatalogMenu: () =>
-    dispatch(changeShowAddChatToCatalogMenu()),
-  getCatalogList: () => dispatch(getCatalogList()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CatalogCreation);
+export default CatalogCreation;

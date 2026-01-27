@@ -1,11 +1,14 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import SelectInput from '../../../InputComponents/SelectInput/SelectInput';
-import { addChatToCatalog } from '../../../../store/slices/chatSlice';
+import { addChatToCatalog as addChatToCatalogAction } from '../../../../store/slices/chatSlice';
 import styles from './AddToCatalog.module.sass';
 
-const AddToCatalog = (props) => {
-  const { catalogList, addChatId, addChatToCatalog } = props;
+const AddToCatalog = () => {
+  const dispatch = useDispatch();
+
+  const catalogList = useSelector((state) => state.chatStore.catalogList);
+  const addChatId = useSelector((state) => state.chatStore.addChatId);
 
   const getCatalogsNames = () => {
     return catalogList.map((catalog) => catalog.catalogName);
@@ -16,12 +19,12 @@ const AddToCatalog = (props) => {
   };
 
   const click = (values) => {
-    if (!values.catalogId) return;
-
-    addChatToCatalog({
-      chatId: addChatId,
-      catalogId: values.catalogId,
-    });
+    dispatch(
+      addChatToCatalogAction({
+        chatId: addChatId,
+        catalogId: values.catalogId,
+      })
+    );
   };
 
   const selectArray = getCatalogsNames();
@@ -33,6 +36,7 @@ const AddToCatalog = (props) => {
         <Formik
           onSubmit={click}
           initialValues={{ catalogId: valueArray[0] || '' }}
+          enableReinitialize={true}
         >
           <Form className={styles.form}>
             <SelectInput
@@ -58,10 +62,4 @@ const AddToCatalog = (props) => {
   );
 };
 
-const mapStateToProps = (state) => state.chatStore;
-
-const mapDispatchToProps = (dispatch) => ({
-  addChatToCatalog: (data) => dispatch(addChatToCatalog(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddToCatalog);
+export default AddToCatalog;

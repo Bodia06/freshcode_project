@@ -1,107 +1,125 @@
-import { connect } from 'react-redux';
+import { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import {
-  goToExpandedDialog,
-  changeChatFavorite,
-  changeChatBlock,
-  changeShowAddChatToCatalogMenu,
+  goToExpandedDialog as goToDialogAction,
+  changeChatFavorite as changeFavoriteAction,
+  changeChatBlock as changeBlockAction,
+  changeShowAddChatToCatalogMenu as showCatalogMenuAction,
 } from '../../../../store/slices/chatSlice';
 import DialogBox from '../DialogBox/DialogBox';
 import CONSTANTS from '../../../../constants';
 import styles from './DialogList.module.sass';
 
-const DialogList = (props) => {
-  const changeFavorite = (data, event) => {
-    props.changeChatFavorite(data);
-    event.stopPropagation();
-  };
+const DialogList = ({
+  removeChat,
+  preview: propsPreview,
+  chatMode: propsChatMode,
+  userId: propsUserId,
+}) => {
+  const dispatch = useDispatch();
 
-  const changeBlackList = (data, event) => {
-    props.changeChatBlock(data);
-    event.stopPropagation();
-  };
+  const {
+    messagesPreview: reduxPreview = [],
+    chatMode: reduxChatMode,
+    userId: chatStoreUserId,
+  } = useSelector((state) => state.chatStore || {});
 
-  const changeShowCatalogCreation = (event, chatId) => {
-    props.changeShowAddChatToCatalogMenu(chatId);
-    event.stopPropagation();
-  };
+  const authUserId = useSelector((state) => state.userStore?.data?.id);
 
-  const onlyFavoriteDialogs = (chatPreview, userId) =>
-    chatPreview.favoriteList[chatPreview.participants.indexOf(userId)];
+  const preview = propsPreview || reduxPreview;
+  const chatMode = propsChatMode || reduxChatMode;
+  const userId = propsUserId || chatStoreUserId || authUserId;
 
-  const onlyBlockDialogs = (chatPreview, userId) =>
-    chatPreview.blackList[chatPreview.participants.indexOf(userId)];
+  const changeFavorite = useCallback(
+    (data, event) => {
+      event.stopPropagation();
+      dispatch(changeFavoriteAction(data));
+    },
+    [dispatch]
+  );
 
-  const getTimeStr = (time) => {
+  const changeBlackList = useCallback(
+    (data, event) => {
+      event.stopPropagation();
+      dispatch(changeBlockAction(data));
+    },
+    [dispatch]
+  );
+
+  const changeShowCatalogCreation = useCallback(
+    (event, chatId) => {
+      event.stopPropagation();
+      dispatch(showCatalogMenuAction(chatId));
+    },
+    [dispatch]
+  );
+
+  const goToExpandedDialog = useCallback(
+    (data) => {
+      dispatch(goToDialogAction(data));
+    },
+    [dispatch]
+  );
+
+  const getTimeStr = useCallback((time) => {
+    const mTime = moment(time);
     const currentTime = moment();
-    if (currentTime.isSame(time, 'day')) return moment(time).format('HH:mm');
-    if (currentTime.isSame(time, 'week')) return moment(time).format('dddd');
-    if (currentTime.isSame(time, 'year')) return moment(time).format('MM DD');
-    return moment(time).format('MMMM DD, YYYY');
-  };
+    if (currentTime.isSame(mTime, 'day')) return mTime.format('HH:mm');
+    if (currentTime.isSame(mTime, 'week')) return mTime.format('dddd');
+    if (currentTime.isSame(mTime, 'year')) return mTime.format('MM DD');
+    return mTime.format('MMMM DD, YYYY');
+  }, []);
 
-  const renderPreview = (filterFunc) => {
-    const arrayList = [];
-    const {
-      userId,
-      preview,
-      goToExpandedDialog,
-      chatMode,
-      removeChat,
-      interlocutor,
-    } = props;
-    preview.forEach((chatPreview, index) => {
-      const dialogNode = (
-        <DialogBox
-          interlocutor={chatPreview.interlocutor}
-          chatPreview={chatPreview}
-          userId={userId}
-          key={index}
-          getTimeStr={getTimeStr}
-          changeFavorite={changeFavorite}
-          changeBlackList={changeBlackList}
-          chatMode={chatMode}
-          catalogOperation={
-            chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
-              ? removeChat
-              : changeShowCatalogCreation
-          }
-          goToExpandedDialog={goToExpandedDialog}
-        />
+  const filteredPreview = useMemo(() => {
+    if (!Array.isArray(preview)) return [];
+
+    return preview.filter((chatPreview) => {
+      if (!chatPreview?.participants) return false;
+
+      const userIndex = chatPreview.participants.findIndex(
+        (id) => Number(id) === Number(userId)
       );
-      if (filterFunc && filterFunc(chatPreview, userId)) {
-        arrayList.push(dialogNode);
-      } else if (!filterFunc) {
-        arrayList.push(dialogNode);
+
+      if (userIndex === -1) return false;
+
+      if (chatMode === CONSTANTS.FAVORITE_PREVIEW_CHAT_MODE) {
+        return chatPreview.favoriteList?.[userIndex];
       }
+      if (chatMode === CONSTANTS.BLOCKED_PREVIEW_CHAT_MODE) {
+        return chatPreview.blackList?.[userIndex];
+      }
+
+      return true;
     });
-    return arrayList.length ? (
-      arrayList
-    ) : (
-      <span className={styles.notFound}>Not found</span>
-    );
+  }, [preview, chatMode, userId]);
+
+  const renderContent = () => {
+    if (!filteredPreview.length) {
+      return <span className={styles.notFound}>Not found</span>;
+    }
+
+    return filteredPreview.map((chatPreview, index) => (
+      <DialogBox
+        key={chatPreview._id || `preview-${index}`}
+        interlocutor={chatPreview.interlocutor}
+        chatPreview={chatPreview}
+        userId={userId}
+        getTimeStr={getTimeStr}
+        changeFavorite={changeFavorite}
+        changeBlackList={changeBlackList}
+        chatMode={chatMode}
+        catalogOperation={
+          chatMode === CONSTANTS.CATALOG_PREVIEW_CHAT_MODE
+            ? removeChat
+            : changeShowCatalogCreation
+        }
+        goToExpandedDialog={goToExpandedDialog}
+      />
+    ));
   };
 
-  const renderChatPreview = () => {
-    const { chatMode } = props;
-    if (chatMode === CONSTANTS.FAVORITE_PREVIEW_CHAT_MODE)
-      return renderPreview(onlyFavoriteDialogs);
-    if (chatMode === CONSTANTS.BLOCKED_PREVIEW_CHAT_MODE)
-      return renderPreview(onlyBlockDialogs);
-    return renderPreview();
-  };
-
-  return <div className={styles.previewContainer}>{renderChatPreview()}</div>;
+  return <div className={styles.previewContainer}>{renderContent()}</div>;
 };
 
-const mapStateToProps = (state) => state.chatStore;
-
-const mapDispatchToProps = (dispatch) => ({
-  goToExpandedDialog: (data) => dispatch(goToExpandedDialog(data)),
-  changeChatFavorite: (data) => dispatch(changeChatFavorite(data)),
-  changeChatBlock: (data) => dispatch(changeChatBlock(data)),
-  changeShowAddChatToCatalogMenu: (data) =>
-    dispatch(changeShowAddChatToCatalogMenu(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DialogList);
+export default DialogList;

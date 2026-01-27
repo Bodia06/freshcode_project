@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Formik } from 'formik';
 import { sendMessage } from '../../../../store/slices/chatSlice';
 import FormInput from '../../../InputComponents/FormInput/FormInput';
@@ -6,17 +6,25 @@ import Schems from '../../../../utils/validators/validationSchems';
 import CONSTANTS from '../../../../constants';
 import styles from './ChatInput.module.sass';
 
-const ChatInput = (props) => {
+const ChatInput = () => {
+  const dispatch = useDispatch();
+
+  const { interlocutor } = useSelector((state) => state.chatStore);
+
   const submitHandler = (values, { resetForm }) => {
-    if (values.message.trim()) {
-      props.sendMessage({
-        messageBody: values.message,
-        recipient: props.interlocutor.id,
-        interlocutor: props.interlocutor,
-      });
+    if (values.message.trim() && interlocutor) {
+      dispatch(
+        sendMessage({
+          messageBody: values.message,
+          recipient: interlocutor.id,
+          interlocutor: interlocutor,
+        })
+      );
       resetForm();
     }
   };
+
+  if (!interlocutor) return null;
 
   return (
     <div className={styles.inputContainer}>
@@ -47,14 +55,4 @@ const ChatInput = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { interlocutor } = state.chatStore;
-  const { data } = state.userStore;
-  return { interlocutor, data };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  sendMessage: (data) => dispatch(sendMessage(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatInput);
+export default ChatInput;

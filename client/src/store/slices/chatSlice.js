@@ -139,7 +139,12 @@ const changeChatFavoriteExtraReducers = createExtraReducers({
   fulfilledReducer: (state, { payload }) => {
     const index = findPreviewIndex(state.messagesPreview, payload.participants);
     if (index !== -1) {
-      state.messagesPreview[index].favoriteList = payload.favoriteList;
+      const newMessagesPreview = [...state.messagesPreview];
+      newMessagesPreview[index] = {
+        ...newMessagesPreview[index],
+        favoriteList: payload.favoriteList,
+      };
+      state.messagesPreview = newMessagesPreview;
     }
     state.chatData = payload;
   },
@@ -161,7 +166,12 @@ const changeChatBlockExtraReducers = createExtraReducers({
   fulfilledReducer: (state, { payload }) => {
     const index = findPreviewIndex(state.messagesPreview, payload.participants);
     if (index !== -1) {
-      state.messagesPreview[index].blackList = payload.blackList;
+      const newMessagesPreview = [...state.messagesPreview];
+      newMessagesPreview[index] = {
+        ...newMessagesPreview[index],
+        blackList: payload.blackList,
+      };
+      state.messagesPreview = newMessagesPreview;
     }
     state.chatData = payload;
   },
@@ -198,19 +208,26 @@ export const addChatToCatalog = decorateAsyncThunk({
 const addChatToCatalogExtraReducers = createExtraReducers({
   thunk: addChatToCatalog,
   fulfilledReducer: (state, { payload }) => {
-    const { catalogList } = state;
-    for (let i = 0; i < catalogList.length; i++) {
-      if (catalogList[i]._id === payload._id) {
-        catalogList[i].chats = payload.chats;
-        break;
-      }
+    state.catalogList = state.catalogList.map(catalog =>
+      Number(catalog._id) === Number(payload._id)
+        ? { ...catalog, chats: payload.chats }
+        : catalog
+    );
+
+    if (
+      state.currentCatalog &&
+      Number(state.currentCatalog._id) === Number(payload._id)
+    ) {
+      state.currentCatalog.chats = payload.chats;
     }
+
     state.isShowCatalogCreation = false;
-    state.catalogList = [...catalogList];
+    state.addChatId = null;
   },
   rejectedReducer: (state, { payload }) => {
     state.error = payload;
     state.isShowCatalogCreation = false;
+    state.addChatId = null;
   },
 });
 
@@ -269,13 +286,19 @@ const removeChatFromCatalogExtraReducers = createExtraReducers({
   thunk: removeChatFromCatalog,
   fulfilledReducer: (state, { payload }) => {
     const { catalogList } = state;
+
     for (let i = 0; i < catalogList.length; i++) {
-      if (catalogList[i]._id === payload._id) {
+      if (Number(catalogList[i]._id) === Number(payload._id)) {
         catalogList[i].chats = payload.chats;
         break;
       }
     }
-    state.currentCatalog = payload;
+
+    state.currentCatalog = {
+      ...state.currentCatalog,
+      chats: payload.chats,
+    };
+
     state.catalogList = [...catalogList];
   },
   rejectedReducer: (state, { payload }) => {

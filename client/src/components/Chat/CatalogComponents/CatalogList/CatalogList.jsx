@@ -1,48 +1,40 @@
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Catalog from '../Catalog/Catalog';
 import {
   changeShowModeCatalog,
-  deleteCatalog,
+  deleteCatalog as deleteCatalogAction,
 } from '../../../../store/slices/chatSlice';
 import styles from '../CatalogListContainer/CatalogListContainer.module.sass';
 
-const CatalogList = (props) => {
+const CatalogList = ({ catalogList }) => {
+  const dispatch = useDispatch();
+
   const goToCatalog = (event, catalog) => {
-    props.changeShowModeCatalog(catalog);
     event.stopPropagation();
+    dispatch(changeShowModeCatalog(catalog));
   };
 
-  const deleteCatalog = (event, catalogId) => {
-    props.deleteCatalog({ catalogId });
+  const handleDeleteCatalog = (event, catalogId) => {
     event.stopPropagation();
+    dispatch(deleteCatalogAction({ catalogId }));
   };
 
   const getListCatalog = () => {
-    const { catalogList } = props;
-    const elementList = [];
-    catalogList.forEach((catalog) => {
-      elementList.push(
-        <Catalog
-          catalog={catalog}
-          key={catalog._id}
-          deleteCatalog={deleteCatalog}
-          goToCatalog={goToCatalog}
-        />
-      );
-    });
-    return elementList.length ? (
-      elementList
-    ) : (
-      <span className={styles.notFound}>Not found</span>
-    );
+    if (!catalogList || catalogList.length === 0) {
+      return <span className={styles.notFound}>Not found</span>;
+    }
+
+    return catalogList.map((catalog) => (
+      <Catalog
+        catalog={catalog}
+        key={catalog._id}
+        deleteCatalog={handleDeleteCatalog}
+        goToCatalog={goToCatalog}
+      />
+    ));
   };
 
   return <div className={styles.listContainer}>{getListCatalog()}</div>;
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  changeShowModeCatalog: (data) => dispatch(changeShowModeCatalog(data)),
-  deleteCatalog: (data) => dispatch(deleteCatalog(data)),
-});
-
-export default connect(null, mapDispatchToProps)(CatalogList);
+export default CatalogList;
