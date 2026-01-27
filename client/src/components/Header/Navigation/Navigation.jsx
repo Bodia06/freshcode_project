@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import CONSTANTS from '../../../constants';
 import styles from '../Header.module.sass';
 
-const Navigation = () => {
+const Navigation = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -29,7 +29,12 @@ const Navigation = () => {
         <span className={isMenuOpen ? styles.open : ''}></span>
       </div>
 
-      <nav className={classNames(styles.nav, { [styles.active]: isMenuOpen })}>
+      <nav
+        className={classNames(styles.nav, {
+          [styles.active]: isMenuOpen,
+          [styles.notLoggedIn]: !isLoggedIn,
+        })}
+      >
         <div className={styles.mobileLogo}>
           <img
             src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}

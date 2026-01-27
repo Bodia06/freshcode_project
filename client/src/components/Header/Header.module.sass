@@ -124,6 +124,10 @@
           padding: 20px 0
           overflow-y: auto
 
+          &.notLoggedIn
+            @media (max-width: $breakpoint-sm)
+              top: 140px
+
           &.active
             right: 0
           
@@ -256,8 +260,48 @@
       @include flex-center
       border-left: 1px solid $border-color
       height: 40px
+      background-color: $white
+
       @media(max-width: $breakpoint-md)
         margin-left: 20px
+      
+      @media(max-width: $breakpoint-xs)
+        margin-left: 10px
+        border-right: 1px solid $border-color 
+
+      a
+        height: 100%
+        display: flex
+        align-items: center
+        text-decoration: none
+        border-right: 1px solid $border-color
+        transition: background-color 0.2s ease
+
+        &:hover
+          background-color: #f9fafb
+
+        .btn
+          padding: 0 20px
+          font-size: 14px
+          font-weight: 500
+          color: $main-blue
+          text-transform: uppercase
+          transition: color 0.2s ease
+          white-space: nowrap
+
+          @media(max-width: $breakpoint-md)
+            padding: 0 15px
+            font-size: 13px
+
+          @media(max-width: $breakpoint-xs)
+            padding: 0 10px
+            font-size: 12px
+
+        &:hover .btn
+          color: $accent-orange
+          
+          &:hover
+            color: $accent-orange
 
       .emailIcon
         padding: 0 15px
@@ -269,12 +313,15 @@
         border-right: 1px solid $border-color
         cursor: pointer
         position: relative
+        height: 100%
 
         &:hover
+          background-color: #f9fafb
           ul
             display: block
             position: absolute
-            top: 20px 
+            top: 100%
+            right: -1px
 
         ul
           @include dropdown-list
@@ -284,7 +331,9 @@
           display: none
           position: absolute
           right: 0
-
+          background-color: white
+          border: 1px solid $border-color
+          
           li:hover
             background: #f9fafb
           

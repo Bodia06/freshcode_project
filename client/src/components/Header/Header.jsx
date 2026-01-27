@@ -46,10 +46,10 @@ const Header = (props) => {
     }
     return (
       <>
-        <Link to="/login" style={{ textDecoration: 'none' }}>
+        <Link to="/login">
           <span className={styles.btn}>LOGIN</span>
         </Link>
-        <Link to="/registration" style={{ textDecoration: 'none' }}>
+        <Link to="/registration">
           <span className={styles.btn}>SIGN UP</span>
         </Link>
       </>
@@ -67,7 +67,7 @@ const Header = (props) => {
           Squadhelp recognized as one of the Most Innovative Companies by Inc
           Magazine.
         </span>
-        <a href="#">Read Announcement</a>
+        <a href="http://www.squadhelp.com/blog/">Read Announcement</a>
       </div>
       <div className={styles.loginSignnUpHeaders}>
         <div className={styles.numberContainer}>
@@ -87,7 +87,7 @@ const Header = (props) => {
         />
 
         <div className={styles.leftNav}>
-          <Navigation />
+          <Navigation isLoggedIn={!!data} />
 
           {data && data.role !== CONSTANTS.CREATOR && (
             <button
