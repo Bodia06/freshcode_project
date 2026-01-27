@@ -141,6 +141,7 @@ export default {
         value => valid.expirationDate(value).isValid
       )
       .required('required'),
+    sum: yup.mixed().optional(),
   }),
   CashoutSchema: yup.object().shape({
     sum: yup.number().min(5, 'min sum is 5$').required('required'),

@@ -18,15 +18,16 @@ const UserProfile = () => {
 
   if (isFetching) return <Spinner />;
 
-  if (!data) {
-    return <div className={styles.error}>User data not found</div>;
-  }
+  if (!data) return <div className={styles.error}>User data not found</div>;
 
   const { balance, role } = data;
 
   const pay = (values) => {
-    const { number, expiry, cvc, sum } = values;
-    dispatch(cashOut({ number, expiry, cvc, sum }));
+    const { number, expiry, cvc } = values;
+
+    const amountToCashOut = values.sum || balance;
+
+    dispatch(cashOut({ number, expiry, cvc, sum: amountToCashOut }));
   };
 
   return (
@@ -82,7 +83,11 @@ const UserProfile = () => {
                       clearError={() => dispatch(clearPaymentStore())}
                     />
                   )}
-                  <PayForm sendRequest={pay} />
+                  <PayForm
+                    sendRequest={pay}
+                    balance={balance}
+                    isPayForOrder={false}
+                  />
                 </div>
               )}
             </div>

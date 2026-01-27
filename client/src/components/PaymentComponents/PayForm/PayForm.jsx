@@ -1,5 +1,5 @@
 import Cards from 'react-credit-cards-2';
-import { Form, Formik } from 'formik';
+import { Form, Formik, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import { changeFocusOnCard } from '../../../store/slices/paymentSlice';
@@ -7,7 +7,7 @@ import PayInput from '../../InputComponents/PayInput/PayInput';
 import Schems from '../../../utils/validators/validationSchems';
 import styles from './PayForm.module.sass';
 
-const PayForm = ({ sendRequest, back, isPayForOrder }) => {
+const PayForm = ({ sendRequest, back, isPayForOrder, balance }) => {
   const dispatch = useDispatch();
   const { focusOnElement } = useSelector((state) => state.payment);
 
@@ -20,6 +20,7 @@ const PayForm = ({ sendRequest, back, isPayForOrder }) => {
     number: '',
     cvc: '',
     expiry: '',
+    sum: isPayForOrder ? '' : balance,
   };
 
   return (
@@ -28,8 +29,11 @@ const PayForm = ({ sendRequest, back, isPayForOrder }) => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={sendRequest}
+        onSubmit={(values) => {
+          sendRequest(values);
+        }}
         validationSchema={Schems.PaymentSchema}
+        enableReinitialize
       >
         {({ values }) => (
           <>
@@ -58,7 +62,7 @@ const PayForm = ({ sendRequest, back, isPayForOrder }) => {
                 <label>Card Number</label>
                 <PayInput
                   isInputMask
-                  mask="9999 9999 9999 9999 999"
+                  mask="9999 9999 9999 9999"
                   name="number"
                   type="text"
                   changeFocus={handleFocusChange}
@@ -90,6 +94,7 @@ const PayForm = ({ sendRequest, back, isPayForOrder }) => {
                   />
                 </div>
               </div>
+              <Field type="hidden" name="sum" />
             </Form>
           </>
         )}
