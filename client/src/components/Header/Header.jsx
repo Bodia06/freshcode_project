@@ -89,14 +89,16 @@ const Header = (props) => {
         <div className={styles.leftNav}>
           <Navigation isLoggedIn={!!data} />
 
-          {data && data.role !== CONSTANTS.CREATOR && (
-            <button
-              className={styles.startContestBtn}
-              onClick={() => navigate('/startContest')}
-            >
-              START CONTEST
-            </button>
-          )}
+          {data &&
+            data.role !== CONSTANTS.CREATOR &&
+            data.role !== CONSTANTS.MODERATOR && (
+              <button
+                className={styles.startContestBtn}
+                onClick={() => navigate('/startContest')}
+              >
+                START CONTEST
+              </button>
+            )}
         </div>
       </div>
     </header>
