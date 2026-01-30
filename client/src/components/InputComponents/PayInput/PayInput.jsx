@@ -1,60 +1,51 @@
 import classNames from 'classnames';
-import InputMask from 'react-input-mask';
+import { PatternFormat } from 'react-number-format';
 import { useField } from 'formik';
 
 const PayInput = (props) => {
-  const { label, changeFocus, classes, isInputMask, mask } = props;
+  const { label, changeFocus, classes, isInputMask, mask, type } = props;
   const [field, meta, helpers] = useField(props.name);
   const { touched, error } = meta;
+  const { setValue } = helpers;
 
-  if (field.name === 'sum') {
+  const inputClasses = classNames(classes.input, {
+    [classes.notValid]: touched && error,
+  });
+
+  const handleFocus = () => {
+    if (changeFocus) changeFocus(field.name);
+  };
+
+  if (field.name === 'sum' || !isInputMask) {
     return (
       <div className={classes.container}>
         <input
           {...field}
+          type={type}
           placeholder={label}
-          className={classNames(classes.input, {
-            [classes.notValid]: touched && error,
-          })}
+          className={inputClasses}
+          onFocus={handleFocus}
         />
-        {touched && error && (
-          <span className={classes.error}>{error.message}!</span>
-        )}
+        {touched && error && <span className={classes.error}>{error}</span>}
       </div>
     );
   }
-  if (isInputMask) {
-    return (
-      <div className={classes.container}>
-        <InputMask
-          mask={mask}
-          maskChar={null}
-          {...field}
-          placeholder={label}
-          className={classNames(classes.input, {
-            [classes.notValid]: touched && error,
-          })}
-          onFocus={() => changeFocus(field.name)}
-        />
-        {touched && error && (
-          <span className={classes.error}>{error.message}!</span>
-        )}
-      </div>
-    );
-  }
+
   return (
     <div className={classes.container}>
-      <input
+      <PatternFormat
         {...field}
+        format={mask.replace(/9/g, '#')}
+        mask="_"
+        allowEmptyFormatting={false}
         placeholder={label}
-        className={classNames(classes.input, {
-          [classes.notValid]: touched && error,
-        })}
-        onFocus={() => changeFocus(field.name)}
+        className={inputClasses}
+        onFocus={handleFocus}
+        onValueChange={(values) => {
+          setValue(values.formattedValue);
+        }}
       />
-      {touched && error && (
-        <span className={classes.error}>{error.message}!</span>
-      )}
+      {touched && error && <span className={classes.error}>{error}</span>}
     </div>
   );
 };

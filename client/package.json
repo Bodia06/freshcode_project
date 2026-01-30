@@ -25,6 +25,7 @@
     "react-flickity-component": "^4.0.7",
     "react-icons": "^4.7.1",
     "react-input-mask": "^2.0.4",
+    "react-number-format": "^5.4.4",
     "react-rating": "^2.0.5",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.23.1",
