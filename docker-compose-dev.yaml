@@ -1,6 +1,4 @@
-# version: '3'
 services:
-
   front-react:
     build:
       context: ./client
@@ -13,8 +11,8 @@ services:
       - ./client:/client
       - /client/node_modules
     ports:
-      - "5000:3000"
-      
+      - '5001:3000'
+
   server-dev:
     build:
       context: ./server
@@ -22,7 +20,7 @@ services:
     environment:
       NODE_ENV: development
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - db-dev
       - mongo-dev
@@ -31,13 +29,10 @@ services:
       - ./server:/server
       - /server/node_modules
 
-
   mongo-dev:
     image: mongo:6.0.11
     ports:
-      - "12345:27017"
-
-
+      - '12345:27017'
 
   db-dev:
     image: postgres:15.5-bullseye
@@ -46,7 +41,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=todo-dev
     ports:
-      - "12346:5432"
+      - '12346:5432'
 
 volumes:
   server-dev:
