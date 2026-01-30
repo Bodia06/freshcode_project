@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "admin2006",
+    "password": "password",
     "database": "todo-dev",
-    "host": "localhost",
+    "host": "db-dev",
     "dialect": "postgres",
     "operatorsAliases": "Op",
     "seederStorage": "sequelize"
