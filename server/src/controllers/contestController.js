@@ -2,7 +2,7 @@ const db = require('../database/models');
 const ServerError = require('../middlewares/errors/ServerError');
 const { contestQueries, userQueries } = require('./queries');
 const controller = require('../socketInit');
-const { utilFunctions } = require('../utils');
+const { utilFunctions, emailService } = require('../utils');
 const CONSTANTS = require('../constants');
 
 module.exports.dataForContest = async (req, res, next) => {
@@ -165,9 +165,23 @@ module.exports.approveOfferByModerator = async (req, res, next) => {
 
     if (updatedCount === 0) return res.status(404).send('Offer not found');
 
+    const offerWithUser = await db.Offers.findByPk(offerId, {
+      include: [{ model: db.Users, attributes: ['email'] }],
+    });
+
+    if (offerWithUser && offerWithUser.User) {
+      emailService
+        .sendModerationResult(
+          offerWithUser.User.email,
+          newStatus,
+          offerWithUser.text || 'Your file'
+        )
+        .catch(err => console.error('Email sending failed:', err));
+    }
+
     res.send(updatedOffer);
   } catch (err) {
-    next(new ServerError());
+    next(new Error('Error send info to email user'));
   }
 };
 
