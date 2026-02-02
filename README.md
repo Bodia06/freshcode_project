@@ -69,7 +69,7 @@ Make sure you have the following installed on your machine:
 2. Grant execution permissions and run the script:
 
 ```bash
-chmod +x ./start.sh
+chmod +x ./start-dev.sh
 ./start-dev.sh
 ```
 
