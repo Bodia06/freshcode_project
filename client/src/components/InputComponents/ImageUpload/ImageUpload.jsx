@@ -1,17 +1,23 @@
 import classNames from 'classnames';
 import { useField } from 'formik';
+import { useEffect } from 'react';
 
 const ImageUpload = (props) => {
   const [field, meta, helpers] = useField(props.name);
   const { uploadContainer, inputContainer, imgStyle } = props.classes;
 
+  useEffect(() => {
+    if (!field.value) {
+      const node = document.getElementById('imagePreview');
+      if (node) node.src = '';
+    }
+  }, [field.value]);
+
   const onChange = (e) => {
     const file = e.target.files?.[0];
     const node = document.getElementById('imagePreview');
 
-    if (!file) {
-      return;
-    }
+    if (!file) return;
 
     if (!file.type.startsWith('image/')) {
       e.target.value = '';
@@ -22,32 +28,39 @@ const ImageUpload = (props) => {
 
     const reader = new FileReader();
     reader.onload = () => {
-      node.src = reader.result;
+      if (node) node.src = reader.result;
     };
     reader.readAsDataURL(file);
+
+    e.target.value = '';
   };
 
   return (
     <div className={uploadContainer}>
+      <img
+        id="imagePreview"
+        className={classNames(imgStyle)}
+        alt="preview"
+        src={field.value ? undefined : ''}
+      />
+
       <div className={inputContainer}>
-        <span>Support only images (*.png, *.gif, *.jpeg)</span>
+        {!field.value && (
+          <span>Support only images (*.png, *.gif, *.jpeg)</span>
+        )}
 
         <input
           id="fileInput"
           type="file"
           accept=".jpg, .png, .jpeg"
           onChange={onChange}
-          value={undefined}
+          style={{ display: 'none' }}
         />
 
-        <label htmlFor="fileInput">Choose file</label>
+        <label htmlFor="fileInput">
+          {field.value ? 'Change file' : 'Choose file'}
+        </label>
       </div>
-
-      <img
-        id="imagePreview"
-        className={classNames({ [imgStyle]: !!field.value })}
-        alt="user"
-      />
     </div>
   );
 };

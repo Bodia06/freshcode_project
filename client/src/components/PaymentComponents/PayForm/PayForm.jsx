@@ -20,7 +20,7 @@ const PayForm = ({ sendRequest, back, isPayForOrder, balance }) => {
     number: '',
     cvc: '',
     expiry: '',
-    sum: isPayForOrder ? '' : balance,
+    sum: isPayForOrder ? 100 : balance,
   };
 
   return (

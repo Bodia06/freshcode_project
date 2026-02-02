@@ -161,12 +161,14 @@ module.exports.payment = async (req, res, next) => {
     );
 
     const orderId = uuid();
+    const parsedContests =
+      typeof contests === 'string' ? JSON.parse(contests) : contests;
 
-    contests.forEach((contest, index) => {
+    parsedContests.forEach((contest, index) => {
       const prize =
-        index === contests.length - 1
-          ? Math.ceil(price / contests.length)
-          : Math.floor(price / contests.length);
+        index === parsedContests.length - 1
+          ? Math.ceil(price / parsedContests.length)
+          : Math.floor(price / parsedContests.length);
 
       Object.assign(contest, {
         status: index === 0 ? 'active' : 'pending',
@@ -178,11 +180,13 @@ module.exports.payment = async (req, res, next) => {
       });
     });
 
-    await bd.Contests.bulkCreate(contests, transaction);
-    transaction.commit();
-    res.send();
+    await bd.Contests.bulkCreate(parsedContests, { transaction });
+
+    await transaction.commit();
+
+    return res.send();
   } catch (err) {
-    transaction.rollback();
+    if (transaction) await transaction.rollback();
     next(err);
   }
 };

@@ -14,63 +14,37 @@
     width: 100%
     max-width: 500px
     margin: 0 auto
-    gap: 15px
-
-    .inputContainer
-      width: 100%
-      
-      .input
-        width: 100%
-        box-sizing: border-box
-        background-color: white
-        border: 2px solid ContestPageVar.$color-border-input
-        border-radius: ContestPageVar.$radius-md
-        color: ContestPageVar.$color-text-main
-        font-size: 16px
-        padding: 12px 15px
-        transition: border-color ContestPageVar.$transition-base
-        
-        &:focus
-          border-color: ContestPageVar.$color-primary-blue
-          outline: none
-
-      .fieldWarning
-        color: ContestPageVar.$color-error-red
-        font-size: 13px
-        margin-top: 5px
-        font-weight: 500
-
-    .btnOffer
-      width: 100%
-      background-color: ContestPageVar.$color-success 
-      border: none
-      border-radius: ContestPageVar.$radius-md
-      color: white
-      font-size: 16px
-      font-weight: 700
-      padding: 14px
-      cursor: pointer
-      transition: transform 0.1s, background-color ContestPageVar.$transition-base
-      
-      &:hover
-        background-color: ContestPageVar.$color-success-green-dark
-      
-      &:active
-        transform: scale(0.98)
+    gap: 20px
 
     .imageUploadContainer
+      display: flex
+      flex-direction: column
+      align-items: center
       width: 100%
-      text-align: center
-      
+      gap: 15px
+
       .imgStyle
-        width: 150px
-        height: 150px
+        width: 100%
+        max-width: 200px 
+        height: 200px
         object-fit: contain
+        background-color: #eee
         border-radius: ContestPageVar.$radius-md
-        margin-bottom: 10px
-        border: 1px solid ContestPageVar.$color-border-input 
+        border: 2px dashed ContestPageVar.$color-border-input
+        
+        &[src=""], &:not([src])
+          display: none
 
       .uploadInputContainer
+        display: flex
+        flex-direction: column
+        align-items: center
+        
+        span
+          font-size: 13px
+          margin-bottom: 8px
+          color: ContestPageVar.$color-text-main
+
         label
           display: inline-block
           padding: 10px 20px
@@ -83,3 +57,15 @@
           
           &:hover
             background: ContestPageVar.$color-primary-blue-dark
+
+    .btnOffer
+      width: 100%
+      background-color: ContestPageVar.$color-success 
+      padding: 14px
+      border-radius: ContestPageVar.$radius-md
+      color: white
+      font-weight: 700
+      border: none
+      cursor: pointer
+      &:hover
+        background-color: ContestPageVar.$color-success-green-dark

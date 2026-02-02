@@ -25,24 +25,35 @@ const Payment = () => {
   }, [contests, navigate]);
 
   const handlePay = (values) => {
-    const contestArray = [];
     const data = new FormData();
 
-    Object.keys(contests).forEach((key) => {
+    const contestArray = Object.keys(contests).map((key) => {
       const contest = contests[key];
       const fileFromCache = getFile(key);
+      if (fileFromCache) data.append('files', fileFromCache);
 
-      if (fileFromCache) {
-        data.append('files', fileFromCache);
-      }
+      const cleanedContest = {
+        title: contest.title,
+        industry: contest.industry,
+        focusOfWork: contest.focusOfWork,
+        targetCustomer: contest.targetCustomer,
+        contestType: contest.contestType || contest.type,
+        nameVenture: contest.nameVenture || undefined,
+        styleName: contest.styleName || undefined,
+        typeOfName: contest.typeOfName || undefined,
+        typeOfTagline: contest.typeOfTagline || undefined,
+        brandStyle: contest.brandStyle || undefined,
+      };
 
-      const { file, ...contestData } = contest;
-      contestArray.push(contestData);
+      Object.keys(cleanedContest).forEach(
+        (key) => cleanedContest[key] === undefined && delete cleanedContest[key]
+      );
+
+      return cleanedContest;
     });
 
     const { number, expiry, cvc } = values;
-
-    data.append('number', number);
+    data.append('number', number.replace(/\s/g, ''));
     data.append('expiry', expiry);
     data.append('cvc', cvc);
     data.append('contests', JSON.stringify(contestArray));
