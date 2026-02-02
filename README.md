@@ -70,10 +70,10 @@ Make sure you have the following installed on your machine:
 
 ```bash
 chmod +x ./start.sh
-./start.sh
+./start-dev.sh
 ```
 
-### What does `start.sh` do?
+### What does `start-dev.sh` do?
 
 - 🏗 **Build** — Builds Docker images for frontend and backend
 - 🔝 **Up** — Starts all services in detached mode
