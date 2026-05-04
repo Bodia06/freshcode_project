@@ -15,9 +15,9 @@ export default {
   OFFER_STATUS_PENDING: 'pending',
   STATIC_IMAGES_PATH: '/staticImages/',
   ANONYM_IMAGE_PATH: '/staticImages/anonym.png',
-  BASE_URL: `http://${apiAddr}/api/`,
+  BASE_URL: `${apiAddr}/api/`,
   ACCESS_TOKEN: 'accessToken',
-  publicURL: `http://${apiAddr}/public/images/`,
+  publicURL: `${apiAddr}/public/images/`,
   NORMAL_PREVIEW_CHAT_MODE: 'NORMAL_PREVIEW_CHAT_MODE',
   FAVORITE_PREVIEW_CHAT_MODE: 'FAVORITE_PREVIEW_CHAT_MODE',
   BLOCKED_PREVIEW_CHAT_MODE: 'BLOCKED_PREVIEW_CHAT_MODE',
@@ -85,7 +85,7 @@ export default {
         'Work with hundreds of creative experts to get custom name suggestions for your business or brand. All names are auto-checked for URL availability.',
       buttonText: 'Launch a Contest',
       iconColor: '#377dff', // Blue
-      iconPath: <path d='M13 2L3 14h9l-1 8 10-12h-9l1-8z' />,
+      iconPath: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />,
     },
     {
       title: 'Explore Names For Sale',
@@ -94,7 +94,7 @@ export default {
       buttonText: 'Explore Names For Sale',
       iconColor: '#2cc295', // Green
       iconPath: (
-        <path d='M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z' />
+        <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z" />
       ),
     },
     {
@@ -104,7 +104,7 @@ export default {
       buttonText: 'Learn More',
       iconColor: '#ffad8f', // Orange
       iconPath: (
-        <path d='M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z' />
+        <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z" />
       ),
     },
   ],
