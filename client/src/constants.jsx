@@ -1,5 +1,5 @@
-const env = import.meta.env.NODE_ENV || 'development';
-const apiAddr = 'https://squad-help-server.onrender.com';
+const env = import.meta.env.VITE_NODE_ENV || 'development';
+const apiAddr = import.meta.env.VITE_API_URL;
 export default {
   MODERATOR: 'moderator',
   CUSTOMER: 'customer',
