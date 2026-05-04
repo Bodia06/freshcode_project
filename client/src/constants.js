@@ -1,8 +1,5 @@
 const env = process.env.NODE_ENV || 'development';
-const apiAddr =
-  env === 'development'
-    ? process.env.REACT_APP_API_URL
-    : 'http://localhost:3000';
+const apiAddr = process.env.REACT_APP_API_URL;
 export default {
   MODERATOR: 'moderator',
   CUSTOMER: 'customer',
@@ -20,10 +17,7 @@ export default {
   ANONYM_IMAGE_PATH: '/staticImages/anonym.png',
   BASE_URL: `http://${apiAddr}/api/`,
   ACCESS_TOKEN: 'accessToken',
-  publicURL:
-    env === 'production'
-      ? `http://${serverIP}:80/images/`
-      : `http://${apiAddr}/public/images/`,
+  publicURL: `http://${apiAddr}/public/images/`,
   NORMAL_PREVIEW_CHAT_MODE: 'NORMAL_PREVIEW_CHAT_MODE',
   FAVORITE_PREVIEW_CHAT_MODE: 'FAVORITE_PREVIEW_CHAT_MODE',
   BLOCKED_PREVIEW_CHAT_MODE: 'BLOCKED_PREVIEW_CHAT_MODE',
