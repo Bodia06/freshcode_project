@@ -1,5 +1,5 @@
-const env = process.env.NODE_ENV || 'development';
-const apiAddr = process.env.VITE_API_URL;
+const env = import.meta.env || 'development';
+const apiAddr = import.meta.env.VITE_API_URL;
 export default {
   MODERATOR: 'moderator',
   CUSTOMER: 'customer',
