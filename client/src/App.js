@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { Analytics } from '@vercel/analytics/next';
 import Router from './router';
 import Home from './pages/Home/Home';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -29,6 +30,7 @@ class App extends Component {
   render () {
     return (
       <Router history={browserHistory}>
+        <Analytics />
         <ToastContainer
           position='top-center'
           autoClose={5000}
