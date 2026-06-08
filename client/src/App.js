@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/react';
 import Router from './router';
 import Home from './pages/Home/Home';
 import LoginPage from './pages/LoginPage/LoginPage';
