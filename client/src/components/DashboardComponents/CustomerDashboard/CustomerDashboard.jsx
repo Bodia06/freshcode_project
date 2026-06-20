@@ -104,7 +104,7 @@ const CustomerDashboard = ({ navigate }) => {
             navigate={navigate}
             haveMore={haveMore}
           >
-            {contests.map((contest) => (
+            {contests?.map((contest) => (
               <ContestBox
                 data={contest}
                 key={contest.id}
