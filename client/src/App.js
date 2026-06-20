@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ToastContainer } from 'react-toastify';
 import Router from './router';
 import Home from './pages/Home/Home';
@@ -31,6 +32,7 @@ class App extends Component {
     return (
       <Router history={browserHistory}>
         <Analytics />
+        <SpeedInsights />
         <ToastContainer
           position='top-center'
           autoClose={5000}
