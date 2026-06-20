@@ -6,7 +6,16 @@ const { STATIC_PATH } = require('./constants');
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || origin) {
+        callback(null, true);
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
