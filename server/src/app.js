@@ -17,6 +17,10 @@ app.use(express.json());
 
 app.use('/public', express.static(STATIC_PATH));
 
+app.get('/', (req, res) => {
+  res.status(200).send('Server is alive!');
+});
+
 app.use('/api', router);
 
 app.use(errorHandlers.errorHandler);
