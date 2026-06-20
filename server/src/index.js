@@ -6,21 +6,18 @@ const db = require('./database/models');
 
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || 5000;
-const HOST =
-  process.env.NODE_ENV === 'production'
-    ? '0.0.0.0'
-    : process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
 
 async function bootstrap () {
   try {
     console.log('Connecting to Neon Postgres database...');
 
     await db.sequelize.authenticate();
-    console.log('✔ Database connection has been established successfully.');
+    console.log('Database connection has been established successfully.');
 
     await db.sequelize.sync({ alter: true });
-    console.log('✔ All database tables synchronized successfully with Neon.');
+    console.log('All database tables synchronized successfully with Neon.');
 
     server.listen(PORT, HOST, () => {
       console.log(`SERVER RUNNING http://${HOST}:${PORT}`);
@@ -29,7 +26,7 @@ async function bootstrap () {
     startCronJob();
     controller.createConnection(server);
   } catch (error) {
-    console.error('❌ Error during server startup or database sync:', error);
+    console.error('Error during server startup or database sync:', error);
     process.exit(1);
   }
 }
