@@ -8,11 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || origin) {
-        callback(null, true);
-      }
-    },
+    origin: 'https://squad-help.vercel.app',
     credentials: true,
   })
 );
